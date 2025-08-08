@@ -60,7 +60,7 @@ jobs:
           set -euo pipefail
           ssh deploy-server <<'EOF'
             set -e
-            cd /home/wp629555/harmonic-society.co.jp/public_html/wp-content/themes/arigatou-club-theme
+            cd /home/wp629555/arigatoh.org/public_html/wp-content/themes/arigatou-club-theme
             export PATH="/usr/bin:/bin:/usr/local/bin:$PATH"
             git fetch origin
             git reset --hard origin/main
