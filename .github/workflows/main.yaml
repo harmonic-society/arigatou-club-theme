@@ -60,9 +60,30 @@ jobs:
           set -euo pipefail
           ssh deploy-server <<'EOF'
             set -e
-            cd /home/wp629555/arigatoh.org/public_html/wp-content/themes/arigatou-club-theme
+            DEPLOY_DIR="/home/wp629555/arigatoh.org/public_html/wp-content/themes/arigatou-club-theme"
             export PATH="/usr/bin:/bin:/usr/local/bin:$PATH"
-            git fetch origin
-            git reset --hard origin/main
+            
+            # ディレクトリが存在しない場合は作成
+            if [ ! -d "$DEPLOY_DIR" ]; then
+              echo "Creating directory: $DEPLOY_DIR"
+              mkdir -p "$DEPLOY_DIR"
+            fi
+            
+            cd "$DEPLOY_DIR"
+            
+            # Gitリポジトリが存在しない場合は初回クローン
+            if [ ! -d ".git" ]; then
+              echo "Initial clone from GitHub..."
+              cd ..
+              rm -rf arigatou-club-theme
+              git clone https://github.com/harmonic-society/arigatou-club-theme.git arigatou-club-theme
+              cd arigatou-club-theme
+            else
+              # 既存リポジトリの場合は更新
+              echo "Updating existing repository..."
+              git fetch origin
+              git reset --hard origin/main
+            fi
+            
             echo "Deployment completed at $(date)"
           EOF
