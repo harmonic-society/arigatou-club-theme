@@ -1,0 +1,68 @@
+name: Deploy
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SSH_USER:   ${{ secrets.USERNAME }}
+      SSH_HOST:   ${{ secrets.HOST }}
+      SSH_PORT:   ${{ secrets.SSH_PORT || 10022 }}
+      REMOTE_DIR: /home/wp629555/harmonic-society.co.jp/public_html/wp-content/themes/arigatou-club-theme
+      BRANCH:     main
+    steps:
+      - uses: actions/checkout@v4
+      
+      # 1) 秘密鍵を書き出して ssh-agent に登録
+      - name: Setup SSH key
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_deploy
+          # Windowsの改行(CR)を削除（CRLF → LF）
+          tr -d '\r' < ~/.ssh/id_deploy > ~/.ssh/id_deploy.clean
+          mv ~/.ssh/id_deploy.clean ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          
+          # ssh-agent を起動して鍵を追加
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_deploy
+          
+          # SSH設定ファイルを作成
+          cat > ~/.ssh/config <<EOF
+          Host deploy-server
+            HostName $SSH_HOST
+            Port $SSH_PORT
+            User $SSH_USER
+            IdentityFile ~/.ssh/id_deploy
+            IdentitiesOnly yes
+            StrictHostKeyChecking no
+          EOF
+          chmod 600 ~/.ssh/config
+      
+      # 2) known_hosts 登録（オプション）
+      - name: Add known_hosts
+        run: |
+          set -euo pipefail
+          ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
+      
+      # 3) SSH 接続テスト
+      - name: Test SSH connection
+        run: |
+          set -euo pipefail
+          # SSH設定を使って接続
+          ssh deploy-server "echo 'SSH OK on $(hostname) at $(date)'"
+      
+      # 4) デプロイ本体
+      - name: Deploy on remote host
+        run: |
+          set -euo pipefail
+          ssh deploy-server <<'EOF'
+            set -e
+            cd /home/wp629555/harmonic-society.co.jp/public_html/wp-content/themes/arigatou-club-theme
+            export PATH="/usr/bin:/bin:/usr/local/bin:$PATH"
+            git fetch origin
+            git reset --hard origin/main
+            echo "Deployment completed at $(date)"
+          EOF
