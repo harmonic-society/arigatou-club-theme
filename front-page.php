@@ -1,259 +1,209 @@
 <?php
 /**
  * フロントページテンプレート
+ * ありがとう倶楽部の温かみのある和のデザイン
  */
 
 get_header(); ?>
 
-<main id="main" class="site-main">
+<main id="main" class="site-main wa-style">
     
     <!-- ヒーローセクション -->
     <section class="hero-section">
+        <div class="wa-pattern-overlay"></div>
         <div class="container">
-            <h1 class="hero-title"><?php echo esc_html(get_theme_mod('hero_title', 'ありがとうで世界を満たそう')); ?></h1>
-            <p class="hero-subtitle"><?php echo esc_html(get_theme_mod('hero_subtitle', '感謝の心を広げるコミュニティ')); ?></p>
-            <div class="hero-buttons">
-                <a href="#events" class="btn btn-primary">イベントに参加する</a>
-                <a href="#about" class="btn btn-secondary">詳しく見る</a>
+            <h1 class="hero-title">ありがとう倶楽部</h1>
+            <p class="hero-subtitle">感謝の心で繋がる、温かい和の世界へ</p>
+        </div>
+    </section>
+    
+    <!-- 目的セクション -->
+    <section class="purpose-section section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-marker">◯</span>
+                <h2 class="section-title">ありがとう倶楽部の目的</h2>
+            </div>
+            
+            <div class="purpose-cards">
+                <div class="purpose-card main-purpose">
+                    <div class="card-inner">
+                        <h3>ありがとうを大事にする人たちの集まる場作り</h3>
+                    </div>
+                </div>
+                
+                <div class="purpose-grid">
+                    <div class="purpose-card">
+                        <div class="card-inner">
+                            <p>身の回りのありがとうに氣づいて、きちんと感謝を言葉にする</p>
+                        </div>
+                    </div>
+                    
+                    <div class="purpose-card">
+                        <div class="card-inner">
+                            <p>自分の天才を発見 発達 発揮すること</p>
+                        </div>
+                    </div>
+                    
+                    <div class="purpose-card">
+                        <div class="card-inner">
+                            <p>仲間の天才を発見 発達 発揮させること</p>
+                        </div>
+                    </div>
+                    
+                    <div class="purpose-card">
+                        <div class="card-inner">
+                            <p>お互いの天才を生かし合って、大いなる調和=大和（だいわ）の世界（お好み焼き社会）を作ること</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="purpose-notes">
+                <div class="note-item">
+                    <span class="note-marker">※</span>
+                    <p>人は皆違うものだという認識のもと、自分の天才（天賦の才）があることを前提として、天才を発見し 発達させ発揮し、周りの人たちを喜ばせたり 助けたりして、周りの人も自分も幸せを感じる人となる。</p>
+                </div>
+                
+                <div class="note-item">
+                    <span class="note-marker">※</span>
+                    <div>
+                        <p><strong>お好み焼き社会</strong>　お好み焼きというのはどんな素材を入れても成立する、まさに大和の世界、大いなる調和はハーモニーの料理ではないでしょうか。</p>
+                        <p class="emphasis">ありがとう倶楽部は、平たく まあるく 温かい お好み焼き のような大和の世界を、目指していきます。</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
     
-    <!-- イベント案内セクション -->
-    <section id="events" class="section events-section">
+    <!-- ご挨拶セクション -->
+    <section class="greeting-section section">
         <div class="container">
-            <h2 class="section-title">イベント案内</h2>
-            <p class="section-description">ありがとうカフェ、セミナー、コーチングなど様々なイベントを開催しています</p>
+            <div class="section-header">
+                <span class="section-marker">◯</span>
+                <h2 class="section-title">ご挨拶</h2>
+            </div>
             
-            <?php
-            $events = new WP_Query(array(
-                'post_type' => 'event',
-                'posts_per_page' => 6,
-                'meta_key' => '_event_date',
-                'orderby' => 'meta_value',
-                'order' => 'ASC',
-                'meta_query' => array(
-                    array(
-                        'key' => '_event_date',
-                        'value' => date('Y-m-d'),
-                        'compare' => '>=',
-                        'type' => 'DATE'
-                    )
-                )
-            ));
-            
-            if ($events->have_posts()) : ?>
-                <div class="card-grid">
-                    <?php while ($events->have_posts()) : $events->the_post(); 
-                        $event_date = get_post_meta(get_the_ID(), '_event_date', true);
-                        $event_time = get_post_meta(get_the_ID(), '_event_time', true);
-                        $event_location = get_post_meta(get_the_ID(), '_event_location', true);
-                        $event_fee = get_post_meta(get_the_ID(), '_event_fee', true);
-                    ?>
-                        <div class="card event-card">
-                            <?php if (has_post_thumbnail()) : ?>
-                                <div class="card-image">
-                                    <?php the_post_thumbnail('medium'); ?>
-                                </div>
-                            <?php endif; ?>
-                            <h3 class="card-title"><?php the_title(); ?></h3>
-                            <div class="event-meta">
-                                <?php if ($event_date) : ?>
-                                    <p class="event-date"><i class="far fa-calendar"></i> <?php echo esc_html($event_date); ?></p>
-                                <?php endif; ?>
-                                <?php if ($event_time) : ?>
-                                    <p class="event-time"><i class="far fa-clock"></i> <?php echo esc_html($event_time); ?></p>
-                                <?php endif; ?>
-                                <?php if ($event_location) : ?>
-                                    <p class="event-location"><i class="fas fa-map-marker-alt"></i> <?php echo esc_html($event_location); ?></p>
-                                <?php endif; ?>
-                                <?php if ($event_fee) : ?>
-                                    <p class="event-fee"><i class="fas fa-yen-sign"></i> <?php echo esc_html($event_fee); ?></p>
-                                <?php endif; ?>
-                            </div>
-                            <div class="card-content">
-                                <?php the_excerpt(); ?>
-                            </div>
-                            <a href="<?php the_permalink(); ?>" class="btn btn-small">詳細を見る</a>
-                        </div>
-                    <?php endwhile; ?>
+            <div class="greeting-content">
+                <div class="greeting-message">
+                    <p class="greeting-intro">ありがとう倶楽部の秋山です。ホームページへようこそお越しくださいました。</p>
+                    
+                    <p>ありがとう倶楽部は、ありがとうを大切にする人たちの集まりです。お互いの天才を生かし合って、喜ばせあって助け合って、暮らしやすい大和の社会を作っていきましょう。</p>
+                    
+                    <p>人は皆違うし、それぞれ 天才があると感じています。違うのは天才を活かしている人とうまく活かせていない人がいるだけで、誰しもが天才を持っていることには変わりがないと思います。</p>
+                    
+                    <p>多くの方は自分には天才などないと思っていらっしゃるかもしれませんが、私はそれが壮大な誤解なのではないかと感じています。</p>
+                    
+                    <p>その自分には天才などないという前提を、全ての人が天才を持っているのだという前提に書き換えたいのです。書き換えた上で、ではどうすれば天才を発見 発達 発揮させることができるのか、周りの人を喜ばせたり 助けたりするのができるのかということについて、この ありがとう倶楽部で仲間と一緒に探求、実践していけたら、こんなに嬉しいことはありません。</p>
+                    
+                    <p>また昨今 日本のみならず世界においても、自分さえよければいいという考え方が蔓延することによって、サービスを受けるお客様中心でなく自分たち中心の考え方、下手をすると騙される方が悪いのだと言わんばかりの商売のあり方が見られるようになりました。とても残念なことだと思います。</p>
+                    
+                    <p>それならば、ありがとう倶楽部という本当にありがとう を実践しようとする人たちの集団の中で、騙し騙される関係ではなく、助け 喜び合う関係を結ぶことで、安心して売買ができるのではないかと感じています。</p>
+                    
+                    <p>働くとは、 端を楽にするという考え方があります。私はこの考え方が大好きです。天才をもって 周りの人を楽しませる 助ける、こういう人間関係をありがとう倶楽部を通じて広げていくことができたら、どれだけ楽しい社会になることだろうと今からワクワクしています。</p>
+                    
+                    <p class="greeting-closing">皆様にご参加いただいて、活発 自己表現および活動を一緒にしていただけることを楽しみにお待ちしております。</p>
                 </div>
-                <div class="section-footer">
-                    <a href="<?php echo get_post_type_archive_link('event'); ?>" class="btn">すべてのイベントを見る</a>
-                </div>
-            <?php else : ?>
-                <p class="no-content">現在予定されているイベントはありません。</p>
-            <?php endif;
-            wp_reset_postdata();
-            ?>
-        </div>
-    </section>
-    
-    <!-- ストーリーセクション -->
-    <section id="stories" class="section story-section">
-        <div class="container">
-            <h2 class="section-title">ありがとう物語</h2>
-            <p class="section-description">感謝のエピソード、ブログ、業界の秘話をお届けします</p>
-            
-            <?php
-            $stories = new WP_Query(array(
-                'post_type' => 'story',
-                'posts_per_page' => 4
-            ));
-            
-            if ($stories->have_posts()) : ?>
-                <div class="story-grid">
-                    <?php while ($stories->have_posts()) : $stories->the_post(); ?>
-                        <article class="story-item">
-                            <h3 class="story-title">
-                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                            </h3>
-                            <div class="story-meta">
-                                <span class="story-author"><?php the_author(); ?></span>
-                                <span class="story-date"><?php echo get_the_date(); ?></span>
-                            </div>
-                            <div class="story-excerpt">
-                                <?php the_excerpt(); ?>
-                            </div>
-                            <a href="<?php the_permalink(); ?>" class="read-more">続きを読む →</a>
-                        </article>
-                    <?php endwhile; ?>
-                </div>
-                <div class="section-footer">
-                    <a href="<?php echo get_post_type_archive_link('story'); ?>" class="btn">すべてのストーリーを見る</a>
-                </div>
-            <?php else : ?>
-                <p class="no-content">ストーリーはまだ投稿されていません。</p>
-            <?php endif;
-            wp_reset_postdata();
-            ?>
-        </div>
-    </section>
-    
-    <!-- スポンサーセクション -->
-    <section id="sponsors" class="section sponsor-section">
-        <div class="container">
-            <h2 class="section-title">ありがとう企業</h2>
-            <p class="section-description">私たちの活動を支援してくださる企業様</p>
-            
-            <?php
-            $sponsors = new WP_Query(array(
-                'post_type' => 'sponsor',
-                'posts_per_page' => -1
-            ));
-            
-            if ($sponsors->have_posts()) : ?>
-                <div class="sponsor-grid">
-                    <?php while ($sponsors->have_posts()) : $sponsors->the_post(); ?>
-                        <div class="sponsor-item">
-                            <?php if (has_post_thumbnail()) : ?>
-                                <a href="<?php the_permalink(); ?>" class="sponsor-logo">
-                                    <?php the_post_thumbnail('medium'); ?>
-                                </a>
-                            <?php else : ?>
-                                <h3 class="sponsor-name">
-                                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                                </h3>
-                            <?php endif; ?>
-                        </div>
-                    <?php endwhile; ?>
-                </div>
-            <?php else : ?>
-                <p class="no-content">スポンサー情報は準備中です。</p>
-            <?php endif;
-            wp_reset_postdata();
-            ?>
-            
-            <div class="section-footer">
-                <p>スポンサーとして支援をご検討の企業様は、<a href="<?php echo home_url('/contact/'); ?>">お問い合わせ</a>ください。</p>
             </div>
         </div>
     </section>
     
-    <!-- グッズセクション -->
-    <section id="goods" class="section goods-section">
+    <!-- 活動内容セクション -->
+    <section class="activities-section section">
         <div class="container">
-            <h2 class="section-title">ありがとうグッズ</h2>
-            <p class="section-description">感謝の気持ちを形にしたオリジナルグッズ</p>
+            <div class="section-header">
+                <span class="section-marker">◯</span>
+                <h2 class="section-title">活動内容</h2>
+            </div>
             
-            <?php
-            $goods = new WP_Query(array(
-                'post_type' => 'goods',
-                'posts_per_page' => 6
-            ));
-            
-            if ($goods->have_posts()) : ?>
-                <div class="goods-grid">
-                    <?php while ($goods->have_posts()) : $goods->the_post(); 
-                        $goods_price = get_post_meta(get_the_ID(), '_goods_price', true);
-                        $goods_link = get_post_meta(get_the_ID(), '_goods_link', true);
-                    ?>
-                        <div class="goods-item">
-                            <?php if (has_post_thumbnail()) : ?>
-                                <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" alt="<?php the_title(); ?>" class="goods-image">
-                            <?php endif; ?>
-                            <h3 class="goods-title"><?php the_title(); ?></h3>
-                            <?php if ($goods_price) : ?>
-                                <p class="goods-price"><?php echo esc_html($goods_price); ?></p>
-                            <?php endif; ?>
-                            <?php if ($goods_link) : ?>
-                                <a href="<?php echo esc_url($goods_link); ?>" class="btn btn-small" target="_blank" rel="noopener">購入する</a>
-                            <?php else : ?>
-                                <a href="<?php the_permalink(); ?>" class="btn btn-small">詳細を見る</a>
-                            <?php endif; ?>
-                        </div>
-                    <?php endwhile; ?>
+            <div class="activities-grid">
+                <div class="activity-item">
+                    <div class="activity-icon">☕</div>
+                    <h3>ありがとうカフェ</h3>
                 </div>
-                <div class="section-footer">
-                    <a href="<?php echo get_post_type_archive_link('goods'); ?>" class="btn">すべてのグッズを見る</a>
+                <div class="activity-item">
+                    <div class="activity-icon">📚</div>
+                    <h3>ありがとうセミナー</h3>
                 </div>
-            <?php else : ?>
-                <p class="no-content">グッズは準備中です。</p>
-            <?php endif;
-            wp_reset_postdata();
-            ?>
+                <div class="activity-item">
+                    <div class="activity-icon">🎨</div>
+                    <h3>ありがとう体験ワークショップ</h3>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">🎁</div>
+                    <h3>ありがとうグッズの販売</h3>
+                    <p class="activity-description">ありがとうカード 2025、野口さんのカレンダー、野口さんの絵本、ありがとう T シャツ、ありがとうシールなど</p>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">👥</div>
+                    <h3>Facebook グループ</h3>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">✍️</div>
+                    <h3>ありがとう ブログ</h3>
+                </div>
+            </div>
         </div>
     </section>
     
-    <!-- アバウトセクション -->
-    <section id="about" class="section about-section">
+    <!-- 参加方法セクション -->
+    <section class="membership-section section">
         <div class="container">
-            <h2 class="section-title">ありがとう倶楽部とは</h2>
+            <div class="section-header">
+                <span class="section-marker">◯</span>
+                <h2 class="section-title">参加方法</h2>
+            </div>
             
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>私たちの目的</h3>
-                    <p>ありがとう倶楽部は、日常の中で忘れがちな「感謝の心」を大切にし、それを広げていくことを目的としたコミュニティです。「ありがとう」という言葉には、人と人をつなぎ、心を温かくする不思議な力があります。</p>
-                    
-                    <h3>活動内容</h3>
-                    <p>定期的なイベント開催、感謝のエピソード共有、コーチングセッションなどを通じて、メンバー同士が互いに支え合い、成長できる場を提供しています。</p>
-                    
-                    <h3>未来へのビジョン</h3>
-                    <p>私たちは、「ありがとう」の輪を日本全国、そして世界へと広げていきたいと考えています。一人ひとりの小さな感謝の気持ちが集まれば、きっと大きな力となり、より良い社会を作ることができると信じています。</p>
-                </div>
-                
-                <div class="about-features">
-                    <div class="feature-item">
-                        <i class="fas fa-heart"></i>
-                        <h4>感謝の心</h4>
-                        <p>日々の生活の中で感謝の気持ちを大切にします</p>
+            <div class="membership-options">
+                <div class="membership-card free">
+                    <div class="membership-header">
+                        <h3>無料会員</h3>
                     </div>
-                    <div class="feature-item">
-                        <i class="fas fa-users"></i>
-                        <h4>コミュニティ</h4>
-                        <p>同じ価値観を持つ仲間とつながります</p>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-globe"></i>
-                        <h4>社会貢献</h4>
-                        <p>感謝の輪を広げて社会に貢献します</p>
+                    <div class="membership-body">
+                        <p>Facebook グループに登録してありがとう倶楽部の活動を知ることができます。またスポットで料金を払うことでありがとうカフェや セミナーに参加することもできます。</p>
                     </div>
                 </div>
                 
-                <div class="about-cta">
-                    <h3>一緒に「ありがとう」を広げませんか？</h3>
-                    <p>ありがとう倶楽部は、いつでも新しいメンバーを歓迎しています。</p>
-                    <a href="<?php echo home_url('/membership/'); ?>" class="btn btn-primary">メンバー登録</a>
+                <div class="membership-card premium">
+                    <div class="membership-header">
+                        <h3>有料会員</h3>
+                        <p class="membership-price">月額1,000円　年額10,000円</p>
+                        <p class="membership-note">（年金生活者、学生は無料）</p>
+                    </div>
+                    <div class="membership-body">
+                        <p>各地で開催される ありがとうカフェに、どこでも、何度でも参加することが可能です。またセミナーやグッズは 会員価格で参加したり購入したりすることが可能です。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="membership-notice">
+                <span class="note-marker">※</span>
+                <p>会員の皆さんに対して、ご自身のご商売やご活動を積極的にご案内いただきます。しかしながら、会員の皆様に対して不誠実な対応や、嘘偽りの内容があってトラブルに発展したような場合、情報を共有させていただき、場合によってはご退会いただくこともございます。お互い様の精神で、氣持ちの良い関係性を保てる倶楽部にしてまいりましょう。</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 企業の皆様へセクション -->
+    <section class="corporate-section section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-marker">◯</span>
+                <h2 class="section-title">企業の皆様へ</h2>
+            </div>
+            
+            <div class="corporate-content">
+                <p class="corporate-intro">ありがとう を企業理念として大切にされている企業の皆様にお願いがあります。</p>
+                
+                <p class="corporate-appeal">是非ありがとう倶楽部と連携していただきたく存じます。</p>
+                
+                <p>ありがとう倶楽部に協賛いただくことで広告として、当ホームページをご活用していただけないでしょうか。</p>
+                
+                <p>このホームページに皆様の考え方あり方やり方を動画に撮って掲載することで、ありがとうを大事に活動をされている会員の皆様へ 訴求することができます。</p>
+                
+                <p class="corporate-closing">是非ご一緒に、ありがとうを大切にする 住みよい大和（だいわ）の社会を作っていきましょう。</p>
+                
+                <div class="corporate-cta">
+                    <a href="<?php echo home_url('/contact/'); ?>" class="btn btn-primary">お問い合わせはこちら</a>
                 </div>
             </div>
         </div>
