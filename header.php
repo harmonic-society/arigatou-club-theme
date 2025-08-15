@@ -14,33 +14,30 @@
     
     <header id="masthead" class="site-header">
         <div class="container">
-            <div class="site-branding">
-                <?php if (has_custom_logo()) : ?>
-                    <div class="site-logo">
-                        <?php the_custom_logo(); ?>
-                    </div>
-                <?php else : ?>
-                    <h1 class="site-title">
-                        <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
-                            <?php bloginfo('name'); ?>
-                        </a>
-                    </h1>
-                    <?php
-                    $description = get_bloginfo('description', 'display');
-                    if ($description || is_customize_preview()) : ?>
-                        <p class="site-description"><?php echo $description; ?></p>
+            <div class="header-inner">
+                <div class="site-branding">
+                    <?php if (has_custom_logo()) : ?>
+                        <div class="site-logo">
+                            <?php the_custom_logo(); ?>
+                        </div>
+                    <?php else : ?>
+                        <h1 class="site-title">
+                            <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+                                <?php bloginfo('name'); ?>
+                            </a>
+                        </h1>
                     <?php endif; ?>
-                <?php endif; ?>
-            </div>
-            
-            <nav id="site-navigation" class="main-navigation">
-                <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+                </div>
+                
+                <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="メニュー">
                     <span class="menu-toggle-inner">
                         <span></span>
                         <span></span>
                         <span></span>
                     </span>
                 </button>
+                
+                <nav id="site-navigation" class="main-navigation" aria-hidden="true">
                 
                 <?php
                 wp_nav_menu(array(
@@ -59,6 +56,7 @@
                     }
                 ));
                 ?>
-            </nav>
+                </nav>
+            </div>
         </div>
     </header>

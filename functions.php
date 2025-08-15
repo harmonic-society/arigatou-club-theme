@@ -64,6 +64,9 @@ function arigatou_club_scripts() {
     // ページ用CSS
     wp_enqueue_style('arigatou-club-pages', get_template_directory_uri() . '/assets/css/pages.css', array(), '1.0.0');
     
+    // ナビゲーション用CSS
+    wp_enqueue_style('arigatou-club-navigation', get_template_directory_uri() . '/assets/css/navigation.css', array(), '1.0.0');
+    
     // JavaScript
     wp_enqueue_script('arigatou-club-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.0', true);
     

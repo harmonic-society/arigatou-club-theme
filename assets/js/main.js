@@ -8,12 +8,79 @@
     // DOM Ready
     $(document).ready(function() {
         
-        // モバイルメニュートグル
-        $('.menu-toggle').on('click', function() {
-            $(this).attr('aria-expanded', function(i, attr) {
-                return attr === 'true' ? 'false' : 'true';
-            });
-            $('.main-navigation').toggleClass('toggled');
+        // モバイルメニュートグル（改良版）
+        $('.menu-toggle').on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            var $toggle = $(this);
+            var $nav = $('.main-navigation');
+            var isOpen = $nav.hasClass('active');
+            
+            if (!isOpen) {
+                // メニューを開く
+                $toggle.addClass('active');
+                $nav.addClass('active');
+                $('body').append('<div class="menu-overlay"></div>');
+                $('.menu-overlay').addClass('active');
+                $('body').addClass('menu-open');
+                
+                // アクセシビリティ
+                $toggle.attr('aria-expanded', 'true');
+                $nav.attr('aria-hidden', 'false');
+                
+                // メニューアイテムのアニメーション
+                $nav.find('li').each(function(index) {
+                    var $item = $(this);
+                    setTimeout(function() {
+                        $item.addClass('animated');
+                    }, index * 50);
+                });
+            } else {
+                // メニューを閉じる
+                closeMenu();
+            }
+        });
+        
+        // メニューを閉じる関数
+        function closeMenu() {
+            $('.menu-toggle').removeClass('active');
+            $('.main-navigation').removeClass('active');
+            $('.menu-overlay').removeClass('active');
+            $('body').removeClass('menu-open');
+            
+            // アクセシビリティ
+            $('.menu-toggle').attr('aria-expanded', 'false');
+            $('.main-navigation').attr('aria-hidden', 'true');
+            
+            // オーバーレイを削除
+            setTimeout(function() {
+                $('.menu-overlay').remove();
+            }, 300);
+            
+            // アニメーションクラスをリセット
+            $('.main-navigation li').removeClass('animated');
+        }
+        
+        // オーバーレイクリックでメニューを閉じる
+        $(document).on('click', '.menu-overlay', function() {
+            closeMenu();
+        });
+        
+        // ESCキーでメニューを閉じる
+        $(document).on('keydown', function(e) {
+            if (e.key === 'Escape' && $('.main-navigation').hasClass('active')) {
+                closeMenu();
+            }
+        });
+        
+        // メニューリンククリックでメニューを閉じる（モバイル時）
+        $('.main-navigation a').on('click', function() {
+            if ($(window).width() < 1024) {
+                setTimeout(function() {
+                    closeMenu();
+                }, 300);
+            }
         });
         
         // スムーススクロール
