@@ -17,93 +17,173 @@ get_header(); ?>
         </div>
     </section>
     
-    <!-- 目的セクション -->
-    <section class="purpose-section section">
+    <!-- ブログセクション -->
+    <section class="home-blog-section section">
         <div class="container">
             <div class="section-header">
                 <span class="section-marker">◯</span>
-                <h2 class="section-title">ありがとう倶楽部の目的</h2>
+                <h2 class="section-title">最新のブログ</h2>
+                <p class="section-subtitle">感謝のエピソードや日々の気づきをお届けします</p>
             </div>
             
-            <div class="purpose-cards">
-                <div class="purpose-card main-purpose">
-                    <div class="card-inner">
-                        <h3>ありがとうを大事にする人たちの集まる場作り</h3>
-                    </div>
-                </div>
+            <div class="home-blog-grid">
+                <?php
+                $recent_posts = new WP_Query(array(
+                    'posts_per_page' => 3,
+                    'post_status' => 'publish'
+                ));
                 
-                <div class="purpose-grid">
-                    <div class="purpose-card">
-                        <div class="card-inner">
-                            <p>身の回りのありがとうに氣づいて、きちんと感謝を言葉にする</p>
-                        </div>
-                    </div>
-                    
-                    <div class="purpose-card">
-                        <div class="card-inner">
-                            <p>自分の天才を発見 発達 発揮すること</p>
-                        </div>
-                    </div>
-                    
-                    <div class="purpose-card">
-                        <div class="card-inner">
-                            <p>仲間の天才を発見 発達 発揮させること</p>
-                        </div>
-                    </div>
-                    
-                    <div class="purpose-card">
-                        <div class="card-inner">
-                            <p>お互いの天才を生かし合って、大いなる調和=大和（だいわ）の世界（お好み焼き社会）を作ること</p>
-                        </div>
-                    </div>
-                </div>
+                if ($recent_posts->have_posts()) :
+                    while ($recent_posts->have_posts()) : $recent_posts->the_post(); ?>
+                        <article class="home-blog-card">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <div class="home-blog-image">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <?php the_post_thumbnail('medium'); ?>
+                                    </a>
+                                    <?php
+                                    $categories = get_the_category();
+                                    if (!empty($categories)) : ?>
+                                        <span class="blog-category-label">
+                                            <?php echo esc_html($categories[0]->name); ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <div class="home-blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-date"><?php echo get_the_date('Y.m.d'); ?></span>
+                                </div>
+                                
+                                <h3 class="home-blog-title">
+                                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                </h3>
+                                
+                                <div class="home-blog-excerpt">
+                                    <?php echo wp_trim_words(get_the_excerpt(), 50, '...'); ?>
+                                </div>
+                                
+                                <a href="<?php the_permalink(); ?>" class="read-more-link">
+                                    続きを読む →
+                                </a>
+                            </div>
+                        </article>
+                    <?php endwhile;
+                    wp_reset_postdata();
+                else : ?>
+                    <p class="no-posts-message">まだブログ記事がありません。</p>
+                <?php endif; ?>
             </div>
             
-            <div class="purpose-notes">
-                <div class="note-item">
-                    <span class="note-marker">※</span>
-                    <p>人は皆違うものだという認識のもと、自分の天才（天賦の才）があることを前提として、天才を発見し 発達させ発揮し、周りの人たちを喜ばせたり 助けたりして、周りの人も自分も幸せを感じる人となる。</p>
+            <?php if ($recent_posts->have_posts()) : ?>
+                <div class="section-footer">
+                    <a href="<?php echo home_url('/blog/'); ?>" class="btn-more">
+                        もっと見る
+                    </a>
                 </div>
-                
-                <div class="note-item">
-                    <span class="note-marker">※</span>
-                    <div>
-                        <p><strong>お好み焼き社会</strong>　お好み焼きというのはどんな素材を入れても成立する、まさに大和の世界、大いなる調和はハーモニーの料理ではないでしょうか。</p>
-                        <p class="emphasis">ありがとう倶楽部は、平たく まあるく 温かい お好み焼き のような大和の世界を、目指していきます。</p>
-                    </div>
-                </div>
-            </div>
+            <?php endif; ?>
         </div>
     </section>
     
-    <!-- ご挨拶セクション -->
-    <section class="greeting-section section">
+    <!-- イベントセクション -->
+    <section class="home-events-section section">
         <div class="container">
             <div class="section-header">
                 <span class="section-marker">◯</span>
-                <h2 class="section-title">ご挨拶</h2>
+                <h2 class="section-title">開催予定のイベント</h2>
+                <p class="section-subtitle">ありがとうカフェやセミナーなどの最新情報</p>
             </div>
             
-            <div class="greeting-content">
-                <div class="greeting-message">
-                    <p class="greeting-intro">ありがとう倶楽部の秋山です。ホームページへようこそお越しくださいました。</p>
-                    
-                    <p>ありがとう倶楽部は、ありがとうを大切にする人たちの集まりです。お互いの天才を生かし合って、喜ばせあって助け合って、暮らしやすい大和の社会を作っていきましょう。</p>
-                    
-                    <p>人は皆違うし、それぞれ 天才があると感じています。違うのは天才を活かしている人とうまく活かせていない人がいるだけで、誰しもが天才を持っていることには変わりがないと思います。</p>
-                    
-                    <p>多くの方は自分には天才などないと思っていらっしゃるかもしれませんが、私はそれが壮大な誤解なのではないかと感じています。</p>
-                    
-                    <p>その自分には天才などないという前提を、全ての人が天才を持っているのだという前提に書き換えたいのです。書き換えた上で、ではどうすれば天才を発見 発達 発揮させることができるのか、周りの人を喜ばせたり 助けたりするのができるのかということについて、この ありがとう倶楽部で仲間と一緒に探求、実践していけたら、こんなに嬉しいことはありません。</p>
-                    
-                    <p>また昨今 日本のみならず世界においても、自分さえよければいいという考え方が蔓延することによって、サービスを受けるお客様中心でなく自分たち中心の考え方、下手をすると騙される方が悪いのだと言わんばかりの商売のあり方が見られるようになりました。とても残念なことだと思います。</p>
-                    
-                    <p>それならば、ありがとう倶楽部という本当にありがとう を実践しようとする人たちの集団の中で、騙し騙される関係ではなく、助け 喜び合う関係を結ぶことで、安心して売買ができるのではないかと感じています。</p>
-                    
-                    <p>働くとは、 端を楽にするという考え方があります。私はこの考え方が大好きです。天才をもって 周りの人を楽しませる 助ける、こういう人間関係をありがとう倶楽部を通じて広げていくことができたら、どれだけ楽しい社会になることだろうと今からワクワクしています。</p>
-                    
-                    <p class="greeting-closing">皆様にご参加いただいて、活発 自己表現および活動を一緒にしていただけることを楽しみにお待ちしております。</p>
-                </div>
+            <div class="home-events-grid">
+                <?php
+                $upcoming_events = new WP_Query(array(
+                    'post_type' => 'event',
+                    'posts_per_page' => 3,
+                    'meta_key' => '_event_date',
+                    'orderby' => 'meta_value',
+                    'order' => 'ASC',
+                    'meta_query' => array(
+                        array(
+                            'key' => '_event_date',
+                            'value' => date('Y-m-d'),
+                            'compare' => '>=',
+                            'type' => 'DATE'
+                        )
+                    )
+                ));
+                
+                if ($upcoming_events->have_posts()) :
+                    while ($upcoming_events->have_posts()) : $upcoming_events->the_post();
+                        $event_date = get_post_meta(get_the_ID(), '_event_date', true);
+                        $event_time = get_post_meta(get_the_ID(), '_event_time', true);
+                        $event_location = get_post_meta(get_the_ID(), '_event_location', true);
+                        $event_fee = get_post_meta(get_the_ID(), '_event_fee', true);
+                        ?>
+                        <article class="home-event-card">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <div class="home-event-image">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <?php the_post_thumbnail('medium'); ?>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <div class="home-event-content">
+                                <?php if ($event_date) : ?>
+                                    <div class="event-date-badge">
+                                        <span class="event-month"><?php echo date('n月', strtotime($event_date)); ?></span>
+                                        <span class="event-day"><?php echo date('j', strtotime($event_date)); ?></span>
+                                    </div>
+                                <?php endif; ?>
+                                
+                                <h3 class="home-event-title">
+                                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                </h3>
+                                
+                                <div class="event-details">
+                                    <?php if ($event_time) : ?>
+                                        <div class="event-detail-item">
+                                            <i class="far fa-clock"></i>
+                                            <span><?php echo esc_html($event_time); ?></span>
+                                        </div>
+                                    <?php endif; ?>
+                                    
+                                    <?php if ($event_location) : ?>
+                                        <div class="event-detail-item">
+                                            <i class="far fa-map-marker-alt"></i>
+                                            <span><?php echo esc_html($event_location); ?></span>
+                                        </div>
+                                    <?php endif; ?>
+                                    
+                                    <?php if ($event_fee) : ?>
+                                        <div class="event-detail-item">
+                                            <i class="far fa-yen-sign"></i>
+                                            <span><?php echo esc_html($event_fee); ?></span>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                
+                                <div class="home-event-excerpt">
+                                    <?php echo wp_trim_words(get_the_excerpt(), 40, '...'); ?>
+                                </div>
+                                
+                                <a href="<?php the_permalink(); ?>" class="event-more-link">
+                                    詳細を見る →
+                                </a>
+                            </div>
+                        </article>
+                    <?php endwhile;
+                    wp_reset_postdata();
+                else : ?>
+                    <p class="no-events-message">現在、開催予定のイベントはありません。</p>
+                <?php endif; ?>
+            </div>
+            
+            <div class="section-footer">
+                <a href="<?php echo get_post_type_archive_link('event'); ?>" class="btn-more">
+                    もっと見る
+                </a>
             </div>
         </div>
     </section>
