@@ -1,0 +1,748 @@
+/* ブログ専用スタイル - 魅力的なデザイン */
+
+/* ブログページヘッダー */
+.blog-page-header {
+    position: relative;
+    background: linear-gradient(135deg, var(--wa-secondary) 0%, var(--wa-gold) 100%);
+    padding: 100px 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.blog-page-header::before {
+    content: '📝';
+    position: absolute;
+    top: 20px;
+    left: 5%;
+    font-size: 100px;
+    opacity: 0.1;
+    animation: float-left 20s ease-in-out infinite;
+}
+
+.blog-page-header::after {
+    content: '✍️';
+    position: absolute;
+    bottom: 20px;
+    right: 5%;
+    font-size: 80px;
+    opacity: 0.1;
+    animation: float-right 15s ease-in-out infinite;
+}
+
+@keyframes float-left {
+    0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+    33% { transform: translateX(20px) translateY(-20px) rotate(10deg); }
+    66% { transform: translateX(-10px) translateY(10px) rotate(-5deg); }
+}
+
+@keyframes float-right {
+    0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+    50% { transform: translateX(-30px) translateY(-30px) rotate(-15deg); }
+}
+
+.blog-page-title {
+    color: white;
+    font-size: 3.5rem;
+    font-family: 'Klee One', cursive;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    letter-spacing: 0.1em;
+    transform: rotate(-1deg);
+}
+
+.blog-page-subtitle {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.3rem;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    letter-spacing: 0.05em;
+}
+
+/* ブログ一覧 - カードスタイル改善 */
+.blog-archive {
+    background: var(--wa-bg-light);
+    padding: 80px 0;
+}
+
+.blog-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* フィーチャード記事 */
+.featured-post {
+    background: linear-gradient(135deg, white 0%, var(--wa-bg-cream) 100%);
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(220, 20, 60, 0.1);
+    margin-bottom: 50px;
+    transform: rotate(-0.5deg);
+    transition: all 0.3s ease;
+}
+
+.featured-post:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 0 25px 80px rgba(220, 20, 60, 0.15);
+}
+
+.featured-post .featured-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 400px;
+}
+
+.featured-post .featured-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.featured-post .featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.featured-post:hover .featured-image img {
+    transform: scale(1.1);
+}
+
+.featured-post .featured-text {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.featured-label {
+    display: inline-block;
+    background: var(--wa-secondary);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    width: fit-content;
+}
+
+.featured-post h2 {
+    font-family: 'Klee One', cursive;
+    font-size: 2rem;
+    color: var(--wa-primary);
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.featured-post .excerpt {
+    color: var(--wa-text-dark);
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* ブログカードグリッド */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.blog-card-new {
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 3px solid transparent;
+}
+
+.blog-card-new:nth-child(odd) {
+    transform: rotate(-0.5deg);
+}
+
+.blog-card-new:nth-child(even) {
+    transform: rotate(0.5deg);
+}
+
+.blog-card-new:hover {
+    transform: rotate(0deg) translateY(-5px);
+    box-shadow: 0 15px 40px rgba(220, 20, 60, 0.15);
+    border-color: var(--wa-gold);
+}
+
+.blog-card-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.blog-card-new:hover .blog-card-image img {
+    transform: scale(1.1) rotate(2deg);
+}
+
+.blog-category-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--wa-secondary);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.blog-card-body {
+    padding: 25px;
+}
+
+.blog-date {
+    color: var(--wa-gold);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.blog-date::before {
+    content: '📅';
+    font-size: 1rem;
+}
+
+.blog-card-title {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.blog-card-title a {
+    color: var(--wa-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.blog-card-title a:hover {
+    color: var(--wa-secondary);
+}
+
+.blog-card-excerpt {
+    color: var(--wa-text-dark);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.blog-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px dashed var(--wa-gold);
+}
+
+.read-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--wa-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.read-more-btn::after {
+    content: '→';
+    transition: transform 0.3s ease;
+}
+
+.read-more-btn:hover {
+    gap: 10px;
+}
+
+.read-more-btn:hover::after {
+    transform: translateX(5px);
+}
+
+.blog-author {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.author-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--wa-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+/* ブログ詳細ページ */
+.single-blog {
+    background: var(--wa-bg-light);
+    padding: 40px 0;
+}
+
+.blog-single-header {
+    max-width: 900px;
+    margin: 0 auto 50px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.blog-single-category {
+    display: inline-block;
+    background: var(--wa-secondary);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.blog-single-category:hover {
+    background: var(--wa-accent);
+    transform: scale(1.05);
+}
+
+.blog-single-title {
+    font-family: 'Klee One', cursive;
+    font-size: 3rem;
+    color: var(--wa-primary);
+    margin-bottom: 30px;
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+.blog-single-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    color: #666;
+}
+
+.blog-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+}
+
+.blog-meta-item i {
+    color: var(--wa-gold);
+}
+
+/* ブログ本文 */
+.blog-content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 30px;
+    padding: 60px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    position: relative;
+}
+
+.blog-content-wrapper::before {
+    content: '💝';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    background: white;
+    padding: 0 20px;
+}
+
+.blog-featured-image {
+    margin: -60px -60px 40px;
+    border-radius: 30px 30px 0 0;
+    overflow: hidden;
+}
+
+.blog-featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.blog-content {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.1rem;
+    line-height: 2;
+    color: var(--wa-text-dark);
+}
+
+.blog-content h2 {
+    font-family: 'Klee One', cursive;
+    font-size: 2.2rem;
+    color: var(--wa-primary);
+    margin: 50px 0 25px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--wa-gold);
+    position: relative;
+}
+
+.blog-content h2::after {
+    content: '✨';
+    position: absolute;
+    right: 0;
+    bottom: -15px;
+    font-size: 20px;
+}
+
+.blog-content h3 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.6rem;
+    color: var(--wa-secondary);
+    margin: 40px 0 20px;
+    padding-left: 20px;
+    border-left: 4px solid var(--wa-accent);
+}
+
+.blog-content p {
+    margin-bottom: 25px;
+}
+
+.blog-content blockquote {
+    margin: 40px 0;
+    padding: 30px;
+    background: var(--wa-bg-cream);
+    border-left: 5px solid var(--wa-secondary);
+    border-radius: 10px;
+    font-style: italic;
+    position: relative;
+}
+
+.blog-content blockquote::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 60px;
+    color: var(--wa-secondary);
+    opacity: 0.3;
+}
+
+.blog-content ul,
+.blog-content ol {
+    margin: 25px 0;
+    padding-left: 30px;
+}
+
+.blog-content li {
+    margin-bottom: 12px;
+    line-height: 1.8;
+}
+
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    margin: 30px 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* 記事下部のアクション */
+.blog-actions {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.blog-share {
+    text-align: center;
+    padding-bottom: 30px;
+    border-bottom: 2px dashed var(--wa-gold);
+}
+
+.share-title {
+    font-family: 'Klee One', cursive;
+    font-size: 1.5rem;
+    color: var(--wa-primary);
+    margin-bottom: 20px;
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.share-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.share-btn.facebook { background: #1877f2; }
+.share-btn.twitter { background: #1da1f2; }
+.share-btn.line { background: #00c300; }
+
+/* 著者情報 */
+.author-box {
+    margin-top: 30px;
+    padding: 30px;
+    background: var(--wa-bg-cream);
+    border-radius: 20px;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.author-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--wa-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.author-info h4 {
+    font-size: 1.3rem;
+    color: var(--wa-primary);
+    margin-bottom: 10px;
+}
+
+.author-bio {
+    color: var(--wa-text-dark);
+    line-height: 1.6;
+}
+
+/* 関連記事 */
+.related-posts {
+    max-width: 1200px;
+    margin: 60px auto 0;
+    padding: 0 20px;
+}
+
+.related-posts-title {
+    font-family: 'Klee One', cursive;
+    font-size: 2rem;
+    color: var(--wa-primary);
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.related-posts-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--wa-gold);
+}
+
+.related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+/* サイドバー改善 */
+.blog-sidebar {
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar-widget {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 2px solid var(--wa-bg-cream);
+}
+
+.widget-title {
+    font-family: 'Klee One', cursive;
+    font-size: 1.5rem;
+    color: var(--wa-primary);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--wa-gold);
+}
+
+/* ページネーション改善 */
+.blog-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 60px;
+}
+
+.page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 45px;
+    height: 45px;
+    padding: 0 15px;
+    background: white;
+    border: 2px solid var(--wa-gold);
+    border-radius: 50%;
+    color: var(--wa-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.page-numbers:hover {
+    background: var(--wa-gold);
+    color: white;
+    transform: scale(1.1);
+}
+
+.page-numbers.current {
+    background: var(--wa-secondary);
+    color: white;
+    border-color: var(--wa-secondary);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .blog-page-title {
+        font-size: 2.5rem;
+    }
+    
+    .featured-post .featured-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .featured-post .featured-text {
+        padding: 30px;
+    }
+    
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .blog-content-wrapper {
+        padding: 30px;
+    }
+    
+    .blog-featured-image {
+        margin: -30px -30px 30px;
+    }
+    
+    .blog-single-title {
+        font-size: 2rem;
+    }
+    
+    .author-box {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .share-buttons {
+        flex-direction: column;
+    }
+    
+    .blog-sidebar {
+        position: static;
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .blog-card-new {
+        transform: none !important;
+    }
+    
+    .blog-page-title {
+        font-size: 2rem;
+    }
+    
+    .related-posts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* アニメーション */
+.blog-card-new,
+.featured-post,
+.sidebar-widget {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ローディングアニメーション */
+.blog-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.blog-loading::after {
+    content: '📝';
+    font-size: 50px;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}

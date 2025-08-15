@@ -67,6 +67,11 @@ function arigatou_club_scripts() {
     // ナビゲーション用CSS
     wp_enqueue_style('arigatou-club-navigation', get_template_directory_uri() . '/assets/css/navigation.css', array(), '1.0.0');
     
+    // ブログ用CSS
+    if (is_home() || is_single() || is_archive() || is_search()) {
+        wp_enqueue_style('arigatou-club-blog', get_template_directory_uri() . '/assets/css/blog.css', array(), '1.0.0');
+    }
+    
     // JavaScript
     wp_enqueue_script('arigatou-club-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.0', true);
     

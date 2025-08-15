@@ -8,11 +8,11 @@ get_header(); ?>
 <main id="main" class="site-main wa-style">
     
     <!-- ページヘッダー -->
-    <section class="page-header">
+    <section class="blog-page-header">
         <div class="wa-pattern-overlay"></div>
         <div class="container">
-            <h1 class="page-title">ブログ</h1>
-            <p class="page-subtitle">感謝のエピソードや日々の気づきをお届けします</p>
+            <h1 class="blog-page-title">ありがとうブログ</h1>
+            <p class="blog-page-subtitle">感謝のエピソードや日々の気づきをお届けします</p>
         </div>
     </section>
     
@@ -26,42 +26,72 @@ get_header(); ?>
                     
                     <?php if (have_posts()) : ?>
                         
-                        <div class="blog-posts">
-                            <?php while (have_posts()) : the_post(); ?>
-                                <article class="blog-card">
+                        <?php
+                        // フィーチャード記事（最初の記事）
+                        if (is_home() && !is_paged()) :
+                            the_post(); ?>
+                            <article class="featured-post">
+                                <div class="featured-content">
                                     <?php if (has_post_thumbnail()) : ?>
-                                        <div class="blog-thumbnail">
+                                        <div class="featured-image">
                                             <a href="<?php the_permalink(); ?>">
-                                                <?php the_post_thumbnail('medium'); ?>
+                                                <?php the_post_thumbnail('large'); ?>
                                             </a>
                                         </div>
                                     <?php endif; ?>
-                                    
-                                    <div class="blog-content">
-                                        <div class="blog-meta">
-                                            <span class="blog-date"><?php echo get_the_date('Y年n月j日'); ?></span>
+                                    <div class="featured-text">
+                                        <span class="featured-label">注目記事</span>
+                                        <h2>
+                                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                        </h2>
+                                        <div class="excerpt">
+                                            <?php echo wp_trim_words(get_the_excerpt(), 80, '...'); ?>
+                                        </div>
+                                        <a href="<?php the_permalink(); ?>" class="read-more-btn">続きを読む</a>
+                                    </div>
+                                </div>
+                            </article>
+                        <?php endif; ?>
+                        
+                        <div class="blog-grid">
+                            <?php while (have_posts()) : the_post(); ?>
+                                <article class="blog-card-new">
+                                    <?php if (has_post_thumbnail()) : ?>
+                                        <div class="blog-card-image">
+                                            <a href="<?php the_permalink(); ?>">
+                                                <?php the_post_thumbnail('medium'); ?>
+                                            </a>
                                             <?php
                                             $categories = get_the_category();
                                             if (!empty($categories)) : ?>
-                                                <span class="blog-category">
-                                                    <?php foreach ($categories as $category) : ?>
-                                                        <a href="<?php echo get_category_link($category->term_id); ?>"><?php echo esc_html($category->name); ?></a>
-                                                    <?php endforeach; ?>
+                                                <span class="blog-category-badge">
+                                                    <?php echo esc_html($categories[0]->name); ?>
                                                 </span>
                                             <?php endif; ?>
                                         </div>
+                                    <?php endif; ?>
+                                    
+                                    <div class="blog-card-body">
+                                        <div class="blog-date">
+                                            <?php echo get_the_date('Y.m.d'); ?>
+                                        </div>
                                         
-                                        <h2 class="blog-title">
+                                        <h2 class="blog-card-title">
                                             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                         </h2>
                                         
-                                        <div class="blog-excerpt">
-                                            <?php the_excerpt(); ?>
+                                        <div class="blog-card-excerpt">
+                                            <?php echo wp_trim_words(get_the_excerpt(), 60, '...'); ?>
                                         </div>
                                         
-                                        <div class="blog-footer">
-                                            <a href="<?php the_permalink(); ?>" class="read-more">続きを読む →</a>
-                                            <span class="blog-author">by <?php the_author(); ?></span>
+                                        <div class="blog-card-footer">
+                                            <a href="<?php the_permalink(); ?>" class="read-more-btn">続きを読む</a>
+                                            <div class="blog-author">
+                                                <div class="author-avatar">
+                                                    <?php echo mb_substr(get_the_author(), 0, 1); ?>
+                                                </div>
+                                                <span><?php the_author(); ?></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </article>
@@ -69,11 +99,12 @@ get_header(); ?>
                         </div>
                         
                         <!-- ページネーション -->
-                        <div class="pagination">
+                        <div class="blog-pagination">
                             <?php
                             echo paginate_links(array(
-                                'prev_text' => '← 前へ',
-                                'next_text' => '次へ →',
+                                'prev_text' => '←',
+                                'next_text' => '→',
+                                'type' => 'array'
                             ));
                             ?>
                         </div>
