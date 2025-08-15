@@ -8,8 +8,8 @@
     // DOM Ready
     $(document).ready(function() {
         
-        // モバイルメニュートグル（改良版）
-        $('.menu-toggle').on('click', function(e) {
+        // モバイルメニュートグル（Android対応版）
+        $(document).on('click touchstart', '.menu-toggle', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
@@ -21,9 +21,17 @@
                 // メニューを開く
                 $toggle.addClass('active');
                 $nav.addClass('active');
-                $('body').append('<div class="menu-overlay"></div>');
-                $('.menu-overlay').addClass('active');
-                $('body').addClass('menu-open');
+                
+                // オーバーレイがまだない場合のみ追加
+                if ($('.menu-overlay').length === 0) {
+                    $('body').append('<div class="menu-overlay"></div>');
+                }
+                
+                // 少し遅延させてアニメーションを開始
+                setTimeout(function() {
+                    $('.menu-overlay').addClass('active');
+                    $('body').addClass('menu-open');
+                }, 10);
                 
                 // アクセシビリティ
                 $toggle.attr('aria-expanded', 'true');
@@ -40,6 +48,8 @@
                 // メニューを閉じる
                 closeMenu();
             }
+            
+            return false;
         });
         
         // メニューを閉じる関数
@@ -62,9 +72,11 @@
             $('.main-navigation li').removeClass('animated');
         }
         
-        // オーバーレイクリックでメニューを閉じる
-        $(document).on('click', '.menu-overlay', function() {
+        // オーバーレイクリックでメニューを閉じる（タッチイベント対応）
+        $(document).on('click touchstart', '.menu-overlay', function(e) {
+            e.preventDefault();
             closeMenu();
+            return false;
         });
         
         // ESCキーでメニューを閉じる
@@ -75,8 +87,8 @@
         });
         
         // メニューリンククリックでメニューを閉じる（モバイル時）
-        $('.main-navigation a').on('click', function() {
-            if ($(window).width() < 1024) {
+        $(document).on('click touchstart', '.main-navigation a', function() {
+            if ($(window).width() < 1024 && !$(this).attr('target')) {
                 setTimeout(function() {
                     closeMenu();
                 }, 300);

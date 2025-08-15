@@ -281,7 +281,7 @@
     }
     
     .header-inner {
-        padding: 0 40px;
+        padding: 0 20px;
         height: 80px;
     }
     
@@ -304,8 +304,9 @@
     .main-navigation ul {
         display: flex;
         padding: 0;
-        gap: 5px;
+        gap: 3px;
         align-items: center;
+        flex-wrap: nowrap;
     }
     
     .main-navigation li {
@@ -315,25 +316,26 @@
     }
     
     .main-navigation a {
-        padding: 12px 20px;
+        padding: 10px 15px;
         border: none;
         border-radius: 25px;
-        font-size: 1rem;
+        font-size: 0.9rem;
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
         transition: all 0.3s ease;
+        white-space: nowrap;
     }
     
     .main-navigation a:hover,
     .main-navigation a:focus {
         background: rgba(255, 255, 255, 0.25);
         transform: translateY(-2px);
-        padding-left: 20px;
+        padding-left: 15px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
     
     .main-navigation a[target="_blank"] {
-        padding-right: 20px;
+        padding-right: 15px;
     }
     
     .main-navigation .external-link-icon {
@@ -375,8 +377,8 @@
     }
     
     .site-header.scrolled .main-navigation a {
-        padding: 10px 18px;
-        font-size: 0.95rem;
+        padding: 8px 12px;
+        font-size: 0.85rem;
     }
 }
 
@@ -455,6 +457,34 @@ body.menu-open {
 @media (min-width: 1024px) {
     body {
         padding-top: 80px;
+    }
+}
+
+/* 大画面用の追加調整 */
+@media (min-width: 1200px) {
+    .header-inner {
+        padding: 0 30px;
+    }
+    
+    .main-navigation ul {
+        gap: 5px;
+    }
+    
+    .main-navigation a {
+        padding: 10px 18px;
+        font-size: 0.95rem;
+    }
+}
+
+/* 超大画面用 */
+@media (min-width: 1440px) {
+    .header-inner {
+        padding: 0 40px;
+    }
+    
+    .main-navigation a {
+        padding: 12px 20px;
+        font-size: 1rem;
     }
 }
 
