@@ -59,6 +59,9 @@ function arigatou_club_scripts() {
     // メインCSS
     wp_enqueue_style('arigatou-club-main', get_template_directory_uri() . '/assets/css/main.css', array(), '1.0.0');
     
+    // ページ用CSS
+    wp_enqueue_style('arigatou-club-pages', get_template_directory_uri() . '/assets/css/pages.css', array(), '1.0.0');
+    
     // JavaScript
     wp_enqueue_script('arigatou-club-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.0', true);
     
@@ -141,68 +144,6 @@ function arigatou_club_custom_post_types() {
         'rewrite' => array('slug' => 'events'),
     ));
     
-    // ストーリー投稿タイプ
-    register_post_type('story', array(
-        'labels' => array(
-            'name' => 'ストーリー',
-            'singular_name' => 'ストーリー',
-            'add_new' => '新規追加',
-            'add_new_item' => '新しいストーリーを追加',
-            'edit_item' => 'ストーリーを編集',
-            'new_item' => '新しいストーリー',
-            'view_item' => 'ストーリーを表示',
-            'search_items' => 'ストーリーを検索',
-            'not_found' => 'ストーリーが見つかりません',
-            'not_found_in_trash' => 'ゴミ箱にストーリーはありません',
-        ),
-        'public' => true,
-        'has_archive' => true,
-        'menu_icon' => 'dashicons-book',
-        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'author'),
-        'rewrite' => array('slug' => 'stories'),
-    ));
-    
-    // スポンサー投稿タイプ
-    register_post_type('sponsor', array(
-        'labels' => array(
-            'name' => 'スポンサー',
-            'singular_name' => 'スポンサー',
-            'add_new' => '新規追加',
-            'add_new_item' => '新しいスポンサーを追加',
-            'edit_item' => 'スポンサーを編集',
-            'new_item' => '新しいスポンサー',
-            'view_item' => 'スポンサーを表示',
-            'search_items' => 'スポンサーを検索',
-            'not_found' => 'スポンサーが見つかりません',
-            'not_found_in_trash' => 'ゴミ箱にスポンサーはありません',
-        ),
-        'public' => true,
-        'has_archive' => false,
-        'menu_icon' => 'dashicons-megaphone',
-        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
-        'rewrite' => array('slug' => 'sponsors'),
-    ));
-    
-    // グッズ投稿タイプ
-    register_post_type('goods', array(
-        'labels' => array(
-            'name' => 'グッズ',
-            'singular_name' => 'グッズ',
-            'add_new' => '新規追加',
-            'add_new_item' => '新しいグッズを追加',
-            'edit_item' => 'グッズを編集',
-            'new_item' => '新しいグッズ',
-            'view_item' => 'グッズを表示',
-            'search_items' => 'グッズを検索',
-            'not_found' => 'グッズが見つかりません',
-            'not_found_in_trash' => 'ゴミ箱にグッズはありません',
-        ),
-        'public' => true,
-        'has_archive' => true,
-        'menu_icon' => 'dashicons-cart',
-        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
-        'rewrite' => array('slug' => 'goods'),
-    ));
 }
 add_action('init', 'arigatou_club_custom_post_types');
 
@@ -227,22 +168,6 @@ function arigatou_club_custom_taxonomies() {
         'rewrite' => array('slug' => 'event-category'),
     ));
     
-    // ストーリータグ
-    register_taxonomy('story_tag', 'story', array(
-        'labels' => array(
-            'name' => 'ストーリータグ',
-            'singular_name' => 'ストーリータグ',
-            'search_items' => 'タグを検索',
-            'all_items' => 'すべてのタグ',
-            'edit_item' => 'タグを編集',
-            'update_item' => 'タグを更新',
-            'add_new_item' => '新しいタグを追加',
-            'new_item_name' => '新しいタグ名',
-        ),
-        'hierarchical' => false,
-        'show_ui' => true,
-        'rewrite' => array('slug' => 'story-tag'),
-    ));
 }
 add_action('init', 'arigatou_club_custom_taxonomies');
 
@@ -256,16 +181,6 @@ function arigatou_club_add_meta_boxes() {
         'イベント詳細',
         'arigatou_club_event_meta_box',
         'event',
-        'normal',
-        'high'
-    );
-    
-    // グッズ用メタボックス
-    add_meta_box(
-        'goods_details',
-        'グッズ詳細',
-        'arigatou_club_goods_meta_box',
-        'goods',
         'normal',
         'high'
     );
@@ -305,28 +220,6 @@ function arigatou_club_event_meta_box($post) {
 }
 
 /**
- * グッズメタボックスの表示
- */
-function arigatou_club_goods_meta_box($post) {
-    wp_nonce_field('arigatou_club_save_goods_meta', 'arigatou_club_goods_nonce');
-    
-    $goods_price = get_post_meta($post->ID, '_goods_price', true);
-    $goods_link = get_post_meta($post->ID, '_goods_link', true);
-    ?>
-    <table class="form-table">
-        <tr>
-            <th><label for="goods_price">価格</label></th>
-            <td><input type="text" id="goods_price" name="goods_price" value="<?php echo esc_attr($goods_price); ?>" class="regular-text" placeholder="例: ¥1,500" /></td>
-        </tr>
-        <tr>
-            <th><label for="goods_link">購入リンク</label></th>
-            <td><input type="url" id="goods_link" name="goods_link" value="<?php echo esc_url($goods_link); ?>" class="large-text" placeholder="https://..." /></td>
-        </tr>
-    </table>
-    <?php
-}
-
-/**
  * カスタムフィールドの保存
  */
 function arigatou_club_save_post_meta($post_id) {
@@ -348,16 +241,6 @@ function arigatou_club_save_post_meta($post_id) {
         }
         if (isset($_POST['event_fee'])) {
             update_post_meta($post_id, '_event_fee', sanitize_text_field($_POST['event_fee']));
-        }
-    }
-    
-    // グッズメタの保存
-    if (isset($_POST['arigatou_club_goods_nonce']) && wp_verify_nonce($_POST['arigatou_club_goods_nonce'], 'arigatou_club_save_goods_meta')) {
-        if (isset($_POST['goods_price'])) {
-            update_post_meta($post_id, '_goods_price', sanitize_text_field($_POST['goods_price']));
-        }
-        if (isset($_POST['goods_link'])) {
-            update_post_meta($post_id, '_goods_link', esc_url_raw($_POST['goods_link']));
         }
     }
 }
@@ -413,3 +296,103 @@ function arigatou_club_excerpt_more($more) {
     return '...';
 }
 add_filter('excerpt_more', 'arigatou_club_excerpt_more');
+
+/**
+ * お問い合わせフォーム処理
+ */
+function arigatou_club_handle_contact_form() {
+    // nonceチェック
+    if (!isset($_POST['arigatou_contact_nonce']) || !wp_verify_nonce($_POST['arigatou_contact_nonce'], 'arigatou_contact_form')) {
+        wp_redirect(home_url('/contact/?status=error'));
+        exit;
+    }
+    
+    // データの取得とサニタイズ
+    $contact_type = sanitize_text_field($_POST['contact_type']);
+    $name = sanitize_text_field($_POST['contact_name']);
+    $email = sanitize_email($_POST['contact_email']);
+    $phone = sanitize_text_field($_POST['contact_phone']);
+    $subject = sanitize_text_field($_POST['contact_subject']);
+    $message = sanitize_textarea_field($_POST['contact_message']);
+    
+    // メール送信
+    $to = get_option('admin_email');
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+        'From: ' . $name . ' <' . $email . '>',
+        'Reply-To: ' . $email
+    );
+    
+    $email_subject = '[ありがとう倶楽部] ' . $contact_type . '：' . $subject;
+    
+    $email_body = "
+    <html>
+    <body>
+        <h2>お問い合わせを受け付けました</h2>
+        <table style='border-collapse: collapse; width: 100%;'>
+            <tr>
+                <th style='border: 1px solid #ddd; padding: 10px; text-align: left; background: #f5f5f5;'>お問い合わせ種別</th>
+                <td style='border: 1px solid #ddd; padding: 10px;'>{$contact_type}</td>
+            </tr>
+            <tr>
+                <th style='border: 1px solid #ddd; padding: 10px; text-align: left; background: #f5f5f5;'>お名前</th>
+                <td style='border: 1px solid #ddd; padding: 10px;'>{$name}</td>
+            </tr>
+            <tr>
+                <th style='border: 1px solid #ddd; padding: 10px; text-align: left; background: #f5f5f5;'>メールアドレス</th>
+                <td style='border: 1px solid #ddd; padding: 10px;'>{$email}</td>
+            </tr>
+            <tr>
+                <th style='border: 1px solid #ddd; padding: 10px; text-align: left; background: #f5f5f5;'>電話番号</th>
+                <td style='border: 1px solid #ddd; padding: 10px;'>{$phone}</td>
+            </tr>
+            <tr>
+                <th style='border: 1px solid #ddd; padding: 10px; text-align: left; background: #f5f5f5;'>件名</th>
+                <td style='border: 1px solid #ddd; padding: 10px;'>{$subject}</td>
+            </tr>
+            <tr>
+                <th style='border: 1px solid #ddd; padding: 10px; text-align: left; background: #f5f5f5;'>お問い合わせ内容</th>
+                <td style='border: 1px solid #ddd; padding: 10px;'>" . nl2br($message) . "</td>
+            </tr>
+        </table>
+    </body>
+    </html>
+    ";
+    
+    $sent = wp_mail($to, $email_subject, $email_body, $headers);
+    
+    // 自動返信メール
+    if ($sent) {
+        $reply_subject = '[ありがとう倶楽部] お問い合わせありがとうございます';
+        $reply_body = "
+        <html>
+        <body>
+            <p>{$name} 様</p>
+            <p>この度は、ありがとう倶楽部へお問い合わせいただき、誠にありがとうございます。</p>
+            <p>以下の内容でお問い合わせを承りました。</p>
+            <hr>
+            <p><strong>お問い合わせ種別：</strong>{$contact_type}</p>
+            <p><strong>件名：</strong>{$subject}</p>
+            <p><strong>お問い合わせ内容：</strong><br>" . nl2br($message) . "</p>
+            <hr>
+            <p>内容を確認の上、担当者よりご連絡させていただきます。</p>
+            <p>今しばらくお待ちください。</p>
+            <br>
+            <p>ありがとう倶楽部</p>
+        </body>
+        </html>
+        ";
+        
+        wp_mail($email, $reply_subject, $reply_body, array('Content-Type: text/html; charset=UTF-8'));
+    }
+    
+    // リダイレクト
+    if ($sent) {
+        wp_redirect(home_url('/contact/?status=success'));
+    } else {
+        wp_redirect(home_url('/contact/?status=error'));
+    }
+    exit;
+}
+add_action('admin_post_arigatou_contact_form', 'arigatou_club_handle_contact_form');
+add_action('admin_post_nopriv_arigatou_contact_form', 'arigatou_club_handle_contact_form');

@@ -49,12 +49,11 @@
                     'container' => false,
                     'fallback_cb' => function() {
                         echo '<ul id="primary-menu" class="menu">';
-                        echo '<li><a href="' . home_url('/') . '">ホーム</a></li>';
-                        echo '<li><a href="#events">イベント案内</a></li>';
-                        echo '<li><a href="#stories">ありがとう物語</a></li>';
-                        echo '<li><a href="#sponsors">スポンサー</a></li>';
-                        echo '<li><a href="#goods">グッズ</a></li>';
-                        echo '<li><a href="#about">倶楽部について</a></li>';
+                        echo '<li><a href="' . home_url('/') . '">TOP</a></li>';
+                        echo '<li><a href="' . home_url('/about/') . '">ありがとう倶楽部について</a></li>';
+                        echo '<li><a href="' . get_post_type_archive_link('event') . '">イベント</a></li>';
+                        echo '<li><a href="' . home_url('/blog/') . '">ブログ</a></li>';
+                        echo '<li><a href="' . home_url('/contact/') . '">お問い合わせ</a></li>';
                         echo '</ul>';
                     }
                 ));
