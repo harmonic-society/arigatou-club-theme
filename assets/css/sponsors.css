@@ -1,0 +1,579 @@
+/* 協賛企業専用スタイル */
+
+/* 協賛企業一覧ページ */
+.sponsor-page-header {
+    position: relative;
+    background: linear-gradient(135deg, var(--wa-gold) 0%, var(--wa-secondary) 100%);
+    padding: 100px 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.sponsor-page-header::before {
+    content: '🏢';
+    position: absolute;
+    top: 20px;
+    left: 5%;
+    font-size: 100px;
+    opacity: 0.1;
+    animation: float-left 20s ease-in-out infinite;
+}
+
+.sponsor-page-header::after {
+    content: '🤝';
+    position: absolute;
+    bottom: 20px;
+    right: 5%;
+    font-size: 80px;
+    opacity: 0.1;
+    animation: float-right 15s ease-in-out infinite;
+}
+
+.sponsor-page-title {
+    color: white;
+    font-size: 3.5rem;
+    font-family: 'Klee One', cursive;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    letter-spacing: 0.1em;
+    transform: rotate(-1deg);
+}
+
+.sponsor-page-subtitle {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.3rem;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    letter-spacing: 0.05em;
+}
+
+/* 協賛レベルセクション */
+.sponsor-level-section {
+    margin-bottom: 80px;
+}
+
+.sponsor-level-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.level-icon {
+    font-size: 3rem;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.sponsor-level-title {
+    font-family: 'Klee One', cursive;
+    font-size: 2.5rem;
+    color: var(--wa-primary);
+    font-weight: 600;
+}
+
+/* スポンサーグリッド */
+.sponsor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.sponsor-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    transform: rotate(-0.5deg);
+}
+
+.sponsor-card:nth-child(even) {
+    transform: rotate(0.5deg);
+}
+
+.sponsor-card:hover {
+    transform: rotate(0deg) translateY(-5px);
+    box-shadow: 0 15px 40px rgba(230, 184, 125, 0.3);
+}
+
+.sponsor-logo {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--wa-bg-cream);
+    padding: 20px;
+}
+
+.sponsor-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.sponsor-content {
+    padding: 25px;
+}
+
+.sponsor-name {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.sponsor-name a {
+    color: var(--wa-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.sponsor-name a:hover {
+    color: var(--wa-secondary);
+}
+
+.sponsor-industry,
+.sponsor-since {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--wa-text-dark);
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+.sponsor-industry i,
+.sponsor-since i {
+    color: var(--wa-gold);
+}
+
+.sponsor-excerpt {
+    color: var(--wa-text-dark);
+    line-height: 1.7;
+    margin: 20px 0;
+}
+
+.sponsor-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-detail,
+.btn-website {
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.btn-detail {
+    background: var(--wa-secondary);
+    color: white;
+}
+
+.btn-detail:hover {
+    background: var(--wa-accent);
+    transform: translateY(-2px);
+}
+
+.btn-website {
+    background: white;
+    color: var(--wa-primary);
+    border: 2px solid var(--wa-primary);
+}
+
+.btn-website:hover {
+    background: var(--wa-primary);
+    color: white;
+}
+
+/* プラチナスポンサー特別スタイル */
+.platinum-sponsors .sponsor-card {
+    background: linear-gradient(135deg, white 0%, #f8f8ff 100%);
+    border: 2px solid #e5e5ff;
+}
+
+.platinum-sponsors .sponsor-grid {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+}
+
+/* ゴールドスポンサー特別スタイル */
+.gold-sponsors .sponsor-card {
+    background: linear-gradient(135deg, white 0%, #fffef5 100%);
+    border: 2px solid var(--wa-gold);
+}
+
+/* 協賛募集セクション */
+.sponsor-cta-section {
+    background: var(--wa-bg-cream);
+    padding: 80px 0;
+}
+
+.sponsor-cta-box {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    background: white;
+    padding: 60px;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.sponsor-cta-box::before {
+    content: '✨';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    background: white;
+    padding: 0 20px;
+}
+
+.cta-title {
+    font-family: 'Klee One', cursive;
+    font-size: 2.5rem;
+    color: var(--wa-primary);
+    margin-bottom: 20px;
+}
+
+.cta-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--wa-text-dark);
+    margin-bottom: 30px;
+}
+
+/* 協賛企業詳細ページ */
+.single-sponsor .sponsor-header {
+    background: linear-gradient(135deg, var(--wa-bg-cream) 0%, var(--wa-bg-light) 100%);
+    padding: 80px 0;
+    position: relative;
+}
+
+.sponsor-header-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.sponsor-logo-large {
+    width: 250px;
+    height: 250px;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.sponsor-logo-large img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.sponsor-info {
+    flex: 1;
+}
+
+.sponsor-level-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.sponsor-level-badge.platinum {
+    background: linear-gradient(135deg, #b8b8ff 0%, #e5e5ff 100%);
+    color: #4a4a8a;
+}
+
+.sponsor-level-badge.gold {
+    background: linear-gradient(135deg, var(--wa-gold) 0%, #ffdc7d 100%);
+    color: #8B4513;
+}
+
+.sponsor-level-badge.silver {
+    background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+    color: #666;
+}
+
+.sponsor-level-badge.bronze {
+    background: linear-gradient(135deg, #cd7f32 0%, #e5a85a 100%);
+    color: white;
+}
+
+.sponsor-title {
+    font-family: 'Klee One', cursive;
+    font-size: 3rem;
+    color: var(--wa-primary);
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.sponsor-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--wa-text-dark);
+}
+
+.meta-item i {
+    color: var(--wa-gold);
+}
+
+.company-link {
+    color: var(--wa-secondary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.company-link:hover {
+    color: var(--wa-accent);
+}
+
+/* コンテンツセクション */
+.sponsor-content-section {
+    padding: 60px 0;
+}
+
+.sponsor-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sponsor-main-content {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.content-box {
+    padding: 40px;
+    border-bottom: 1px solid #eee;
+}
+
+.content-box:last-child {
+    border-bottom: none;
+}
+
+.content-title {
+    font-family: 'Klee One', cursive;
+    font-size: 2rem;
+    color: var(--wa-primary);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--wa-gold);
+}
+
+.content-subtitle {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 1.3rem;
+    color: var(--wa-secondary);
+    margin-bottom: 15px;
+}
+
+.sponsor-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--wa-text-dark);
+}
+
+.sponsor-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--wa-bg-cream);
+    border-radius: 20px;
+    color: var(--wa-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.category-tag:hover {
+    background: var(--wa-gold);
+    color: white;
+}
+
+/* サイドバー */
+.sponsor-sidebar {
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar-box {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.box-title {
+    font-family: 'Klee One', cursive;
+    font-size: 1.5rem;
+    color: var(--wa-primary);
+    margin-bottom: 15px;
+}
+
+.message-box {
+    background: var(--wa-bg-cream);
+    border: 2px solid var(--wa-gold);
+}
+
+.message-text {
+    line-height: 1.8;
+    color: var(--wa-text-dark);
+    margin-bottom: 20px;
+}
+
+.thank-you-icon {
+    text-align: center;
+    font-size: 3rem;
+}
+
+.website-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: var(--wa-secondary);
+    color: white;
+    text-align: center;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.website-button:hover {
+    background: var(--wa-accent);
+    transform: translateY(-2px);
+}
+
+/* 他の協賛企業 */
+.other-sponsors-section {
+    background: var(--wa-bg-light);
+    padding: 80px 0;
+}
+
+.other-sponsors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.other-sponsor-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.other-sponsor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.other-sponsor-logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 15px;
+}
+
+.other-sponsor-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.other-sponsor-name {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.other-sponsor-name a {
+    color: var(--wa-primary);
+    text-decoration: none;
+}
+
+.other-sponsor-level {
+    font-size: 0.85rem;
+    padding: 3px 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1024px) {
+    .sponsor-header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .sponsor-content-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .sponsor-sidebar {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .sponsor-page-title {
+        font-size: 2.5rem;
+    }
+    
+    .sponsor-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .platinum-sponsors .sponsor-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sponsor-cta-box {
+        padding: 40px 20px;
+    }
+    
+    .other-sponsors-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .sponsor-title {
+        font-size: 2rem;
+    }
+    
+    .sponsor-logo-large {
+        width: 200px;
+        height: 200px;
+    }
+}

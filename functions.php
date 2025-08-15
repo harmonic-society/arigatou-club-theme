@@ -72,6 +72,11 @@ function arigatou_club_scripts() {
         wp_enqueue_style('arigatou-club-blog', get_template_directory_uri() . '/assets/css/blog.css', array(), '1.0.0');
     }
     
+    // 協賛企業用CSS
+    if (is_post_type_archive('sponsor') || is_singular('sponsor')) {
+        wp_enqueue_style('arigatou-club-sponsors', get_template_directory_uri() . '/assets/css/sponsors.css', array(), '1.0.0');
+    }
+    
     // フッター用CSS
     wp_enqueue_style('arigatou-club-footer', get_template_directory_uri() . '/assets/css/footer.css', array(), '1.0.0');
     
@@ -160,6 +165,30 @@ function arigatou_club_custom_post_types() {
         'rewrite' => array('slug' => 'events'),
     ));
     
+    // 協賛企業投稿タイプ
+    register_post_type('sponsor', array(
+        'labels' => array(
+            'name' => '協賛企業',
+            'singular_name' => '協賛企業',
+            'add_new' => '新規追加',
+            'add_new_item' => '新しい協賛企業を追加',
+            'edit_item' => '協賛企業を編集',
+            'new_item' => '新しい協賛企業',
+            'view_item' => '協賛企業を表示',
+            'search_items' => '協賛企業を検索',
+            'not_found' => '協賛企業が見つかりません',
+            'not_found_in_trash' => 'ゴミ箱に協賛企業はありません',
+            'all_items' => 'すべての協賛企業',
+            'menu_name' => '協賛企業',
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'menu_icon' => 'dashicons-building',
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
+        'rewrite' => array('slug' => 'sponsors'),
+        'show_in_rest' => true,
+    ));
+    
 }
 add_action('init', 'arigatou_club_custom_post_types');
 
@@ -184,6 +213,24 @@ function arigatou_club_custom_taxonomies() {
         'rewrite' => array('slug' => 'event-category'),
     ));
     
+    // 協賛企業カテゴリー
+    register_taxonomy('sponsor_category', 'sponsor', array(
+        'labels' => array(
+            'name' => '協賛カテゴリー',
+            'singular_name' => '協賛カテゴリー',
+            'search_items' => 'カテゴリーを検索',
+            'all_items' => 'すべてのカテゴリー',
+            'edit_item' => 'カテゴリーを編集',
+            'update_item' => 'カテゴリーを更新',
+            'add_new_item' => '新しいカテゴリーを追加',
+            'new_item_name' => '新しいカテゴリー名',
+        ),
+        'hierarchical' => true,
+        'show_ui' => true,
+        'rewrite' => array('slug' => 'sponsor-category'),
+        'show_in_rest' => true,
+    ));
+    
 }
 add_action('init', 'arigatou_club_custom_taxonomies');
 
@@ -197,6 +244,16 @@ function arigatou_club_add_meta_boxes() {
         'イベント詳細',
         'arigatou_club_event_meta_box',
         'event',
+        'normal',
+        'high'
+    );
+    
+    // 協賛企業用メタボックス
+    add_meta_box(
+        'sponsor_details',
+        '企業詳細',
+        'arigatou_club_sponsor_meta_box',
+        'sponsor',
         'normal',
         'high'
     );
@@ -236,6 +293,56 @@ function arigatou_club_event_meta_box($post) {
 }
 
 /**
+ * 協賛企業メタボックスの表示
+ */
+function arigatou_club_sponsor_meta_box($post) {
+    wp_nonce_field('arigatou_club_save_sponsor_meta', 'arigatou_club_sponsor_nonce');
+    
+    $company_url = get_post_meta($post->ID, '_sponsor_url', true);
+    $company_industry = get_post_meta($post->ID, '_sponsor_industry', true);
+    $sponsor_level = get_post_meta($post->ID, '_sponsor_level', true);
+    $sponsor_since = get_post_meta($post->ID, '_sponsor_since', true);
+    $contact_person = get_post_meta($post->ID, '_sponsor_contact_person', true);
+    $contact_email = get_post_meta($post->ID, '_sponsor_contact_email', true);
+    ?>
+    <table class="form-table">
+        <tr>
+            <th><label for="sponsor_url">企業ウェブサイト</label></th>
+            <td><input type="url" id="sponsor_url" name="sponsor_url" value="<?php echo esc_attr($company_url); ?>" class="regular-text" placeholder="https://example.com" /></td>
+        </tr>
+        <tr>
+            <th><label for="sponsor_industry">業種</label></th>
+            <td><input type="text" id="sponsor_industry" name="sponsor_industry" value="<?php echo esc_attr($company_industry); ?>" class="regular-text" placeholder="例: IT、製造業、サービス業" /></td>
+        </tr>
+        <tr>
+            <th><label for="sponsor_level">協賛レベル</label></th>
+            <td>
+                <select id="sponsor_level" name="sponsor_level">
+                    <option value="">選択してください</option>
+                    <option value="platinum" <?php selected($sponsor_level, 'platinum'); ?>>プラチナスポンサー</option>
+                    <option value="gold" <?php selected($sponsor_level, 'gold'); ?>>ゴールドスポンサー</option>
+                    <option value="silver" <?php selected($sponsor_level, 'silver'); ?>>シルバースポンサー</option>
+                    <option value="bronze" <?php selected($sponsor_level, 'bronze'); ?>>ブロンズスポンサー</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="sponsor_since">協賛開始年月</label></th>
+            <td><input type="month" id="sponsor_since" name="sponsor_since" value="<?php echo esc_attr($sponsor_since); ?>" /></td>
+        </tr>
+        <tr>
+            <th><label for="sponsor_contact_person">担当者名</label></th>
+            <td><input type="text" id="sponsor_contact_person" name="sponsor_contact_person" value="<?php echo esc_attr($contact_person); ?>" class="regular-text" /></td>
+        </tr>
+        <tr>
+            <th><label for="sponsor_contact_email">担当者メール</label></th>
+            <td><input type="email" id="sponsor_contact_email" name="sponsor_contact_email" value="<?php echo esc_attr($contact_email); ?>" class="regular-text" /></td>
+        </tr>
+    </table>
+    <?php
+}
+
+/**
  * カスタムフィールドの保存
  */
 function arigatou_club_save_post_meta($post_id) {
@@ -257,6 +364,28 @@ function arigatou_club_save_post_meta($post_id) {
         }
         if (isset($_POST['event_fee'])) {
             update_post_meta($post_id, '_event_fee', sanitize_text_field($_POST['event_fee']));
+        }
+    }
+    
+    // 協賛企業メタの保存
+    if (isset($_POST['arigatou_club_sponsor_nonce']) && wp_verify_nonce($_POST['arigatou_club_sponsor_nonce'], 'arigatou_club_save_sponsor_meta')) {
+        if (isset($_POST['sponsor_url'])) {
+            update_post_meta($post_id, '_sponsor_url', esc_url_raw($_POST['sponsor_url']));
+        }
+        if (isset($_POST['sponsor_industry'])) {
+            update_post_meta($post_id, '_sponsor_industry', sanitize_text_field($_POST['sponsor_industry']));
+        }
+        if (isset($_POST['sponsor_level'])) {
+            update_post_meta($post_id, '_sponsor_level', sanitize_text_field($_POST['sponsor_level']));
+        }
+        if (isset($_POST['sponsor_since'])) {
+            update_post_meta($post_id, '_sponsor_since', sanitize_text_field($_POST['sponsor_since']));
+        }
+        if (isset($_POST['sponsor_contact_person'])) {
+            update_post_meta($post_id, '_sponsor_contact_person', sanitize_text_field($_POST['sponsor_contact_person']));
+        }
+        if (isset($_POST['sponsor_contact_email'])) {
+            update_post_meta($post_id, '_sponsor_contact_email', sanitize_email($_POST['sponsor_contact_email']));
         }
     }
 }
