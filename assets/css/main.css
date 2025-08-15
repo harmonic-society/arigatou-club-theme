@@ -1,22 +1,23 @@
 /* 追加のメインスタイル */
 
-/* 和風カラーパレット */
+/* 和風カラーパレット - 親しみやすい色調 */
 :root {
     --wa-primary: #8B4513;      /* 茶色 */
-    --wa-secondary: #DC143C;    /* 深紅 */
+    --wa-secondary: #DC143C;    /* 深紅（メインカラー） */
     --wa-accent: #FF6B6B;       /* 朱色 */
-    --wa-bg-light: #FFF5EE;     /* 薄い和紙色 */
-    --wa-bg-cream: #FAEBD7;     /* クリーム色 */
-    --wa-text-dark: #3A2D27;    /* 濃い茶色 */
-    --wa-gold: #D4A574;         /* 金色 */
-    --wa-green: #7B8B6F;        /* 抹茶色 */
+    --wa-bg-light: #FFFAF5;     /* より柔らかい和紙色 */
+    --wa-bg-cream: #FFF0E5;     /* 優しいクリーム色 */
+    --wa-text-dark: #4A3C33;    /* 柔らかい茶色 */
+    --wa-gold: #E6B87D;         /* 明るい金色 */
+    --wa-green: #8FA68E;        /* 優しい抹茶色 */
+    --wa-pink: #FFB3BA;         /* 優しいピンク */
 }
 
 /* 和風スタイル全体 */
 .wa-style {
     background: var(--wa-bg-light);
     color: var(--wa-text-dark);
-    font-family: "游明朝", "Yu Mincho", "Hiragino Mincho Pro", serif;
+    font-family: "Klee One", "Zen Maru Gothic", "Kosugi Maru", "游明朝", "Yu Mincho", serif;
 }
 
 /* ヒーローセクション和風 */
@@ -49,9 +50,11 @@
     color: var(--wa-primary);
     text-align: center;
     margin-bottom: 20px;
-    font-weight: 700;
+    font-weight: 600;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     letter-spacing: 0.2em;
+    font-family: "Klee One", cursive;
+    transform: rotate(-1deg);
 }
 
 .wa-style .hero-subtitle {
@@ -99,6 +102,8 @@
     margin: 0;
     letter-spacing: 0.1em;
     position: relative;
+    font-family: "Klee One", cursive;
+    font-weight: 600;
 }
 
 .wa-style .section-title::after {
@@ -119,14 +124,19 @@
 
 .purpose-card {
     background: white;
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 30px;
     margin-bottom: 20px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    border: 2px solid transparent;
+    border: 3px solid transparent;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    transform: rotate(-0.5deg);
+}
+
+.purpose-card:nth-child(even) {
+    transform: rotate(0.5deg);
 }
 
 .purpose-card::before {
@@ -213,9 +223,21 @@
 .greeting-message {
     background: white;
     padding: 50px;
-    border-radius: 20px;
+    border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     border-top: 5px solid var(--wa-secondary);
+    position: relative;
+    transform: rotate(-0.3deg);
+}
+
+.greeting-message::before {
+    content: '♥';
+    position: absolute;
+    top: -20px;
+    right: 30px;
+    font-size: 40px;
+    color: var(--wa-accent);
+    transform: rotate(15deg);
 }
 
 .greeting-intro {
@@ -253,15 +275,36 @@
 .activity-item {
     background: white;
     padding: 30px;
-    border-radius: 15px;
+    border-radius: 25px;
     text-align: center;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 2px dashed var(--wa-gold);
+    position: relative;
+}
+
+.activity-item::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, transparent 30%, var(--wa-accent) 50%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+    border-radius: 25px;
 }
 
 .activity-item:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) rotate(2deg);
     box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border-color: var(--wa-secondary);
+}
+
+.activity-item:hover::before {
+    opacity: 0.1;
 }
 
 .activity-icon {
@@ -293,10 +336,21 @@
 
 .membership-card {
     background: white;
-    border-radius: 20px;
+    border-radius: 25px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
+    border: 3px solid var(--wa-bg-cream);
+    position: relative;
+}
+
+.membership-card::after {
+    content: '✨';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    opacity: 0.5;
 }
 
 .membership-card:hover {
@@ -360,8 +414,31 @@
     margin: 0 auto;
     background: white;
     padding: 50px;
-    border-radius: 20px;
+    border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 4px dotted var(--wa-gold);
+    position: relative;
+}
+
+.corporate-content::before,
+.corporate-content::after {
+    content: '♾';
+    position: absolute;
+    font-size: 40px;
+    color: var(--wa-gold);
+    opacity: 0.3;
+}
+
+.corporate-content::before {
+    top: 20px;
+    left: 20px;
+    transform: rotate(-15deg);
+}
+
+.corporate-content::after {
+    bottom: 20px;
+    right: 20px;
+    transform: rotate(15deg);
 }
 
 .corporate-intro {
@@ -410,6 +487,28 @@
     text-decoration: none;
     display: inline-block;
     letter-spacing: 0.1em;
+    font-family: "Zen Maru Gothic", sans-serif;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+.wa-style .btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.wa-style .btn:hover::after {
+    width: 300px;
+    height: 300px;
 }
 
 .wa-style .btn-primary {
@@ -478,6 +577,26 @@
     .section-header {
         flex-direction: column;
         gap: 10px;
+    }
+}
+
+/* 外部リンクアイコン */
+.external-link-icon {
+    margin-left: 5px;
+    font-size: 0.9em;
+    display: inline-block;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-5px);
+    }
+    60% {
+        transform: translateY(-3px);
     }
 }
 

@@ -54,7 +54,9 @@ add_action('after_setup_theme', 'arigatou_club_setup');
 function arigatou_club_scripts() {
     // スタイルシート
     wp_enqueue_style('arigatou-club-style', get_stylesheet_uri(), array(), '1.0.0');
-    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap', array(), null);
+    
+    // Google Fonts - 手書き風フォント
+    wp_enqueue_style('google-fonts-handwriting', 'https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700&family=Kosugi+Maru&display=swap', array(), null);
     
     // メインCSS
     wp_enqueue_style('arigatou-club-main', get_template_directory_uri() . '/assets/css/main.css', array(), '1.0.0');

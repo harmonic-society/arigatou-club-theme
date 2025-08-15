@@ -53,6 +53,7 @@
                         echo '<li><a href="' . home_url('/about/') . '">ありがとう倶楽部について</a></li>';
                         echo '<li><a href="' . get_post_type_archive_link('event') . '">イベント</a></li>';
                         echo '<li><a href="' . home_url('/blog/') . '">ブログ</a></li>';
+                        echo '<li><a href="https://arigatou-goods.stores.jp/" target="_blank" rel="noopener">グッズ販売<span class="external-link-icon">🛒</span></a></li>';
                         echo '<li><a href="' . home_url('/contact/') . '">お問い合わせ</a></li>';
                         echo '</ul>';
                     }
