@@ -1,24 +1,41 @@
     <footer id="colophon" class="site-footer">
+        <div class="footer-decoration"></div>
+        <div class="wave-animation"></div>
+        
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
+                <!-- メインカラム -->
+                <div class="footer-column footer-main">
                     <h3>ありがとう倶楽部</h3>
-                    <p>感謝の心を広げ、世界を「ありがとう」で満たすコミュニティです。</p>
+                    <p>感謝の心を広げ、<br>世界を「ありがとう」で満たすコミュニティです。</p>
+                    <p>私たちは日々の小さな感謝から始まる<br>大きな幸せの輪を広げています。</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/arigatouclub" target="_blank" rel="noopener" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/arigatouclub" target="_blank" rel="noopener" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.instagram.com/arigatouclub" target="_blank" rel="noopener" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/arigatouclub" target="_blank" rel="noopener" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://line.me/R/ti/p/@arigatouclub" target="_blank" rel="noopener" aria-label="LINE">
+                            <i class="fab fa-line"></i>
+                        </a>
                     </div>
                 </div>
                 
+                <!-- クイックリンク -->
                 <?php if (is_active_sidebar('footer-1')) : ?>
                     <div class="footer-column">
                         <?php dynamic_sidebar('footer-1'); ?>
                     </div>
                 <?php else : ?>
                     <div class="footer-column">
-                        <h3>クイックリンク</h3>
+                        <h3>メニュー</h3>
                         <?php
                         wp_nav_menu(array(
                             'theme_location' => 'footer',
@@ -26,10 +43,12 @@
                             'container' => false,
                             'fallback_cb' => function() {
                                 echo '<ul class="footer-menu">';
-                                echo '<li><a href="' . home_url('/events/') . '">イベント一覧</a></li>';
-                                echo '<li><a href="' . home_url('/stories/') . '">ストーリー</a></li>';
-                                echo '<li><a href="' . home_url('/goods/') . '">グッズ</a></li>';
-                                echo '<li><a href="' . home_url('/about/') . '">私たちについて</a></li>';
+                                echo '<li><a href="' . home_url('/') . '">TOP</a></li>';
+                                echo '<li><a href="' . home_url('/about/') . '">倶楽部について</a></li>';
+                                echo '<li><a href="' . get_post_type_archive_link('event') . '">イベント</a></li>';
+                                echo '<li><a href="' . home_url('/blog/') . '">ブログ</a></li>';
+                                echo '<li><a href="https://arigatou-goods.stores.jp/" target="_blank" rel="noopener">グッズ販売</a></li>';
+                                echo '<li><a href="' . home_url('/contact/') . '">お問い合わせ</a></li>';
                                 echo '</ul>';
                             }
                         ));
@@ -37,6 +56,7 @@
                     </div>
                 <?php endif; ?>
                 
+                <!-- 最新情報 -->
                 <?php if (is_active_sidebar('footer-2')) : ?>
                     <div class="footer-column">
                         <?php dynamic_sidebar('footer-2'); ?>
@@ -48,8 +68,17 @@
                         $recent_events = new WP_Query(array(
                             'post_type' => 'event',
                             'posts_per_page' => 3,
-                            'orderby' => 'date',
-                            'order' => 'DESC'
+                            'meta_key' => '_event_date',
+                            'orderby' => 'meta_value',
+                            'order' => 'ASC',
+                            'meta_query' => array(
+                                array(
+                                    'key' => '_event_date',
+                                    'value' => date('Y-m-d'),
+                                    'compare' => '>=',
+                                    'type' => 'DATE'
+                                )
+                            )
                         ));
                         
                         if ($recent_events->have_posts()) : ?>
@@ -62,8 +91,9 @@
                                         <?php
                                         $event_date = get_post_meta(get_the_ID(), '_event_date', true);
                                         if ($event_date) :
+                                            $formatted_date = date('n月j日', strtotime($event_date));
                                         ?>
-                                            <span class="event-date"><?php echo esc_html($event_date); ?></span>
+                                            <span class="event-date"><?php echo esc_html($formatted_date); ?></span>
                                         <?php endif; ?>
                                     </li>
                                 <?php endwhile; ?>
@@ -72,11 +102,12 @@
                         wp_reset_postdata();
                         else :
                         ?>
-                            <p>現在予定されているイベントはありません。</p>
+                            <p>現在予定されているイベントはありません。<br>新しいイベント情報をお楽しみに！</p>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
                 
+                <!-- お問い合わせ -->
                 <?php if (is_active_sidebar('footer-3')) : ?>
                     <div class="footer-column">
                         <?php dynamic_sidebar('footer-3'); ?>
@@ -85,17 +116,29 @@
                     <div class="footer-column">
                         <h3>お問い合わせ</h3>
                         <ul class="contact-info">
-                            <li><i class="fas fa-envelope"></i> info@arigatou-club.com</li>
-                            <li><i class="fas fa-phone"></i> 03-1234-5678</li>
-                            <li><i class="fas fa-map-marker-alt"></i> 東京都千代田区</li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>info@arigatou-club.jp</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <span>03-1234-5678</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-clock"></i>
+                                <span>平日 10:00-18:00</span>
+                            </li>
                         </ul>
-                        <a href="<?php echo home_url('/contact/'); ?>" class="btn btn-secondary">お問い合わせフォーム</a>
+                        <a href="<?php echo home_url('/contact/'); ?>" class="btn btn-secondary">
+                            お問い合わせフォーム
+                        </a>
                     </div>
                 <?php endif; ?>
             </div>
             
+            <!-- フッター下部 -->
             <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. All rights reserved.</p>
+                <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. <span class="footer-heart">♥</span> すべての権利を保護しています。</p>
                 <ul class="footer-links">
                     <li><a href="<?php echo home_url('/privacy/'); ?>">プライバシーポリシー</a></li>
                     <li><a href="<?php echo home_url('/terms/'); ?>">利用規約</a></li>
@@ -103,10 +146,62 @@
                 </ul>
             </div>
         </div>
+        
+        <!-- スクロールトップボタン -->
+        <div class="scroll-to-top" id="scrollToTop" aria-label="ページトップへ戻る"></div>
     </footer>
 </div>
 
 <?php wp_footer(); ?>
+
+<script>
+// スクロールトップボタン
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    // スクロール時の表示/非表示
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.classList.add('visible');
+        } else {
+            scrollToTopBtn.classList.remove('visible');
+        }
+    });
+    
+    // クリック時のスクロール
+    scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
+
+// フッターアニメーション
+document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // フッターカラムをobserve
+    document.querySelectorAll('.footer-column').forEach(column => {
+        column.style.opacity = '0';
+        column.style.transform = 'translateY(30px)';
+        column.style.transition = 'all 0.8s ease-out';
+        observer.observe(column);
+    });
+});
+</script>
 
 </body>
 </html>

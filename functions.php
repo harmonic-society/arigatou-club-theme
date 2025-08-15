@@ -72,6 +72,12 @@ function arigatou_club_scripts() {
         wp_enqueue_style('arigatou-club-blog', get_template_directory_uri() . '/assets/css/blog.css', array(), '1.0.0');
     }
     
+    // フッター用CSS
+    wp_enqueue_style('arigatou-club-footer', get_template_directory_uri() . '/assets/css/footer.css', array(), '1.0.0');
+    
+    // Font Awesome
+    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0');
+    
     // JavaScript
     wp_enqueue_script('arigatou-club-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.0', true);
     
