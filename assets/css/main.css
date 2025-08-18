@@ -238,42 +238,217 @@
     background: linear-gradient(135deg, var(--wa-bg-cream) 0%, var(--wa-bg-light) 100%);
 }
 
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
+/* レスポンシブ対応 - タブレット */
+@media (max-width: 1024px) {
     .wa-style .hero-section {
-        height: 60vh;
-        min-height: 400px;
+        height: 70vh;
+        min-height: 500px;
     }
     
     .slide-title {
-        font-size: 2.5rem;
+        font-size: 3.5rem;
     }
     
     .slide-subtitle {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
+    }
+}
+
+/* レスポンシブ対応 - モバイル */
+@media (max-width: 768px) {
+    .wa-style .hero-section {
+        height: 100vh;
+        min-height: 500px;
+        max-height: 800px;
+    }
+    
+    .slide-content {
+        padding: 20px;
+    }
+    
+    .slide-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+    
+    .slide-subtitle {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 25px;
+        padding: 0 10px;
     }
     
     .btn-hero-primary {
-        padding: 12px 30px;
-        font-size: 1rem;
+        padding: 12px 35px;
+        font-size: 0.95rem;
+        border-radius: 25px;
+    }
+    
+    /* ナビゲーションボタンを下部に配置 */
+    .hero-slider .swiper-button-prev,
+    .hero-slider .swiper-button-next {
+        width: 35px;
+        height: 35px;
+        top: auto;
+        bottom: 80px;
+    }
+    
+    .hero-slider .swiper-button-prev {
+        left: 20px;
+    }
+    
+    .hero-slider .swiper-button-next {
+        right: 20px;
+    }
+    
+    .hero-slider .swiper-button-prev::after,
+    .hero-slider .swiper-button-next::after {
+        font-size: 16px;
+    }
+    
+    /* ページネーションの位置調整 */
+    .hero-slider .swiper-pagination {
+        bottom: 20px;
+    }
+    
+    .hero-slider .swiper-pagination-bullet {
+        width: 30px;
+        height: 3px;
+        margin: 0 3px;
+    }
+    
+    /* オーバーレイの調整 */
+    .slide-overlay {
+        background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(139, 69, 19, 0.5) 50%,
+            rgba(0, 0, 0, 0.7) 100%
+        );
+    }
+}
+
+/* レスポンシブ対応 - 小型モバイル */
+@media (max-width: 480px) {
+    .wa-style .hero-section {
+        height: 100vh;
+        min-height: 450px;
+        max-height: 700px;
+    }
+    
+    .slide-content {
+        padding: 15px;
+    }
+    
+    .slide-title {
+        font-size: 1.8rem;
+        line-height: 1.2;
+        margin-bottom: 12px;
+        letter-spacing: 0.02em;
+    }
+    
+    .slide-subtitle {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-bottom: 20px;
+        padding: 0 5px;
+    }
+    
+    .btn-hero-primary {
+        padding: 10px 28px;
+        font-size: 0.9rem;
+        width: 90%;
+        max-width: 250px;
+    }
+    
+    /* スワイプインジケーター表示 */
+    .hero-slider::after {
+        content: '';
+        position: absolute;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 40px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E") center no-repeat;
+        opacity: 0.5;
+        animation: bounce 2s infinite;
+        z-index: 10;
+    }
+}
+
+/* 横向きモバイル対応 */
+@media (max-width: 768px) and (orientation: landscape) {
+    .wa-style .hero-section {
+        height: 100vh;
+        min-height: 320px;
+    }
+    
+    .slide-title {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .slide-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    
+    .btn-hero-primary {
+        padding: 8px 25px;
+        font-size: 0.85rem;
     }
     
     .hero-slider .swiper-button-prev,
     .hero-slider .swiper-button-next {
-        width: 40px;
-        height: 40px;
+        bottom: 50px;
+    }
+    
+    .hero-slider .swiper-pagination {
+        bottom: 15px;
     }
 }
 
-@media (max-width: 480px) {
-    .slide-title {
-        font-size: 2rem;
+/* iPhone X以降のノッチ対応 */
+@supports (padding: max(0px)) {
+    .hero-slider {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
     }
     
-    .slide-subtitle {
-        font-size: 1rem;
-        margin-bottom: 30px;
+    .slide-content {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
     }
+}
+
+/* バウンスアニメーション */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* フェードイン・アウトアニメーション */
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* CSS変数でビューポート高さ管理 */
+.hero-slider {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
 }
 
 .wa-pattern-overlay {
