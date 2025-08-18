@@ -128,15 +128,6 @@ get_header(); ?>
                         <p>第三者への提供は一切行いません。</p>
                     </div>
                     
-                    <!-- SNS -->
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title">公式SNS</h3>
-                        <div class="social-links">
-                            <a href="#" class="social-link facebook">Facebook</a>
-                            <a href="#" class="social-link twitter">Twitter</a>
-                            <a href="#" class="social-link instagram">Instagram</a>
-                        </div>
-                    </div>
                     
                 </aside>
                 

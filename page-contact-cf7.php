@@ -108,24 +108,6 @@ get_header(); ?>
                         </div>
                     </div>
                     
-                    <!-- SNS -->
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title">公式SNS</h3>
-                        <div class="social-links">
-                            <a href="#" class="social-link facebook" target="_blank" rel="noopener">
-                                <i class="fab fa-facebook-f"></i> Facebook
-                            </a>
-                            <a href="#" class="social-link twitter" target="_blank" rel="noopener">
-                                <i class="fab fa-twitter"></i> Twitter
-                            </a>
-                            <a href="#" class="social-link instagram" target="_blank" rel="noopener">
-                                <i class="fab fa-instagram"></i> Instagram
-                            </a>
-                            <a href="#" class="social-link line" target="_blank" rel="noopener">
-                                <i class="fab fa-line"></i> LINE
-                            </a>
-                        </div>
-                    </div>
                     
                 </aside>
                 
