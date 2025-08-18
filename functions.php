@@ -83,8 +83,19 @@ function arigatou_club_scripts() {
     // Font Awesome
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0');
     
+    // Swiper CSS (フロントページのみ)
+    if (is_front_page()) {
+        wp_enqueue_style('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', array(), '11.0.0');
+    }
+    
     // JavaScript
     wp_enqueue_script('arigatou-club-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.0', true);
+    
+    // Swiper JS (フロントページのみ)
+    if (is_front_page()) {
+        wp_enqueue_script('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '11.0.0', true);
+        wp_enqueue_script('arigatou-club-slider', get_template_directory_uri() . '/assets/js/slider.js', array('swiper'), '1.0.0', true);
+    }
     
     // AJAXのURL設定
     wp_localize_script('arigatou-club-main', 'arigatou_ajax', array(
@@ -144,6 +155,31 @@ add_action('widgets_init', 'arigatou_club_widgets_init');
  * カスタム投稿タイプの登録
  */
 function arigatou_club_custom_post_types() {
+    // ヒーロースライダー投稿タイプ
+    register_post_type('hero_slider', array(
+        'labels' => array(
+            'name' => 'ヒーロースライダー',
+            'singular_name' => 'スライダー画像',
+            'add_new' => '新規追加',
+            'add_new_item' => '新しいスライダー画像を追加',
+            'edit_item' => 'スライダー画像を編集',
+            'new_item' => '新しいスライダー画像',
+            'view_item' => 'スライダー画像を表示',
+            'search_items' => 'スライダー画像を検索',
+            'not_found' => 'スライダー画像が見つかりません',
+            'not_found_in_trash' => 'ゴミ箱にスライダー画像はありません',
+            'all_items' => 'すべてのスライダー画像',
+            'menu_name' => 'ヒーロースライダー',
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'menu_icon' => 'dashicons-images-alt2',
+        'supports' => array('title', 'thumbnail', 'custom-fields'),
+        'exclude_from_search' => true,
+        'publicly_queryable' => false,
+        'show_in_rest' => true,
+    ));
+    
     // イベント投稿タイプ
     register_post_type('event', array(
         'labels' => array(
@@ -238,6 +274,16 @@ add_action('init', 'arigatou_club_custom_taxonomies');
  * カスタムフィールドの追加（ACF不使用版）
  */
 function arigatou_club_add_meta_boxes() {
+    // ヒーロースライダー用メタボックス
+    add_meta_box(
+        'slider_details',
+        'スライダー詳細設定',
+        'arigatou_club_slider_meta_box',
+        'hero_slider',
+        'normal',
+        'high'
+    );
+    
     // イベント用メタボックス
     add_meta_box(
         'event_details',
@@ -259,6 +305,44 @@ function arigatou_club_add_meta_boxes() {
     );
 }
 add_action('add_meta_boxes', 'arigatou_club_add_meta_boxes');
+
+/**
+ * ヒーロースライダーメタボックスの表示
+ */
+function arigatou_club_slider_meta_box($post) {
+    wp_nonce_field('arigatou_club_save_slider_meta', 'arigatou_club_slider_nonce');
+    
+    $slide_title = get_post_meta($post->ID, '_slide_title', true);
+    $slide_subtitle = get_post_meta($post->ID, '_slide_subtitle', true);
+    $button_text = get_post_meta($post->ID, '_slide_button_text', true);
+    $button_url = get_post_meta($post->ID, '_slide_button_url', true);
+    $slide_order = get_post_meta($post->ID, '_slide_order', true);
+    ?>
+    <table class="form-table">
+        <tr>
+            <th><label for="slide_title">スライドタイトル</label></th>
+            <td><input type="text" id="slide_title" name="slide_title" value="<?php echo esc_attr($slide_title); ?>" class="regular-text" placeholder="ありがとう倶楽部" /></td>
+        </tr>
+        <tr>
+            <th><label for="slide_subtitle">スライドサブタイトル</label></th>
+            <td><textarea id="slide_subtitle" name="slide_subtitle" class="large-text" rows="2" placeholder="感謝の心で繋がる、温かい和の世界へ"><?php echo esc_textarea($slide_subtitle); ?></textarea></td>
+        </tr>
+        <tr>
+            <th><label for="slide_button_text">ボタンテキスト</label></th>
+            <td><input type="text" id="slide_button_text" name="slide_button_text" value="<?php echo esc_attr($button_text); ?>" class="regular-text" placeholder="詳しく見る" /></td>
+        </tr>
+        <tr>
+            <th><label for="slide_button_url">ボタンリンク先URL</label></th>
+            <td><input type="url" id="slide_button_url" name="slide_button_url" value="<?php echo esc_attr($button_url); ?>" class="regular-text" placeholder="https://" /></td>
+        </tr>
+        <tr>
+            <th><label for="slide_order">表示順序</label></th>
+            <td><input type="number" id="slide_order" name="slide_order" value="<?php echo esc_attr($slide_order ? $slide_order : '0'); ?>" class="small-text" min="0" /> <span class="description">小さい数字から順に表示されます</span></td>
+        </tr>
+    </table>
+    <p class="description">※ アイキャッチ画像を設定してください。推奨サイズ: 1920×800px</p>
+    <?php
+}
 
 /**
  * イベントメタボックスの表示
@@ -349,6 +433,25 @@ function arigatou_club_save_post_meta($post_id) {
     // 自動保存の場合は何もしない
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
         return;
+    }
+    
+    // スライダーメタの保存
+    if (isset($_POST['arigatou_club_slider_nonce']) && wp_verify_nonce($_POST['arigatou_club_slider_nonce'], 'arigatou_club_save_slider_meta')) {
+        if (isset($_POST['slide_title'])) {
+            update_post_meta($post_id, '_slide_title', sanitize_text_field($_POST['slide_title']));
+        }
+        if (isset($_POST['slide_subtitle'])) {
+            update_post_meta($post_id, '_slide_subtitle', sanitize_textarea_field($_POST['slide_subtitle']));
+        }
+        if (isset($_POST['slide_button_text'])) {
+            update_post_meta($post_id, '_slide_button_text', sanitize_text_field($_POST['slide_button_text']));
+        }
+        if (isset($_POST['slide_button_url'])) {
+            update_post_meta($post_id, '_slide_button_url', esc_url_raw($_POST['slide_button_url']));
+        }
+        if (isset($_POST['slide_order'])) {
+            update_post_meta($post_id, '_slide_order', intval($_POST['slide_order']));
+        }
     }
     
     // イベントメタの保存
