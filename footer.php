@@ -10,20 +10,17 @@
                     <p>感謝の心を広げ、<br>世界を「ありがとう」で満たすコミュニティです。</p>
                     <p>私たちは日々の小さな感謝から始まる<br>大きな幸せの輪を広げています。</p>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/arigatouclub" target="_blank" rel="noopener" aria-label="Facebook">
+                        <a href="https://www.facebook.com/koh.akiyama.1" target="_blank" rel="noopener" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://twitter.com/arigatouclub" target="_blank" rel="noopener" aria-label="Twitter">
+                        <a href="https://x.com/kohcore3" target="_blank" rel="noopener" aria-label="X (Twitter)">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="https://www.instagram.com/arigatouclub" target="_blank" rel="noopener" aria-label="Instagram">
+                        <a href="https://www.instagram.com/arigatoh_okotoba_coach/" target="_blank" rel="noopener" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://www.youtube.com/arigatouclub" target="_blank" rel="noopener" aria-label="YouTube">
+                        <a href="https://www.youtube.com/@arigatoh_club" target="_blank" rel="noopener" aria-label="YouTube">
                             <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="https://line.me/R/ti/p/@arigatouclub" target="_blank" rel="noopener" aria-label="LINE">
-                            <i class="fab fa-line"></i>
                         </a>
                     </div>
                 </div>
