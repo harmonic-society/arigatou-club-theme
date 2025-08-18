@@ -1,0 +1,283 @@
+/* お問い合わせページ専用スタイル */
+
+/* コンタクトセクション */
+.contact-section {
+    padding: 80px 0;
+    background: var(--wa-bg-light);
+}
+
+/* レイアウト */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* メインコンテンツ */
+.contact-main {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* イントロダクション */
+.contact-intro {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: var(--wa-bg-cream);
+    border-radius: 10px;
+    border-left: 4px solid var(--wa-accent);
+}
+
+.contact-intro p {
+    margin: 10px 0;
+    line-height: 1.8;
+    color: var(--wa-text-dark);
+}
+
+.contact-intro p:first-child {
+    margin-top: 0;
+}
+
+.contact-intro p:last-child {
+    margin-bottom: 0;
+}
+
+/* サイドバー */
+.contact-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.sidebar-widget {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+.widget-title {
+    font-size: 1.2rem;
+    color: var(--wa-primary);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--wa-bg-cream);
+    font-family: "Klee One", serif;
+    letter-spacing: 0.05em;
+}
+
+/* FAQ */
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.faq-item {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--wa-bg-cream);
+}
+
+.faq-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.faq-item h4 {
+    font-size: 0.95rem;
+    color: var(--wa-secondary);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.faq-item p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--wa-text-dark);
+    margin: 0;
+}
+
+/* プライバシーポリシー */
+.privacy-policy-summary {
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.privacy-policy-summary ul {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.privacy-policy-summary li {
+    margin: 8px 0;
+    color: var(--wa-text-dark);
+}
+
+.privacy-policy-summary a {
+    color: var(--wa-accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.privacy-policy-summary a:hover {
+    color: var(--wa-secondary);
+    text-decoration: underline;
+}
+
+/* お問い合わせ方法 */
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-method {
+    padding: 15px;
+    background: var(--wa-bg-light);
+    border-radius: 8px;
+}
+
+.contact-method h4 {
+    font-size: 1rem;
+    color: var(--wa-primary);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.contact-method h4 i {
+    color: var(--wa-accent);
+    font-size: 0.9rem;
+}
+
+.contact-method p {
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.contact-method a {
+    color: var(--wa-accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.contact-method a:hover {
+    color: var(--wa-secondary);
+}
+
+/* ソーシャルリンク */
+.social-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.social-link i {
+    font-size: 1rem;
+}
+
+.social-link.facebook {
+    background: #1877f2;
+}
+
+.social-link.twitter {
+    background: #1da1f2;
+}
+
+.social-link.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.social-link.line {
+    background: #00c300;
+}
+
+.social-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 地図セクション */
+.map-section {
+    padding: 60px 0;
+    background: white;
+}
+
+.map-wrapper {
+    margin-top: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* レスポンシブ - タブレット */
+@media (max-width: 1024px) {
+    .contact-layout {
+        grid-template-columns: 1fr 320px;
+        gap: 30px;
+    }
+}
+
+/* レスポンシブ - モバイル */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 60px 0;
+    }
+    
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .contact-main {
+        padding: 25px;
+    }
+    
+    .contact-sidebar {
+        margin-top: 20px;
+    }
+    
+    .social-links {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-main {
+        padding: 20px;
+    }
+    
+    .sidebar-widget {
+        padding: 20px;
+    }
+    
+    .widget-title {
+        font-size: 1.1rem;
+    }
+    
+    .contact-intro {
+        padding: 15px;
+    }
+}

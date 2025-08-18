@@ -1,0 +1,160 @@
+<?php
+/**
+ * Template Name: お問い合わせ (CF7版)
+ * 
+ * Contact Form 7を使用するお問い合わせページテンプレート
+ */
+
+get_header(); ?>
+
+<main id="main" class="site-main wa-style">
+    
+    <!-- ページヘッダー -->
+    <section class="page-header">
+        <div class="wa-pattern-overlay"></div>
+        <div class="container">
+            <h1 class="page-title">お問い合わせ</h1>
+            <p class="page-subtitle">ご質問・ご相談はお気軽にどうぞ</p>
+        </div>
+    </section>
+    
+    <!-- お問い合わせセクション -->
+    <section class="contact-section section">
+        <div class="container">
+            <div class="contact-layout">
+                
+                <!-- メインコンテンツ -->
+                <div class="contact-main">
+                    
+                    <div class="contact-intro">
+                        <p>ありがとう倶楽部へのお問い合わせは、下記のフォームよりお願いいたします。</p>
+                        <p>会員登録、イベント参加、協賛のご相談など、どのようなことでもお気軽にご連絡ください。</p>
+                    </div>
+                    
+                    <!-- Contact Form 7 ショートコード挿入エリア -->
+                    <div class="contact-form-wrapper">
+                        <?php
+                        // Contact Form 7のショートコードを出力
+                        // 実際のIDは Contact Form 7 で作成後に置き換えてください
+                        echo do_shortcode('[contact-form-7 id="YOUR-FORM-ID" title="ありがとう倶楽部 お問い合わせフォーム"]');
+                        ?>
+                        
+                        <!-- 代替: ページコンテンツから自動的にショートコードを表示 -->
+                        <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                            <?php the_content(); ?>
+                        <?php endwhile; endif; ?>
+                    </div>
+                    
+                </div>
+                
+                <!-- サイドバー -->
+                <aside class="contact-sidebar">
+                    
+                    <!-- よくあるご質問 -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">よくあるご質問</h3>
+                        <div class="faq-list">
+                            <div class="faq-item">
+                                <h4>Q. 会員登録に費用はかかりますか？</h4>
+                                <p>A. 無料会員と有料会員があります。有料会員は月額1,000円または年額10,000円です。年金生活者と学生は無料です。</p>
+                            </div>
+                            <div class="faq-item">
+                                <h4>Q. イベントには誰でも参加できますか？</h4>
+                                <p>A. はい、どなたでもご参加いただけます。無料会員の方はスポット料金でのご参加となります。</p>
+                            </div>
+                            <div class="faq-item">
+                                <h4>Q. 企業として協賛したいのですが？</h4>
+                                <p>A. ありがとうございます。詳細についてはお問い合わせフォームよりご連絡ください。</p>
+                            </div>
+                            <div class="faq-item">
+                                <h4>Q. 返信はどのくらいで来ますか？</h4>
+                                <p>A. 通常、2〜3営業日以内にご返信させていただきます。お急ぎの場合はその旨をお知らせください。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 個人情報の取り扱い -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">個人情報の取り扱い</h3>
+                        <div class="privacy-policy-summary">
+                            <p>お預かりした個人情報は、お問い合わせへの回答およびありがとう倶楽部の活動に関するご案内にのみ使用いたします。</p>
+                            <ul>
+                                <li>第三者への提供は一切行いません</li>
+                                <li>SSL暗号化通信により安全に送信されます</li>
+                                <li>ご本人の同意なく個人情報を利用することはありません</li>
+                            </ul>
+                            <p>詳細は<a href="<?php echo home_url('/privacy-policy/'); ?>">プライバシーポリシー</a>をご確認ください。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- お問い合わせ方法 -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">その他のお問い合わせ方法</h3>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <h4><i class="fas fa-phone"></i> お電話</h4>
+                                <p>平日 10:00〜17:00<br>
+                                <a href="tel:0312345678">03-1234-5678</a></p>
+                            </div>
+                            <div class="contact-method">
+                                <h4><i class="fas fa-envelope"></i> メール</h4>
+                                <p><a href="mailto:info@arigatou-club.jp">info@arigatou-club.jp</a></p>
+                            </div>
+                            <div class="contact-method">
+                                <h4><i class="fas fa-map-marker-alt"></i> 所在地</h4>
+                                <p>〒100-0001<br>
+                                東京都千代田区千代田1-1-1</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- SNS -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">公式SNS</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link facebook" target="_blank" rel="noopener">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </a>
+                            <a href="#" class="social-link twitter" target="_blank" rel="noopener">
+                                <i class="fab fa-twitter"></i> Twitter
+                            </a>
+                            <a href="#" class="social-link instagram" target="_blank" rel="noopener">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </a>
+                            <a href="#" class="social-link line" target="_blank" rel="noopener">
+                                <i class="fab fa-line"></i> LINE
+                            </a>
+                        </div>
+                    </div>
+                    
+                </aside>
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- 地図セクション（オプション） -->
+    <section class="map-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-marker">◯</span>
+                <h2 class="section-title">アクセス</h2>
+            </div>
+            <div class="map-wrapper">
+                <!-- Google Maps埋め込みまたはその他の地図サービス -->
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.8280303808788!2d139.75487091525882!3d35.68123618019432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bfbd89f700b%3A0x277c49ba34ed38!2z5p2x5Lqs6aeF!5e0!3m2!1sja!2sjp!4v1635150000000!5m2!1sja!2sjp"
+                    width="100%" 
+                    height="400" 
+                    style="border:0; border-radius: 10px;" 
+                    allowfullscreen="" 
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+    
+</main>
+
+<?php get_footer(); ?>

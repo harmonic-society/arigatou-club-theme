@@ -1,0 +1,388 @@
+/* Contact Form 7 カスタムスタイル */
+
+/* フォーム全体のコンテナ */
+.cf7-arigatou-form {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(139, 69, 19, 0.08);
+}
+
+/* フォームグループ */
+.cf7-arigatou-form .form-group {
+    margin-bottom: 25px;
+}
+
+/* フォーム行（2カラムレイアウト用） */
+.cf7-arigatou-form .form-row {
+    display: flex;
+    gap: 20px;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.cf7-arigatou-form .form-row .form-group {
+    flex: 1;
+    padding: 0 10px;
+}
+
+.cf7-arigatou-form .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+/* ラベル */
+.cf7-arigatou-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--wa-text-dark);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+}
+
+/* 必須マーク */
+.cf7-arigatou-form .required {
+    color: var(--wa-secondary);
+    margin-left: 3px;
+    font-weight: normal;
+}
+
+/* 入力フィールド共通 */
+.cf7-arigatou-form .form-control,
+.cf7-arigatou-form input[type="text"],
+.cf7-arigatou-form input[type="email"],
+.cf7-arigatou-form input[type="tel"],
+.cf7-arigatou-form input[type="url"],
+.cf7-arigatou-form select,
+.cf7-arigatou-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: var(--wa-bg-light);
+    color: var(--wa-text-dark);
+}
+
+/* フォーカス時 */
+.cf7-arigatou-form input:focus,
+.cf7-arigatou-form select:focus,
+.cf7-arigatou-form textarea:focus {
+    outline: none;
+    border-color: var(--wa-accent);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+/* プレースホルダー */
+.cf7-arigatou-form ::placeholder {
+    color: #999;
+    opacity: 0.7;
+}
+
+/* セレクトボックス */
+.cf7-arigatou-form select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 40px;
+}
+
+/* テキストエリア */
+.cf7-arigatou-form textarea {
+    resize: vertical;
+    min-height: 150px;
+    line-height: 1.6;
+}
+
+/* チェックボックス */
+.cf7-arigatou-form .privacy-agreement {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.cf7-arigatou-form input[type="checkbox"] {
+    width: auto;
+    margin-top: 3px;
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.cf7-arigatou-form .privacy-agreement label {
+    margin-bottom: 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* プライバシー通知 */
+.cf7-arigatou-form .privacy-notice {
+    margin-top: 10px;
+    padding: 15px;
+    background: var(--wa-bg-cream);
+    border-radius: 8px;
+    border-left: 3px solid var(--wa-gold);
+}
+
+.cf7-arigatou-form .privacy-notice p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--wa-text-dark);
+    line-height: 1.6;
+}
+
+/* 送信ボタン */
+.cf7-arigatou-form .form-submit {
+    text-align: center;
+    margin-top: 35px;
+}
+
+.cf7-arigatou-form .btn-submit,
+.cf7-arigatou-form input[type="submit"] {
+    display: inline-block;
+    padding: 15px 50px;
+    background: linear-gradient(135deg, var(--wa-secondary) 0%, var(--wa-accent) 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(220, 20, 60, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.cf7-arigatou-form .btn-submit::before,
+.cf7-arigatou-form input[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.cf7-arigatou-form .btn-submit:hover,
+.cf7-arigatou-form input[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(220, 20, 60, 0.4);
+}
+
+.cf7-arigatou-form .btn-submit:hover::before,
+.cf7-arigatou-form input[type="submit"]:hover::before {
+    left: 100%;
+}
+
+/* Contact Form 7 メッセージ */
+.wpcf7-response-output {
+    margin: 25px 0 0 0;
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 500;
+    animation: slideDown 0.5s ease;
+}
+
+/* 成功メッセージ */
+.wpcf7-mail-sent-ok {
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+    border: 2px solid #8fa68e;
+    color: #2e7d32;
+}
+
+/* エラーメッセージ */
+.wpcf7-mail-sent-ng,
+.wpcf7-aborted,
+.wpcf7-spam-blocked,
+.wpcf7-validation-errors,
+.wpcf7-acceptance-missing {
+    background: #fff3e0;
+    border: 2px solid #ff9800;
+    color: #e65100;
+}
+
+/* 個別フィールドエラー */
+.wpcf7-not-valid-tip {
+    color: var(--wa-secondary);
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block;
+    animation: shake 0.5s ease;
+}
+
+.wpcf7-not-valid {
+    border-color: var(--wa-secondary) !important;
+    background: #fff5f5 !important;
+}
+
+/* Ajax loader */
+.wpcf7 .ajax-loader {
+    visibility: hidden;
+    display: inline-block;
+    background: url('../images/ajax-loader.gif') no-repeat center;
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.wpcf7.submitting .ajax-loader {
+    visibility: visible;
+}
+
+/* スピナーアニメーション（カスタム） */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.wpcf7.submitting .btn-submit::after,
+.wpcf7.submitting input[type="submit"]::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    border: 2px solid white;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    vertical-align: middle;
+}
+
+/* アニメーション */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* タブレット対応 */
+@media (max-width: 768px) {
+    .cf7-arigatou-form {
+        padding: 20px;
+    }
+    
+    .cf7-arigatou-form .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .cf7-arigatou-form .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .cf7-arigatou-form .btn-submit,
+    .cf7-arigatou-form input[type="submit"] {
+        width: 100%;
+        padding: 15px 30px;
+    }
+}
+
+/* モバイル対応 */
+@media (max-width: 480px) {
+    .cf7-arigatou-form {
+        padding: 15px;
+    }
+    
+    .cf7-arigatou-form label {
+        font-size: 0.9rem;
+    }
+    
+    .cf7-arigatou-form input,
+    .cf7-arigatou-form select,
+    .cf7-arigatou-form textarea {
+        font-size: 16px; /* iOS zoom防止 */
+        padding: 10px 12px;
+    }
+    
+    .cf7-arigatou-form .btn-submit,
+    .cf7-arigatou-form input[type="submit"] {
+        font-size: 1rem;
+        padding: 12px 25px;
+    }
+}
+
+/* reCAPTCHAバッジの位置調整 */
+.grecaptcha-badge {
+    z-index: 1;
+}
+
+/* Contact Form 7 デフォルトスタイルの上書き */
+.wpcf7 form.sent .wpcf7-response-output {
+    border-color: #8fa68e;
+}
+
+.wpcf7 form.invalid .wpcf7-response-output,
+.wpcf7 form.unaccepted .wpcf7-response-output {
+    border-color: #ff9800;
+}
+
+.wpcf7 form.spam .wpcf7-response-output,
+.wpcf7 form.failed .wpcf7-response-output {
+    border-color: var(--wa-secondary);
+}
+
+/* カスタムローディング状態 */
+.cf7-arigatou-form.submitting {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.cf7-arigatou-form.submitting::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+/* アクセシビリティ */
+.cf7-arigatou-form input:focus-visible,
+.cf7-arigatou-form select:focus-visible,
+.cf7-arigatou-form textarea:focus-visible {
+    outline: 3px solid var(--wa-accent);
+    outline-offset: 2px;
+}
+
+.screen-reader-response {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    width: 1px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
