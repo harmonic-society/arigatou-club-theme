@@ -113,20 +113,6 @@
                 <?php else : ?>
                     <div class="footer-column">
                         <h3>お問い合わせ</h3>
-                        <ul class="contact-info">
-                            <li>
-                                <i class="fas fa-envelope"></i>
-                                <span>info@arigatou-club.jp</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-phone"></i>
-                                <span>03-1234-5678</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-clock"></i>
-                                <span>平日 10:00-18:00</span>
-                            </li>
-                        </ul>
                         <a href="<?php echo home_url('/contact/'); ?>" class="btn btn-secondary">
                             お問い合わせフォーム
                         </a>
