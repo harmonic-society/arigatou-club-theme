@@ -9,11 +9,51 @@
     $(document).ready(function() {
         
         // モバイルメニュートグル（Android対応版）
-        $(document).on('click touchstart', '.menu-toggle', function(e) {
+        var menuToggleProcessing = false;
+        
+        // タッチデバイス用のイベント処理
+        $(document).on('touchend', '.menu-toggle', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
-            var $toggle = $(this);
+            // 連続タップ防止
+            if (menuToggleProcessing) return false;
+            menuToggleProcessing = true;
+            
+            toggleMenu($(this));
+            
+            // 処理完了後フラグをリセット
+            setTimeout(function() {
+                menuToggleProcessing = false;
+            }, 300);
+            
+            return false;
+        });
+        
+        // 非タッチデバイス用のクリックイベント
+        $(document).on('click', '.menu-toggle', function(e) {
+            // タッチイベントが発生した場合はクリックイベントを無視
+            if (e.originalEvent && e.originalEvent.touches) return false;
+            
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // 連続クリック防止
+            if (menuToggleProcessing) return false;
+            menuToggleProcessing = true;
+            
+            toggleMenu($(this));
+            
+            // 処理完了後フラグをリセット
+            setTimeout(function() {
+                menuToggleProcessing = false;
+            }, 300);
+            
+            return false;
+        });
+        
+        // メニュートグル関数
+        function toggleMenu($toggle) {
             var $nav = $('.main-navigation');
             var isOpen = $nav.hasClass('active');
             
@@ -48,9 +88,7 @@
                 // メニューを閉じる
                 closeMenu();
             }
-            
-            return false;
-        });
+        }
         
         // メニューを閉じる関数
         function closeMenu() {
@@ -73,7 +111,17 @@
         }
         
         // オーバーレイクリックでメニューを閉じる（タッチイベント対応）
-        $(document).on('click touchstart', '.menu-overlay', function(e) {
+        $(document).on('touchend', '.menu-overlay', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeMenu();
+            return false;
+        });
+        
+        $(document).on('click', '.menu-overlay', function(e) {
+            // タッチイベントが発生した場合はクリックイベントを無視
+            if (e.originalEvent && e.originalEvent.touches) return false;
+            
             e.preventDefault();
             closeMenu();
             return false;
@@ -87,7 +135,19 @@
         });
         
         // メニューリンククリックでメニューを閉じる（モバイル時）
-        $(document).on('click touchstart', '.main-navigation a', function() {
+        $(document).on('touchend', '.main-navigation a', function(e) {
+            if ($(window).width() < 1024 && !$(this).attr('target')) {
+                // リンクのデフォルト動作を許可しつつメニューを閉じる
+                setTimeout(function() {
+                    closeMenu();
+                }, 300);
+            }
+        });
+        
+        $(document).on('click', '.main-navigation a', function(e) {
+            // タッチイベントが発生した場合はクリックイベントを無視
+            if (e.originalEvent && e.originalEvent.touches) return false;
+            
             if ($(window).width() < 1024 && !$(this).attr('target')) {
                 setTimeout(function() {
                     closeMenu();
