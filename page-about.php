@@ -86,8 +86,25 @@ get_header(); ?>
             </div>
             
             <div class="greeting-content">
-                <div class="greeting-message">
-                    <p class="greeting-intro">ありがとう倶楽部の秋山です。ホームページへようこそお越しくださいました。</p>
+                <?php 
+                $representative_photo = get_theme_mod('representative_photo');
+                $representative_name = get_theme_mod('representative_name', '秋山');
+                $representative_title = get_theme_mod('representative_title', 'ありがとう倶楽部 代表');
+                
+                if ($representative_photo) : ?>
+                    <div class="representative-profile">
+                        <div class="profile-photo">
+                            <img src="<?php echo esc_url($representative_photo); ?>" alt="<?php echo esc_attr($representative_name); ?>">
+                        </div>
+                        <div class="profile-info">
+                            <h3 class="representative-name"><?php echo esc_html($representative_name); ?></h3>
+                            <p class="representative-title"><?php echo esc_html($representative_title); ?></p>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                
+                <div class="greeting-message <?php echo $representative_photo ? 'with-photo' : ''; ?>">
+                    <p class="greeting-intro">ありがとう倶楽部の<?php echo esc_html($representative_name); ?>です。ホームページへようこそお越しくださいました。</p>
                     
                     <p>ありがとう倶楽部は、ありがとうを大切にする人たちの集まりです。お互いの天才を生かし合って、喜ばせあって助け合って、暮らしやすい大和の社会を作っていきましょう。</p>
                     

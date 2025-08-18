@@ -64,6 +64,11 @@ function arigatou_club_scripts() {
     // ページ用CSS
     wp_enqueue_style('arigatou-club-pages', get_template_directory_uri() . '/assets/css/pages.css', array(), '1.0.0');
     
+    // About ページ用CSS
+    if (is_page_template('page-about.php')) {
+        wp_enqueue_style('arigatou-club-about', get_template_directory_uri() . '/assets/css/about.css', array(), '1.0.0');
+    }
+    
     // ナビゲーション用CSS
     wp_enqueue_style('arigatou-club-navigation', get_template_directory_uri() . '/assets/css/navigation.css', array(), '1.0.0');
     
@@ -526,6 +531,49 @@ function arigatou_club_customize_register($wp_customize) {
         'section' => 'arigatou_club_homepage',
         'type' => 'text',
     ));
+    
+    // 代表挨拶設定セクション
+    $wp_customize->add_section('arigatou_club_representative', array(
+        'title' => '代表挨拶設定',
+        'priority' => 35,
+    ));
+    
+    // 代表者名
+    $wp_customize->add_setting('representative_name', array(
+        'default' => '秋山',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    
+    $wp_customize->add_control('representative_name', array(
+        'label' => '代表者名',
+        'section' => 'arigatou_club_representative',
+        'type' => 'text',
+    ));
+    
+    // 代表者肩書き
+    $wp_customize->add_setting('representative_title', array(
+        'default' => 'ありがとう倶楽部 代表',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    
+    $wp_customize->add_control('representative_title', array(
+        'label' => '代表者肩書き',
+        'section' => 'arigatou_club_representative',
+        'type' => 'text',
+    ));
+    
+    // 代表者プロフィール写真
+    $wp_customize->add_setting('representative_photo', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'representative_photo', array(
+        'label' => '代表者プロフィール写真',
+        'description' => '推奨サイズ: 600×800px（縦長）',
+        'section' => 'arigatou_club_representative',
+        'settings' => 'representative_photo',
+    )));
 }
 add_action('customize_register', 'arigatou_club_customize_register');
 
