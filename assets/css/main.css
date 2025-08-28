@@ -1,16 +1,16 @@
 /* 追加のメインスタイル */
 
-/* 和風カラーパレット - 親しみやすい色調 */
+/* 和風カラーパレット - 緑系統の自然な色調 */
 :root {
-    --wa-primary: #8B4513;      /* 茶色 */
-    --wa-secondary: #DC143C;    /* 深紅（メインカラー） */
-    --wa-accent: #FF6B6B;       /* 朱色 */
-    --wa-bg-light: #FFFAF5;     /* より柔らかい和紙色 */
-    --wa-bg-cream: #FFF0E5;     /* 優しいクリーム色 */
-    --wa-text-dark: #4A3C33;    /* 柔らかい茶色 */
-    --wa-gold: #E6B87D;         /* 明るい金色 */
-    --wa-green: #8FA68E;        /* 優しい抹茶色 */
-    --wa-pink: #FFB3BA;         /* 優しいピンク */
+    --wa-primary: #2d5016;      /* 深い森の緑 */
+    --wa-secondary: #a4c624;    /* メインの黄緑（ベースカラー） */
+    --wa-accent: #7fb800;       /* 鮮やかなライムグリーン */
+    --wa-bg-light: #f9faf5;     /* 薄い緑がかった白 */
+    --wa-bg-cream: #f5f9e9;     /* 優しい薄緑色 */
+    --wa-text-dark: #2c3e26;    /* 深緑のテキスト色 */
+    --wa-gold: #d4e157;         /* 薄い黄緑（補助色） */
+    --wa-green: #6b8e23;        /* オリーブグリーン */
+    --wa-pink: #c5e1a5;         /* 薄い黄緑（旧ピンクの代替） */
 }
 
 /* 和風スタイル全体 */
@@ -74,9 +74,9 @@
     height: 100%;
     background: linear-gradient(
         135deg,
-        rgba(139, 69, 19, 0.7) 0%,
-        rgba(220, 20, 60, 0.4) 50%,
-        rgba(139, 69, 19, 0.6) 100%
+        rgba(45, 80, 22, 0.7) 0%,
+        rgba(164, 198, 36, 0.4) 50%,
+        rgba(45, 80, 22, 0.6) 100%
     );
     z-index: 2;
 }
@@ -104,7 +104,7 @@
     font-family: "Klee One", serif;
     text-shadow: 
         3px 3px 6px rgba(0, 0, 0, 0.5),
-        0 0 30px rgba(220, 20, 60, 0.3);
+        0 0 30px rgba(164, 198, 36, 0.3);
     letter-spacing: 0.05em;
     animation: fadeInUp 1s ease-out;
 }
@@ -134,7 +134,7 @@
     font-size: 1.1rem;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(220, 20, 60, 0.3);
+    box-shadow: 0 5px 15px rgba(164, 198, 36, 0.3);
     position: relative;
     overflow: hidden;
 }
@@ -152,7 +152,7 @@
 
 .btn-hero-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(220, 20, 60, 0.4);
+    box-shadow: 0 8px 25px rgba(164, 198, 36, 0.4);
 }
 
 .btn-hero-primary:hover::before {
@@ -163,7 +163,7 @@
 .hero-slider .swiper-button-prev,
 .hero-slider .swiper-button-next {
     color: white;
-    background: rgba(139, 69, 19, 0.5);
+    background: rgba(45, 80, 22, 0.5);
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -172,7 +172,7 @@
 
 .hero-slider .swiper-button-prev:hover,
 .hero-slider .swiper-button-next:hover {
-    background: rgba(220, 20, 60, 0.7);
+    background: rgba(164, 198, 36, 0.7);
     transform: scale(1.1);
 }
 
@@ -323,7 +323,7 @@
         background: linear-gradient(
             180deg,
             rgba(0, 0, 0, 0.2) 0%,
-            rgba(139, 69, 19, 0.5) 50%,
+            rgba(45, 80, 22, 0.5) 50%,
             rgba(0, 0, 0, 0.7) 100%
         );
     }
@@ -462,8 +462,8 @@
             45deg,
             transparent,
             transparent 10px,
-            rgba(139, 69, 19, 0.03) 10px,
-            rgba(139, 69, 19, 0.03) 20px
+            rgba(45, 80, 22, 0.03) 10px,
+            rgba(45, 80, 22, 0.03) 20px
         );
     pointer-events: none;
 }
@@ -937,12 +937,12 @@
 .wa-style .btn-primary {
     background: linear-gradient(135deg, var(--wa-secondary), var(--wa-accent));
     color: white;
-    box-shadow: 0 5px 15px rgba(220, 20, 60, 0.3);
+    box-shadow: 0 5px 15px rgba(164, 198, 36, 0.3);
 }
 
 .wa-style .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(220, 20, 60, 0.4);
+    box-shadow: 0 8px 25px rgba(164, 198, 36, 0.4);
 }
 
 .wa-style .btn-secondary {
@@ -1087,7 +1087,7 @@
 
 .home-blog-card:hover {
     transform: rotate(0deg) translateY(-5px);
-    box-shadow: 0 15px 40px rgba(220, 20, 60, 0.15);
+    box-shadow: 0 15px 40px rgba(164, 198, 36, 0.15);
 }
 
 .home-blog-image {
@@ -1202,7 +1202,7 @@
 
 .home-event-card:hover {
     transform: rotate(0deg) translateY(-5px);
-    box-shadow: 0 15px 40px rgba(139, 69, 19, 0.15);
+    box-shadow: 0 15px 40px rgba(45, 80, 22, 0.15);
 }
 
 .home-event-image {
@@ -1239,7 +1239,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 5px 15px rgba(220, 20, 60, 0.3);
+    box-shadow: 0 5px 15px rgba(164, 198, 36, 0.3);
 }
 
 .event-month {
@@ -1322,13 +1322,13 @@
     font-weight: 600;
     font-size: 1.1rem;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(220, 20, 60, 0.2);
+    box-shadow: 0 5px 15px rgba(164, 198, 36, 0.2);
     font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 .btn-more:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(220, 20, 60, 0.3);
+    box-shadow: 0 8px 25px rgba(164, 198, 36, 0.3);
 }
 
 /* メッセージ */

@@ -503,7 +503,7 @@
     visibility: hidden;
     transition: all 0.3s ease;
     z-index: 999;
-    box-shadow: 0 5px 15px rgba(220, 20, 60, 0.3);
+    box-shadow: 0 5px 15px rgba(164, 198, 36, 0.3);
 }
 
 .scroll-to-top.visible {
@@ -513,7 +513,7 @@
 
 .scroll-to-top:hover {
     transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 8px 25px rgba(220, 20, 60, 0.4);
+    box-shadow: 0 8px 25px rgba(164, 198, 36, 0.4);
 }
 
 .scroll-to-top::before {

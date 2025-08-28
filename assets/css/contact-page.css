@@ -199,19 +199,19 @@
 }
 
 .social-link.facebook {
-    background: #1877f2;
+    background: #2d5016;
 }
 
 .social-link.twitter {
-    background: #1da1f2;
+    background: #6b8e23;
 }
 
 .social-link.instagram {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: linear-gradient(45deg, #a4c624 0%, #8fa68e 25%, #7fb800 50%, #6b8e23 75%, #2d5016 100%);
 }
 
 .social-link.line {
-    background: #00c300;
+    background: #a4c624;
 }
 
 .social-link:hover {

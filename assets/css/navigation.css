@@ -8,7 +8,7 @@
     width: 100%;
     top: 0;
     z-index: 9999;
-    box-shadow: 0 4px 20px rgba(220, 20, 60, 0.15);
+    box-shadow: 0 4px 20px rgba(164, 198, 36, 0.15);
     transition: all 0.3s ease;
 }
 
@@ -354,7 +354,7 @@
 .site-header.scrolled {
     padding: 0;
     background: linear-gradient(135deg, var(--wa-secondary) 0%, var(--wa-accent) 100%);
-    box-shadow: 0 2px 20px rgba(220, 20, 60, 0.2);
+    box-shadow: 0 2px 20px rgba(164, 198, 36, 0.2);
 }
 
 .site-header.scrolled .header-inner {

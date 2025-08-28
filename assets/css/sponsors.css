@@ -94,7 +94,7 @@
 
 .sponsor-card:hover {
     transform: rotate(0deg) translateY(-5px);
-    box-shadow: 0 15px 40px rgba(230, 184, 125, 0.3);
+    box-shadow: 0 15px 40px rgba(212, 225, 87, 0.3);
 }
 
 .sponsor-logo {

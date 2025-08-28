@@ -77,7 +77,7 @@
     background: linear-gradient(135deg, white 0%, var(--wa-bg-cream) 100%);
     border-radius: 30px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(220, 20, 60, 0.1);
+    box-shadow: 0 20px 60px rgba(164, 198, 36, 0.1);
     margin-bottom: 50px;
     transform: rotate(-0.5deg);
     transition: all 0.3s ease;
@@ -85,7 +85,7 @@
 
 .featured-post:hover {
     transform: rotate(0deg) scale(1.02);
-    box-shadow: 0 25px 80px rgba(220, 20, 60, 0.15);
+    box-shadow: 0 25px 80px rgba(164, 198, 36, 0.15);
 }
 
 .featured-post .featured-content {
@@ -170,7 +170,7 @@
 
 .blog-card-new:hover {
     transform: rotate(0deg) translateY(-5px);
-    box-shadow: 0 15px 40px rgba(220, 20, 60, 0.15);
+    box-shadow: 0 15px 40px rgba(164, 198, 36, 0.15);
     border-color: var(--wa-gold);
 }
 
@@ -517,9 +517,9 @@
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-.share-btn.facebook { background: #1877f2; }
-.share-btn.twitter { background: #1da1f2; }
-.share-btn.line { background: #00c300; }
+.share-btn.facebook { background: #2d5016; }
+.share-btn.twitter { background: #6b8e23; }
+.share-btn.line { background: #a4c624; }
 
 /* 著者情報 */
 .author-box {

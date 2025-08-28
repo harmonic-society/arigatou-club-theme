@@ -76,7 +76,7 @@
     outline: none;
     border-color: var(--wa-accent);
     background: white;
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+    box-shadow: 0 0 0 3px rgba(197, 225, 165, 0.1);
 }
 
 /* プレースホルダー */
@@ -157,7 +157,7 @@
     letter-spacing: 0.05em;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(220, 20, 60, 0.3);
+    box-shadow: 0 5px 15px rgba(164, 198, 36, 0.3);
     position: relative;
     overflow: hidden;
 }
@@ -177,7 +177,7 @@
 .cf7-arigatou-form .btn-submit:hover,
 .cf7-arigatou-form input[type="submit"]:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(220, 20, 60, 0.4);
+    box-shadow: 0 8px 25px rgba(164, 198, 36, 0.4);
 }
 
 .cf7-arigatou-form .btn-submit:hover::before,
@@ -198,7 +198,7 @@
 /* 成功メッセージ */
 .wpcf7-mail-sent-ok {
     background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
-    border: 2px solid #8fa68e;
+    border: 2px solid #6b8e23;
     color: #2e7d32;
 }
 
@@ -334,7 +334,7 @@
 
 /* Contact Form 7 デフォルトスタイルの上書き */
 .wpcf7 form.sent .wpcf7-response-output {
-    border-color: #8fa68e;
+    border-color: #6b8e23;
 }
 
 .wpcf7 form.invalid .wpcf7-response-output,
