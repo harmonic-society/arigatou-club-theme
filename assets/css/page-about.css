@@ -157,14 +157,6 @@
     position: relative;
 }
 
-.directions-section .section-subtitle {
-    text-align: center;
-    color: var(--wa-text-dark);
-    font-size: 1.1rem;
-    margin-top: 10px;
-    opacity: 0.8;
-}
-
 .directions-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -219,6 +211,13 @@
     box-shadow: 0 5px 15px rgba(164, 198, 36, 0.3);
 }
 
+.direction-card h3 {
+    color: var(--wa-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 15px 0 10px;
+}
+
 .card-content p {
     color: var(--wa-text-dark);
     line-height: 1.7;
@@ -241,13 +240,18 @@
 
 .value-item {
     text-align: center;
-    padding: 40px 30px;
+    padding: 30px 20px;
     background: white;
     border-radius: 25px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
     border: 2px solid transparent;
     position: relative;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .value-item::after {
