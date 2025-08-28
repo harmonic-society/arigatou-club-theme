@@ -77,6 +77,192 @@ get_header(); ?>
         </div>
     </section>
     
+    <!-- ビジョンセクション -->
+    <section class="vision-section section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-marker">◯</span>
+                <h2 class="section-title">ありがとう倶楽部のビジョン</h2>
+                <p class="section-subtitle">「お好み焼き社会」とは</p>
+            </div>
+            
+            <div class="vision-content">
+                <div class="okonomiyaki-concept">
+                    <div class="concept-visual">
+                        <div class="okonomiyaki-circle">
+                            <span class="emoji">🥞</span>
+                        </div>
+                    </div>
+                    <div class="concept-text">
+                        <h3>平たく まあるく 温かい社会</h3>
+                        <p class="concept-description">
+                            お好み焼きは、どんな素材を入れても成立する、まさに大和の世界、大いなる調和（ハーモニー）の料理です。
+                            様々な個性が混ざり合い、互いを引き立て合いながら、一つの美味しい調和を作り出します。
+                        </p>
+                        <p class="concept-philosophy">
+                            私たちは、このお好み焼きのような「平たく まあるく 温かい」社会を目指しています。
+                            誰もが自分らしく輝き、互いの違いを認め合い、支え合う。
+                            そんな大和（だいわ）の世界を、ありがとう倶楽部から広げていきます。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ミッションセクション -->
+    <section class="mission-section section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-marker">◯</span>
+                <h2 class="section-title">ミッション</h2>
+            </div>
+            
+            <div class="mission-content">
+                <div class="mission-statement">
+                    <p class="mission-main">
+                        「人は皆違う」が持つ個性を尊重し、1人1人の天才（天賦の才）を育てるとともに<br>
+                        お互いの天才の違いを生かし合い、喜び分かち合い、助け、助けられ<br>
+                        感謝する大いなる調和の大和社会を創ることです。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 12の方向性セクション -->
+    <section class="directions-section section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-marker">◯</span>
+                <h2 class="section-title">12の方向性</h2>
+                <p class="section-subtitle">私たちが大切にする活動指針</p>
+            </div>
+            
+            <div class="directions-grid">
+                <div class="direction-card">
+                    <div class="card-number">1</div>
+                    <div class="card-content">
+                        <p>日本人が本来持つ和の精神を復活させる活動</p>
+                    </div>
+                </div>
+                
+                <div class="direction-card">
+                    <div class="card-number">2</div>
+                    <div class="card-content">
+                        <p>ありがとうを身近に感じ、生活の中に浸透していく活動</p>
+                    </div>
+                </div>
+                
+                <div class="direction-card">
+                    <div class="card-number">3</div>
+                    <div class="card-content">
+                        <p>「孤食」から「共食」へ　みんなで一緒に食事をすることで調和を体験する活動</p>
+                    </div>
+                </div>
+                
+                <div class="direction-card">
+                    <div class="card-number">4</div>
+                    <div class="card-content">
+                        <p>ありがとうが生み出す健康効果、体験する活動</p>
+                    </div>
+                </div>
+                
+                <div class="direction-card">
+                    <div class="card-number">5</div>
+                    <div class="card-content">
+                        <p>未来ある子どもたちが「ありがとう」で未来をつくる活動</p>
+                    </div>
+                </div>
+                
+                <div class="direction-card">
+                    <div class="card-number">6</div>
+                    <div class="card-content">
+                        <p>近年増加する高齢者の孤独を救う活動</p>
+                    </div>
+                </div>
+                
+                <div class="direction-card">
+                    <div class="card-number">7</div>
+                    <div class="card-content">
+                        <p>弱者の上に強者が立つのではなく、すべての人がお互い様で立つ循環型の活動</p>
+                    </div>
+                </div>
+                
+                <div class="direction-card">
+                    <div class="card-number">8</div>
+                    <div class="card-content">
+                        <p>ありがとうを通じて脳力開発する活動</p>
+                    </div>
+                </div>
+                
+                <div class="direction-card">
+                    <div class="card-number">9</div>
+                    <div class="card-content">
+                        <p>誰もが先生であり生徒である関係での学びの活動</p>
+                    </div>
+                </div>
+                
+                <div class="direction-card">
+                    <div class="card-number">10</div>
+                    <div class="card-content">
+                        <p>感謝の気持ちを伝えて人間関係を再生、改善する活動</p>
+                    </div>
+                </div>
+                
+                <div class="direction-card">
+                    <div class="card-number">11</div>
+                    <div class="card-content">
+                        <p>ペイフォワード(恩送り)を実現して、世界を感謝の連鎖でつなぐ活動</p>
+                    </div>
+                </div>
+                
+                <div class="direction-card">
+                    <div class="card-number">12</div>
+                    <div class="card-content">
+                        <p>みんながありがとうの表現者、発信者になる活動</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- バリューセクション -->
+    <section class="values-section section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-marker">◯</span>
+                <h2 class="section-title">私たちの価値観</h2>
+            </div>
+            
+            <div class="values-content">
+                <div class="value-item">
+                    <div class="value-icon">🤝</div>
+                    <h3>お互い様の精神</h3>
+                    <p>助け、助けられる関係性を大切にし、循環型の社会を作ります</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">✨</div>
+                    <h3>個性の尊重</h3>
+                    <p>一人ひとりの天才（天賦の才）を認め、育て、活かし合います</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">🙏</div>
+                    <h3>感謝の実践</h3>
+                    <p>日々の小さな「ありがとう」から始まる大きな幸せの輪を広げます</p>
+                </div>
+                
+                <div class="value-item">
+                    <div class="value-icon">🌸</div>
+                    <h3>和の心</h3>
+                    <p>日本人が本来持つ調和の精神を大切にし、温かい社会を築きます</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- 代表挨拶セクション -->
     <section class="greeting-section section">
         <div class="container">

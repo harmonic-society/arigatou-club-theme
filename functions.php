@@ -66,7 +66,7 @@ function arigatou_club_scripts() {
     
     // About ページ用CSS
     if (is_page_template('page-about.php')) {
-        wp_enqueue_style('arigatou-club-about', get_template_directory_uri() . '/assets/css/about.css', array(), '1.0.0');
+        wp_enqueue_style('arigatou-club-about', get_template_directory_uri() . '/assets/css/page-about.css', array(), '1.0.0');
     }
     
     // ナビゲーション用CSS
