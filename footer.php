@@ -6,7 +6,13 @@
             <div class="footer-content">
                 <!-- メインカラム -->
                 <div class="footer-column footer-main">
-                    <h3>ありがとう倶楽部</h3>
+                    <?php $site_icon_url = get_site_icon_url(96); ?>
+                    <div class="footer-brand-wrapper">
+                        <?php if ($site_icon_url) : ?>
+                            <img src="<?php echo esc_url($site_icon_url); ?>" alt="<?php bloginfo('name'); ?> アイコン" class="footer-site-icon">
+                        <?php endif; ?>
+                        <h3>ありがとう倶楽部</h3>
+                    </div>
                     <p>感謝の心を広げ、<br>世界を「ありがとう」で満たすコミュニティです。</p>
                     <p>私たちは日々の小さな感謝から始まる<br>大きな幸せの輪を広げています。</p>
                     <div class="social-links">

@@ -28,6 +28,42 @@
 .site-branding {
     flex-shrink: 0;
     z-index: 10001;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* サイトアイコン */
+.site-icon-wrapper {
+    flex-shrink: 0;
+}
+
+.header-site-icon {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 3px;
+    transition: all 0.3s ease;
+    animation: icon-float 3s ease-in-out infinite;
+}
+
+@keyframes icon-float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-3px) rotate(5deg);
+    }
+}
+
+.header-site-icon:hover {
+    transform: scale(1.1) rotate(360deg);
+    border-color: var(--wa-gold);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(164, 198, 36, 0.5);
 }
 
 .site-title {
@@ -51,6 +87,12 @@
     content: '🌸';
     font-size: 1.5rem;
     animation: sakura-float 3s ease-in-out infinite;
+    display: none; /* アイコンがある場合は非表示 */
+}
+
+.site-icon-wrapper + .site-logo .site-title a::before,
+.site-icon-wrapper + h1.site-title a::before {
+    display: none;
 }
 
 @keyframes sakura-float {
@@ -365,6 +407,11 @@
     font-size: 1.5rem;
 }
 
+.site-header.scrolled .header-site-icon {
+    width: 35px;
+    height: 35px;
+}
+
 @media (min-width: 768px) {
     .site-header.scrolled .site-title {
         font-size: 1.8rem;
@@ -514,4 +561,19 @@ body.menu-open {
     border: 2px solid var(--wa-secondary);
     border-radius: 3px;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* モバイル時のアイコン調整 */
+@media (max-width: 480px) {
+    .header-site-icon {
+        width: 35px;
+        height: 35px;
+        border-width: 1px;
+        padding: 2px;
+    }
+    
+    .site-header.scrolled .header-site-icon {
+        width: 30px;
+        height: 30px;
+    }
 }

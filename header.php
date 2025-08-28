@@ -16,6 +16,14 @@
         <div class="container">
             <div class="header-inner">
                 <div class="site-branding">
+                    <?php 
+                    $site_icon_url = get_site_icon_url(64);
+                    if ($site_icon_url) : ?>
+                        <div class="site-icon-wrapper">
+                            <img src="<?php echo esc_url($site_icon_url); ?>" alt="<?php bloginfo('name'); ?> アイコン" class="header-site-icon">
+                        </div>
+                    <?php endif; ?>
+                    
                     <?php if (has_custom_logo()) : ?>
                         <div class="site-logo">
                             <?php the_custom_logo(); ?>
