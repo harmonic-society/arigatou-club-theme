@@ -584,6 +584,26 @@ function arigatou_club_customize_register($wp_customize) {
         'section' => 'arigatou_club_representative',
         'settings' => 'representative_photo',
     )));
+    
+    // お好み焼き社会セクション
+    $wp_customize->add_section('arigatou_club_okonomiyaki', array(
+        'title' => 'お好み焼き社会',
+        'priority' => 35,
+        'description' => 'お好み焼き社会セクションの設定',
+    ));
+    
+    // お好み焼き社会イメージ画像
+    $wp_customize->add_setting('okonomiyaki_society_image', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'okonomiyaki_society_image', array(
+        'label' => 'お好み焼き社会イメージ画像',
+        'description' => '推奨サイズ: 400×400px（正方形）。未設定の場合は絵文字が表示されます。',
+        'section' => 'arigatou_club_okonomiyaki',
+        'settings' => 'okonomiyaki_society_image',
+    )));
 }
 add_action('customize_register', 'arigatou_club_customize_register');
 

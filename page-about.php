@@ -90,7 +90,13 @@ get_header(); ?>
                 <div class="okonomiyaki-concept">
                     <div class="concept-visual">
                         <div class="okonomiyaki-circle">
-                            <span class="emoji">🥞</span>
+                            <?php 
+                            $okonomiyaki_image = get_theme_mod('okonomiyaki_society_image');
+                            if ($okonomiyaki_image) : ?>
+                                <img src="<?php echo esc_url($okonomiyaki_image); ?>" alt="お好み焼き社会イメージ" class="okonomiyaki-image">
+                            <?php else : ?>
+                                <span class="emoji">🥞</span>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="concept-text">

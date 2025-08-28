@@ -57,6 +57,14 @@
     animation: rotate-slow 10s linear infinite;
 }
 
+.okonomiyaki-circle .okonomiyaki-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    animation: rotate-slow 10s linear infinite;
+}
+
 @keyframes pulse-glow {
     0%, 100% {
         transform: scale(1);
