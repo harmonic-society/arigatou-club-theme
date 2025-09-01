@@ -39,8 +39,8 @@
 }
 
 .header-site-icon {
-    width: 42px;
-    height: 42px;
+    width: 52px;
+    height: 52px;
     object-fit: contain;
     border-radius: 50%;
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -408,8 +408,8 @@
 }
 
 .site-header.scrolled .header-site-icon {
-    width: 35px;
-    height: 35px;
+    width: 42px;
+    height: 42px;
 }
 
 @media (min-width: 768px) {
@@ -566,14 +566,14 @@ body.menu-open {
 /* モバイル時のアイコン調整 */
 @media (max-width: 480px) {
     .header-site-icon {
-        width: 35px;
-        height: 35px;
+        width: 42px;
+        height: 42px;
         border-width: 1px;
         padding: 2px;
     }
     
     .site-header.scrolled .header-site-icon {
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
     }
 }
