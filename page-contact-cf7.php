@@ -36,7 +36,7 @@ get_header(); ?>
                         <?php
                         // Contact Form 7のショートコードを出力
                         // 実際のIDは Contact Form 7 で作成後に置き換えてください
-                        echo do_shortcode('[contact-form-7 id="YOUR-FORM-ID" title="ありがとう倶楽部 お問い合わせフォーム"]');
+                        echo do_shortcode('[contact-form-7 id="319960c" title="ありがとう倶楽部-お問い合わせフォーム"]');
                         ?>
                         
                         <!-- 代替: ページコンテンツから自動的にショートコードを表示 -->
