@@ -1,0 +1,593 @@
+/* お問い合わせ完了ページスタイル */
+
+/* ヘッダー */
+.thanks-header {
+    background: linear-gradient(135deg, var(--wa-secondary) 0%, var(--wa-accent) 100%);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.thanks-header::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: floatPattern 20s linear infinite;
+}
+
+@keyframes floatPattern {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(20px, 20px); }
+}
+
+.thanks-header .page-title {
+    color: white;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 10px;
+    font-family: "Klee One", serif;
+    letter-spacing: 0.1em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    animation: slideInDown 0.8s ease-out;
+}
+
+.thanks-header .page-subtitle {
+    color: rgba(255,255,255,0.9);
+    text-align: center;
+    font-size: 1.1rem;
+    animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+/* サンクスセクション */
+.thanks-section {
+    padding: 80px 0;
+    background: var(--wa-bg-light);
+}
+
+.thanks-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* サンクスカード */
+.thanks-card {
+    background: white;
+    border-radius: 30px;
+    padding: 60px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInScale 0.8s ease-out 0.3s both;
+}
+
+.thanks-card::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, var(--wa-gold) 0%, transparent 70%);
+    opacity: 0.1;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.thanks-card::after {
+    content: '🌸';
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    font-size: 80px;
+    opacity: 0.1;
+    transform: rotate(-15deg);
+}
+
+/* アイコンアニメーション */
+.thanks-icon-wrapper {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.thanks-icon {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.icon-circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    border: 4px solid var(--wa-secondary);
+    border-radius: 50%;
+    animation: drawCircle 1s ease-out 0.5s both;
+}
+
+@keyframes drawCircle {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+.icon-check {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: var(--wa-secondary);
+    font-weight: bold;
+    opacity: 0;
+    animation: checkMark 0.5s ease-out 1.2s both;
+}
+
+@keyframes checkMark {
+    0% {
+        transform: translate(-50%, -50%) scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2) rotate(10deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* コンテンツ */
+.thanks-content {
+    text-align: center;
+}
+
+.thanks-title {
+    font-size: 2.2rem;
+    color: var(--wa-primary);
+    margin-bottom: 30px;
+    font-family: "Klee One", serif;
+    letter-spacing: 0.1em;
+    animation: fadeInUp 0.8s ease-out 1.5s both;
+}
+
+.thanks-message {
+    animation: fadeInUp 0.8s ease-out 1.7s both;
+}
+
+.thanks-lead {
+    font-size: 1.2rem;
+    color: var(--wa-text-dark);
+    margin-bottom: 30px;
+    line-height: 1.8;
+    font-weight: 500;
+}
+
+.thanks-details {
+    background: var(--wa-bg-cream);
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.thanks-details p {
+    margin: 10px 0;
+    line-height: 1.8;
+    color: var(--wa-text-dark);
+}
+
+/* ノート */
+.thanks-note {
+    background: linear-gradient(135deg, rgba(164, 198, 36, 0.05) 0%, rgba(127, 184, 0, 0.05) 100%);
+    border: 2px dashed var(--wa-gold);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 40px;
+    text-align: left;
+    animation: fadeInUp 0.8s ease-out 1.9s both;
+}
+
+.note-title {
+    font-size: 1.1rem;
+    color: var(--wa-primary);
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.thanks-note ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.thanks-note li {
+    position: relative;
+    padding-left: 25px;
+    margin: 10px 0;
+    color: var(--wa-text-dark);
+    line-height: 1.6;
+}
+
+.thanks-note li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--wa-secondary);
+    font-weight: bold;
+}
+
+/* アクションボタン */
+.thanks-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease-out 2.1s both;
+}
+
+.thanks-actions .btn {
+    padding: 15px 35px;
+    font-size: 1.05rem;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Zen Maru Gothic", sans-serif;
+    font-weight: 500;
+}
+
+.btn-arrow {
+    transition: transform 0.3s ease;
+}
+
+.btn:hover .btn-arrow {
+    transform: translateX(5px);
+}
+
+.thanks-actions .btn-primary {
+    background: linear-gradient(135deg, var(--wa-secondary) 0%, var(--wa-accent) 100%);
+    color: white;
+    box-shadow: 0 5px 15px rgba(164, 198, 36, 0.3);
+}
+
+.thanks-actions .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(164, 198, 36, 0.4);
+}
+
+.thanks-actions .btn-secondary {
+    background: white;
+    color: var(--wa-primary);
+    border: 2px solid var(--wa-primary);
+}
+
+.thanks-actions .btn-secondary:hover {
+    background: var(--wa-primary);
+    color: white;
+}
+
+/* 関連リンク */
+.thanks-links {
+    margin-top: 60px;
+    animation: fadeInUp 0.8s ease-out 2.3s both;
+}
+
+.links-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--wa-primary);
+    margin-bottom: 30px;
+    font-family: "Klee One", serif;
+    position: relative;
+}
+
+.links-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--wa-gold);
+}
+
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.link-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border: 2px solid transparent;
+}
+
+.link-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-color: var(--wa-gold);
+}
+
+.link-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.link-content {
+    flex: 1;
+}
+
+.link-content h4 {
+    color: var(--wa-primary);
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.link-content p {
+    color: var(--wa-text-dark);
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.link-arrow {
+    color: var(--wa-secondary);
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.link-card:hover .link-arrow {
+    transform: translateX(5px);
+}
+
+/* ソーシャルメディア */
+.thanks-social {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 50px;
+    border-top: 2px dashed var(--wa-bg-cream);
+    animation: fadeInUp 0.8s ease-out 2.5s both;
+}
+
+.social-title {
+    font-size: 1.1rem;
+    color: var(--wa-text-dark);
+    margin-bottom: 20px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-link {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.social-link.facebook {
+    background: #2d5016;
+}
+
+.social-link.twitter {
+    background: #6b8e23;
+}
+
+.social-link.instagram {
+    background: linear-gradient(45deg, #a4c624, #7fb800);
+}
+
+.social-link.line {
+    background: #a4c624;
+}
+
+.social-link:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* アニメーション */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.2;
+    }
+}
+
+/* レスポンシブ - タブレット */
+@media (max-width: 1024px) {
+    .thanks-card {
+        padding: 50px 40px;
+    }
+    
+    .links-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* レスポンシブ - モバイル */
+@media (max-width: 768px) {
+    .thanks-header .page-title {
+        font-size: 1.8rem;
+    }
+    
+    .thanks-header .page-subtitle {
+        font-size: 1rem;
+    }
+    
+    .thanks-section {
+        padding: 60px 0;
+    }
+    
+    .thanks-card {
+        padding: 40px 25px;
+        border-radius: 20px;
+    }
+    
+    .thanks-title {
+        font-size: 1.8rem;
+    }
+    
+    .thanks-lead {
+        font-size: 1.1rem;
+    }
+    
+    .thanks-details {
+        padding: 20px;
+    }
+    
+    .thanks-actions {
+        flex-direction: column;
+    }
+    
+    .thanks-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .sp-only {
+        display: inline;
+    }
+}
+
+/* 小型モバイル */
+@media (max-width: 480px) {
+    .thanks-header {
+        padding: 80px 0;
+    }
+    
+    .thanks-header .page-title {
+        font-size: 1.5rem;
+        padding: 0 20px;
+    }
+    
+    .thanks-card {
+        padding: 30px 20px;
+    }
+    
+    .thanks-icon {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .icon-circle {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .icon-check {
+        font-size: 40px;
+    }
+    
+    .thanks-title {
+        font-size: 1.5rem;
+    }
+    
+    .thanks-lead {
+        font-size: 1rem;
+    }
+    
+    .thanks-note {
+        padding: 20px;
+    }
+    
+    .link-card {
+        padding: 20px;
+    }
+    
+    .social-link {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+}
+
+/* PC用改行制御 */
+@media (min-width: 769px) {
+    .sp-only {
+        display: none;
+    }
+}

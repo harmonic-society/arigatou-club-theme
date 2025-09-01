@@ -95,6 +95,11 @@ function arigatou_club_scripts() {
         wp_enqueue_style('arigatou-club-contact', get_template_directory_uri() . '/assets/css/contact-page.css', array(), '1.0.0');
     }
     
+    // Thanks ページ用CSS
+    if (is_page_template('page-thanks.php') || is_page('thanks')) {
+        wp_enqueue_style('arigatou-club-thanks', get_template_directory_uri() . '/assets/css/thanks-page.css', array(), '1.0.0');
+    }
+    
     // Font Awesome
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0');
     
@@ -722,3 +727,25 @@ function arigatou_club_handle_contact_form() {
 }
 add_action('admin_post_arigatou_contact_form', 'arigatou_club_handle_contact_form');
 add_action('admin_post_nopriv_arigatou_contact_form', 'arigatou_club_handle_contact_form');
+
+/**
+ * Contact Form 7 送信後のサンクスページへのリダイレクト
+ */
+add_action('wp_footer', 'arigatou_cf7_redirect_script');
+function arigatou_cf7_redirect_script() {
+    // Contact Form 7を使用しているページでのみ実行
+    if (!is_page('contact') && !is_page_template('page-contact-cf7.php')) {
+        return;
+    }
+    ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Contact Form 7の送信完了イベントをリスン
+        document.addEventListener('wpcf7mailsent', function(event) {
+            // サンクスページへリダイレクト
+            window.location.href = '<?php echo home_url('/thanks/'); ?>';
+        }, false);
+    });
+    </script>
+    <?php
+}
