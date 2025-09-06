@@ -747,6 +747,7 @@
     font-size: 0.95rem;
     color: var(--wa-text-dark);
     line-height: 1.6;
+    text-align: left;
 }
 
 /* 会員カード */
