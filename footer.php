@@ -16,7 +16,7 @@
                     <p>感謝の心を広げ、<br>世界を「ありがとう」で満たすコミュニティです。</p>
                     <p>私たちは日々の小さな感謝から始まる<br>大きな幸せの輪を広げています。</p>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/koh.akiyama.1" target="_blank" rel="noopener" aria-label="Facebook">
+                        <a href="https://www.facebook.com/share/g/19jwZHKL3B/" target="_blank" rel="noopener" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                         <a href="https://x.com/kohcore3" target="_blank" rel="noopener" aria-label="X (Twitter)">
