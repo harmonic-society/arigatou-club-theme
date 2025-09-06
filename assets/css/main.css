@@ -423,11 +423,7 @@ p,
 
 /* レスポンシブ対応 - 小型モバイル */
 @media (max-width: 480px) {
-    .wa-style .hero-section {
-        height: 100vh;
-        min-height: 450px;
-        max-height: 700px;
-    }
+    /* HEROセクションの高さは上記のモバイル設定を使用 */
     
     .slide-content {
         padding: 15px;
@@ -560,11 +556,7 @@ p,
     100% { opacity: 0; }
 }
 
-/* CSS変数でビューポート高さ管理 */
-.hero-slider {
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
-}
+/* CSS変数でビューポート高さ管理 - モバイルでオーバーライドされる */
 
 .wa-pattern-overlay {
     position: absolute;
