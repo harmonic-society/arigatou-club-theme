@@ -77,7 +77,7 @@ get_header(); ?>
                 <div class="wa-pattern-overlay"></div>
                 <div class="container">
                     <h1 class="hero-title">ありがとう倶楽部</h1>
-                    <p class="hero-subtitle">感謝の心で繋がる、温かい和の世界へ</p>
+                    <p class="hero-subtitle">感謝の言葉で広がれ、お好み焼き社会</p>
                 </div>
             </div>
         <?php endif;
