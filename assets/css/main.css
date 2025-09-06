@@ -302,10 +302,23 @@ p,
     
     /* 最初のセクション（ブログセクション）の上部パディングをさらに削減 */
     .hero-section + .home-blog-section {
-        padding-top: 20px;
+        padding-top: 15px;
     }
     
-    /* HEROセクションの高さはスライダー設定で管理 */
+    /* デフォルトヒーローセクションの余白を削減 */
+    .default-hero {
+        padding: 40px 0 !important;
+    }
+    
+    .default-hero .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .default-hero .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
     
     .slide-content {
         padding: 20px;
@@ -365,9 +378,9 @@ p,
     
     /* スライダーの高さを調整 */
     .hero-section {
-        height: 40vh;
-        min-height: 300px;
-        max-height: 400px;
+        height: 35vh;
+        min-height: 250px;
+        max-height: 350px;
     }
     
     .hero-slider {
@@ -375,9 +388,9 @@ p,
     }
     
     .hero-slider .swiper-slide {
-        height: 40vh;
-        min-height: 300px;
-        max-height: 400px;
+        height: 35vh;
+        min-height: 250px;
+        max-height: 350px;
     }
     
     /* モバイル時は画像全体を表示 */
@@ -460,13 +473,15 @@ p,
 /* 横向きモバイル対応 */
 @media (max-width: 768px) and (orientation: landscape) {
     .wa-style .hero-section {
-        height: 90vh;
-        min-height: 320px;
+        height: 70vh;
+        min-height: 250px;
+        max-height: 400px;
     }
     
     .hero-slider .swiper-slide {
-        height: 90vh;
-        min-height: 320px;
+        height: 70vh;
+        min-height: 250px;
+        max-height: 400px;
     }
     
     /* 横向きでも画像全体を表示 */
