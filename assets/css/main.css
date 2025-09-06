@@ -318,49 +318,38 @@
         margin: 0 3px;
     }
     
-    /* モバイル時は画像全体を表示 */
-    .slide-image img {
-        object-fit: contain;
-        object-position: center;
-    }
-    
-    /* 画像の背景色を設定（画像が小さい場合の背景） */
-    .slide-image {
-        background-color: #f5f5f0;
-    }
-    
-    /* スライダーの高さを調整 - 画像に合わせて自動調整 */
+    /* スライダーの高さを調整 */
     .hero-section {
-        height: auto;
+        height: 60vh;
         min-height: 400px;
-        max-height: 70vh;
+        max-height: 500px;
     }
     
     .hero-slider {
-        height: auto;
-        min-height: 400px;
-        max-height: 70vh;
+        height: 100%;
     }
     
     .hero-slider .swiper-slide {
-        height: auto;
+        height: 60vh;
         min-height: 400px;
-        max-height: 70vh;
+        max-height: 500px;
     }
     
-    /* 画像のアスペクト比を維持しながら適切なサイズに */
+    /* モバイル時は画像全体を表示 */
     .slide-image {
-        position: relative;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
         height: 100%;
-        min-height: 400px;
-        max-height: 70vh;
+        background-color: #f5f5f0;
     }
     
     .slide-image img {
-        position: relative;
         width: 100%;
-        height: auto;
-        max-height: 70vh;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
     }
     
     /* オーバーレイの調整 */
@@ -426,12 +415,27 @@
 /* 横向きモバイル対応 */
 @media (max-width: 768px) and (orientation: landscape) {
     .wa-style .hero-section {
-        height: 100vh;
+        height: 90vh;
+        min-height: 320px;
+    }
+    
+    .hero-slider .swiper-slide {
+        height: 90vh;
         min-height: 320px;
     }
     
     /* 横向きでも画像全体を表示 */
+    .slide-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
     .slide-image img {
+        width: 100%;
+        height: 100%;
         object-fit: contain;
         object-position: center;
     }
