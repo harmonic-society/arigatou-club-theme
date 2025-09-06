@@ -716,6 +716,15 @@
 }
 
 @media (max-width: 768px) {
+    /* 本文テキストを左寄せ */
+    .page-content p,
+    .blog-excerpt,
+    .event-description,
+    .faq-answer,
+    .contact-description {
+        text-align: left !important;
+    }
+    
     .page-title {
         font-size: 2rem;
     }

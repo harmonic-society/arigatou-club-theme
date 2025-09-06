@@ -538,6 +538,20 @@
 
 /* モバイル対応 */
 @media (max-width: 768px) {
+    /* 本文テキストを左寄せ */
+    .greeting-message p,
+    .greeting-intro,
+    .greeting-closing,
+    .purpose-card p,
+    .note-item p,
+    .direction-card p,
+    .concept-description,
+    .membership-body p,
+    .corporate-benefits li,
+    .membership-benefits li {
+        text-align: left !important;
+    }
+    
     .greeting-section {
         padding: 60px 0;
     }

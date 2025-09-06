@@ -1,5 +1,19 @@
 /* 追加のメインスタイル */
 
+/* 基本的な本文テキストは左寄せ */
+p,
+.activity-description,
+.corporate-content p,
+.corporate-intro,
+.corporate-appeal,
+.corporate-closing,
+.membership-body p,
+.purpose-card p,
+.note-item p,
+.membership-notice p {
+    text-align: left;
+}
+
 /* 和風カラーパレット - 緑系統の自然な色調 */
 :root {
     --wa-primary: #2d5016;      /* 深い森の緑 */
@@ -256,6 +270,26 @@
 
 /* レスポンシブ対応 - モバイル */
 @media (max-width: 768px) {
+    /* 本文テキストを左寄せ */
+    p,
+    .activity-description,
+    .corporate-content p,
+    .corporate-intro,
+    .corporate-appeal,
+    .corporate-closing,
+    .membership-body p,
+    .purpose-card p,
+    .home-blog-excerpt,
+    .home-event-excerpt,
+    .event-description,
+    .section-subtitle,
+    .default-hero .hero-subtitle,
+    .membership-notice p,
+    .no-posts-message,
+    .no-events-message {
+        text-align: left !important;
+    }
+    
     .wa-style .hero-section {
         height: 100vh;
         min-height: 500px;
