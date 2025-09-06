@@ -290,6 +290,21 @@ p,
         text-align: left !important;
     }
     
+    /* セクションのパディングを調整 */
+    .wa-style .section,
+    .home-blog-section,
+    .home-events-section,
+    .activities-section,
+    .membership-section,
+    .corporate-section {
+        padding: 40px 0;
+    }
+    
+    /* 最初のセクション（ブログセクション）の上部パディングをさらに削減 */
+    .hero-section + .home-blog-section {
+        padding-top: 30px;
+    }
+    
     .wa-style .hero-section {
         height: 100vh;
         min-height: 500px;
@@ -354,9 +369,9 @@ p,
     
     /* スライダーの高さを調整 */
     .hero-section {
-        height: 60vh;
-        min-height: 400px;
-        max-height: 500px;
+        height: 50vh;
+        min-height: 350px;
+        max-height: 450px;
     }
     
     .hero-slider {
@@ -364,9 +379,9 @@ p,
     }
     
     .hero-slider .swiper-slide {
-        height: 60vh;
-        min-height: 400px;
-        max-height: 500px;
+        height: 50vh;
+        min-height: 350px;
+        max-height: 450px;
     }
     
     /* モバイル時は画像全体を表示 */
