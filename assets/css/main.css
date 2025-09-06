@@ -734,6 +734,12 @@
     font-size: 3rem;
     margin-bottom: 20px;
     display: block;
+    color: var(--wa-primary);
+}
+
+.activity-icon i {
+    font-size: inherit;
+    color: inherit;
 }
 
 .activity-item h3 {

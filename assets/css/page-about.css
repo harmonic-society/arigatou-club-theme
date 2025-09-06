@@ -280,6 +280,12 @@
     font-size: 50px;
     margin-bottom: 20px;
     animation: bounce-slow 3s ease-in-out infinite;
+    color: var(--wa-primary);
+}
+
+.value-icon i {
+    font-size: inherit;
+    color: inherit;
 }
 
 @keyframes bounce-slow {
