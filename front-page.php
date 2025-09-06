@@ -268,14 +268,17 @@ get_header(); ?>
                 <div class="activity-item">
                     <div class="activity-icon">☕</div>
                     <h3>ありがとうカフェ</h3>
+                    <p class="activity-description">有料会員向けの座談会。お互いの天才を探したり、お互いの得意や仕事を紹介してありがとうを大事に、助け合い。リアルとオンラインで開催。</p>
                 </div>
                 <div class="activity-item">
                     <div class="activity-icon">📚</div>
                     <h3>ありがとうセミナー</h3>
+                    <p class="activity-description">ありがとう倶楽部に参加してくれてる皆さんの中で、天才を発揮している人が皆さんの知りたいことでセミナーを行ってくれます。</p>
                 </div>
                 <div class="activity-item">
                     <div class="activity-icon">🎨</div>
                     <h3>ありがとう体験ワークショップ</h3>
+                    <p class="activity-description">ありがとうを感じるには体感が大事。体感を得るには体験が大事。多くの体験体感をしましょう。</p>
                 </div>
                 <div class="activity-item">
                     <div class="activity-icon">🎁</div>
@@ -284,11 +287,13 @@ get_header(); ?>
                 </div>
                 <div class="activity-item">
                     <div class="activity-icon">👥</div>
-                    <h3>Facebook グループ</h3>
+                    <h3>ありがとう Facebook グループ</h3>
+                    <p class="activity-description">有料会員無料会員を問わず、ありがとうを大事にする人たちが自由に交流できるFacebookのグループです。</p>
                 </div>
                 <div class="activity-item">
                     <div class="activity-icon">✍️</div>
-                    <h3>ありがとう ブログ</h3>
+                    <h3>ありがとうブログ</h3>
+                    <p class="activity-description">会員の皆様が感じる自分自身や身の回りのヒト・モノ・コトに対するありがとうをまとめて記事にしていきます。</p>
                 </div>
             </div>
         </div>
