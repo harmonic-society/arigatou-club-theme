@@ -318,6 +318,27 @@
         margin: 0 3px;
     }
     
+    /* モバイル時は画像全体を表示 */
+    .slide-image img {
+        object-fit: contain;
+        object-position: center;
+    }
+    
+    /* 画像の背景色を設定（画像が小さい場合の背景） */
+    .slide-image {
+        background-color: #f5f5f0;
+    }
+    
+    /* スライダーの高さを調整 */
+    .hero-section {
+        height: 50vh;
+        min-height: 350px;
+    }
+    
+    .hero-slider {
+        height: 100%;
+    }
+    
     /* オーバーレイの調整 */
     .slide-overlay {
         background: linear-gradient(
@@ -383,6 +404,12 @@
     .wa-style .hero-section {
         height: 100vh;
         min-height: 320px;
+    }
+    
+    /* 横向きでも画像全体を表示 */
+    .slide-image img {
+        object-fit: contain;
+        object-position: center;
     }
     
     .slide-title {
