@@ -188,11 +188,18 @@ p,
 
 .thumbnails-slider {
     width: 100%;
-    padding: 0 20px;
+    padding: 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .thumbnails-slider .swiper-wrapper {
     padding: 10px 0;
+}
+
+.thumbnails-slider .swiper-slide {
+    width: 100%;
+    height: auto;
 }
 
 .thumbnail-item {
@@ -321,6 +328,34 @@ p,
 }
 
 /* =======================================
+   モバイル専用 (最大767px)
+   ======================================= */
+@media (max-width: 767px) {
+    /* モバイルでスライダー表示を確実に */
+    .desktop-only,
+    .thumbnails-grid {
+        display: none !important;
+    }
+    
+    .mobile-only {
+        display: block !important;
+    }
+    
+    .thumbnails-slider {
+        width: 100%;
+        padding: 0 10px;
+    }
+    
+    .thumbnail-image {
+        height: 180px;
+    }
+    
+    .hero-thumbnails {
+        padding: 20px 0;
+    }
+}
+
+/* =======================================
    タブレット (768px以上)
    ======================================= */
 @media (min-width: 768px) {
@@ -356,6 +391,21 @@ p,
     .thumbnail-subtitle {
         font-size: 0.95rem;
     }
+    
+    /* タブレットでグリッド表示（2列） */
+    .desktop-only {
+        display: block;
+    }
+    
+    .mobile-only {
+        display: none !important;
+    }
+    
+    .thumbnails-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
 }
 
 /* =======================================
@@ -389,7 +439,7 @@ p,
     
     /* デスクトップでグリッド表示 */
     .desktop-only {
-        display: block !important;
+        display: block;
     }
     
     .mobile-only {
@@ -397,7 +447,7 @@ p,
     }
     
     .thumbnails-grid {
-        display: grid;
+        display: grid !important;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 20px;
         align-items: start;
