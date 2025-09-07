@@ -49,6 +49,7 @@ p,
     width: 100%;
     margin: 0;
     padding: 0;
+    overflow: visible !important;
 }
 
 /* メインヒーロー画像 */
@@ -57,7 +58,7 @@ p,
     width: 100%;
     height: 60vh;
     min-height: 400px;
-    overflow: hidden;
+    overflow: visible;
     margin: 0;
     padding: 0;
 }
@@ -151,6 +152,9 @@ p,
     margin-top: -1px; /* 微小な隙間を埋める */
     z-index: 10;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .hero-thumbnails .container {
@@ -356,6 +360,12 @@ p,
    モバイル専用 (最大767px)
    ======================================= */
 @media (max-width: 767px) {
+    /* ヒーローセクション全体の高さ自動調整 */
+    .hero-section {
+        height: auto !important;
+        overflow: visible !important;
+    }
+    
     /* メインヒーロー画像の高さ調整 */
     .hero-main {
         height: calc(100vh - 70px); /* ヘッダーの高さを引く */
@@ -448,12 +458,16 @@ p,
     
     .hero-thumbnails {
         padding: 20px 0;
-        min-height: 280px; /* 最小高さを確保 */
+        min-height: 280px !important; /* 最小高さを確保 */
         margin-bottom: 20px; /* ブログセクションとの間隔 */
-        background: #f5f5f5; /* 背景色を変更して可視化 */
+        background: #ff0000 !important; /* 赤色にして強制的に可視化 */
+        border: 5px solid #00ff00 !important; /* 緑のボーダーで確認 */
         display: block !important;
         visibility: visible !important;
+        opacity: 1 !important;
         position: relative;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .hero-thumbnails .container {
@@ -705,11 +719,8 @@ p,
     
     /* モバイル用ヒーローセクション全面改修 */
     .wa-style .hero-section {
-        height: calc(100vh - 80px);
-        min-height: 400px;
-        max-height: 600px;
         position: relative;
-        overflow: hidden;
+        overflow: visible;
         margin-top: 0;
     }
     
