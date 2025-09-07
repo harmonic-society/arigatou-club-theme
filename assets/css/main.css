@@ -166,6 +166,26 @@ p,
     display: block;
 }
 
+/* Swiperの余分なスライドを隠す */
+.thumbnails-slider .swiper-slide-duplicate {
+    display: none !important;
+}
+
+/* サムネイルが4枚未満の場合でもグリッドを維持 */
+.thumbnails-grid .thumbnail-item:only-child {
+    max-width: 25%;
+}
+
+.thumbnails-grid .thumbnail-item:nth-last-child(2):first-child,
+.thumbnails-grid .thumbnail-item:nth-last-child(2):first-child ~ .thumbnail-item {
+    max-width: 50%;
+}
+
+.thumbnails-grid .thumbnail-item:nth-last-child(3):first-child,
+.thumbnails-grid .thumbnail-item:nth-last-child(3):first-child ~ .thumbnail-item {
+    max-width: 33.333%;
+}
+
 .thumbnails-slider {
     width: 100%;
     padding: 0 20px;
@@ -369,11 +389,11 @@ p,
     
     /* デスクトップでグリッド表示 */
     .desktop-only {
-        display: block;
+        display: block !important;
     }
     
     .mobile-only {
-        display: none;
+        display: none !important;
     }
     
     .thumbnails-grid {
@@ -381,7 +401,7 @@ p,
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 20px;
         align-items: start;
-        justify-items: center;
+        justify-items: stretch;
     }
     
     .thumbnail-item {

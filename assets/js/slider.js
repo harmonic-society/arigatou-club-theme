@@ -6,12 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // サムネイルスライダー（モバイル用）
     const thumbnailSlider = document.querySelector('.thumbnails-slider');
     if (thumbnailSlider && isMobile) {
+        // スライドの数をチェック
+        const slideCount = thumbnailSlider.querySelectorAll('.swiper-slide').length;
         const thumbnailSwiper = new Swiper('.thumbnails-slider', {
-            loop: true,
-            autoplay: {
+            loop: slideCount > 1, // スライドが2枚以上の場合のみループ
+            autoplay: slideCount > 1 ? {
                 delay: 3500,
                 disableOnInteraction: false,
-            },
+            } : false,
             speed: 600,
             
             // タッチ操作の設定

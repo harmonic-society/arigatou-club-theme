@@ -14,7 +14,7 @@ get_header(); ?>
         // ヒーロー画像を取得
         $hero_query = new WP_Query(array(
             'post_type' => 'hero_slider',
-            'posts_per_page' => 5, // メイン1枚 + サムネイル4枚
+            'posts_per_page' => -1, // すべての画像を取得
             'meta_key' => '_slide_order',
             'orderby' => 'meta_value_num',
             'order' => 'ASC'
@@ -35,10 +35,15 @@ get_header(); ?>
                 );
             endwhile;
             
-            // メイン画像（最初の1枚）
-            $main_hero = !empty($hero_posts) ? $hero_posts[0] : null;
-            // サムネイル画像（2枚目以降、最大4枚）
-            $thumbnails = array_slice($hero_posts, 1, 4);
+            // 画像が4枚以下の場合はすべてサムネイルとして表示
+            if (count($hero_posts) <= 4) {
+                $main_hero = !empty($hero_posts) ? $hero_posts[0] : null;
+                $thumbnails = array_slice($hero_posts, 1); // 残りすべて
+            } else {
+                // 5枚以上ある場合は、1枚目をメイン、次の4枚をサムネイル
+                $main_hero = !empty($hero_posts) ? $hero_posts[0] : null;
+                $thumbnails = array_slice($hero_posts, 1, 4);
+            }
             ?>
             
             <!-- メインヒーロー画像 -->
