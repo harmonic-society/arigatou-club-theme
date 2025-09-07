@@ -8,71 +8,121 @@ get_header(); ?>
 
 <main id="main" class="site-main wa-style">
     
-    <!-- ヒーローセクション with スライダー -->
+    <!-- ヒーローセクション -->
     <section class="hero-section">
         <?php
-        // スライダー画像を取得
-        $slider_query = new WP_Query(array(
+        // ヒーロー画像を取得
+        $hero_query = new WP_Query(array(
             'post_type' => 'hero_slider',
-            'posts_per_page' => -1,
+            'posts_per_page' => 5, // メイン1枚 + サムネイル4枚
             'meta_key' => '_slide_order',
             'orderby' => 'meta_value_num',
             'order' => 'ASC'
         ));
         
-        if ($slider_query->have_posts()) : ?>
-            <div class="swiper hero-slider">
-                <div class="swiper-wrapper">
-                    <?php while ($slider_query->have_posts()) : $slider_query->the_post();
-                        $slide_title = get_post_meta(get_the_ID(), '_slide_title', true);
-                        $slide_subtitle = get_post_meta(get_the_ID(), '_slide_subtitle', true);
-                        $button_text = get_post_meta(get_the_ID(), '_slide_button_text', true);
-                        $button_url = get_post_meta(get_the_ID(), '_slide_button_url', true);
-                        ?>
-                        <div class="swiper-slide">
-                            <?php if (has_post_thumbnail()) : ?>
-                                <div class="slide-image">
-                                    <?php the_post_thumbnail('full'); ?>
-                                </div>
-                            <?php endif; ?>
-                            
-                            <div class="slide-overlay"></div>
-                            <div class="wa-pattern-overlay"></div>
-                            
-                            <div class="slide-content">
-                                <div class="container">
-                                    <?php if ($slide_title) : ?>
-                                        <h1 class="slide-title"><?php echo esc_html($slide_title); ?></h1>
-                                    <?php else : ?>
-                                        <h1 class="slide-title"><?php the_title(); ?></h1>
-                                    <?php endif; ?>
-                                    
-                                    <?php if ($slide_subtitle) : ?>
-                                        <p class="slide-subtitle"><?php echo esc_html($slide_subtitle); ?></p>
-                                    <?php endif; ?>
-                                    
-                                    <?php if ($button_text && $button_url) : ?>
-                                        <div class="slide-buttons">
-                                            <a href="<?php echo esc_url($button_url); ?>" class="btn-hero-primary">
-                                                <?php echo esc_html($button_text); ?>
-                                            </a>
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
+        if ($hero_query->have_posts()) : 
+            $hero_posts = array();
+            while ($hero_query->have_posts()) : 
+                $hero_query->the_post();
+                $hero_posts[] = array(
+                    'id' => get_the_ID(),
+                    'title' => get_post_meta(get_the_ID(), '_slide_title', true) ?: get_the_title(),
+                    'subtitle' => get_post_meta(get_the_ID(), '_slide_subtitle', true),
+                    'button_text' => get_post_meta(get_the_ID(), '_slide_button_text', true),
+                    'button_url' => get_post_meta(get_the_ID(), '_slide_button_url', true),
+                    'image_url' => get_the_post_thumbnail_url(get_the_ID(), 'full'),
+                    'thumbnail_url' => get_the_post_thumbnail_url(get_the_ID(), 'large')
+                );
+            endwhile;
+            
+            // メイン画像（最初の1枚）
+            $main_hero = !empty($hero_posts) ? $hero_posts[0] : null;
+            // サムネイル画像（2枚目以降、最大4枚）
+            $thumbnails = array_slice($hero_posts, 1, 4);
+            ?>
+            
+            <!-- メインヒーロー画像 -->
+            <?php if ($main_hero) : ?>
+                <div class="hero-main">
+                    <div class="hero-main-image" style="background-image: url('<?php echo esc_url($main_hero['image_url']); ?>')">
+                        <div class="hero-overlay"></div>
+                        <div class="hero-content">
+                            <div class="container">
+                                <h1 class="hero-title"><?php echo esc_html($main_hero['title']); ?></h1>
+                                <?php if ($main_hero['subtitle']) : ?>
+                                    <p class="hero-subtitle"><?php echo esc_html($main_hero['subtitle']); ?></p>
+                                <?php endif; ?>
+                                <?php if ($main_hero['button_text'] && $main_hero['button_url']) : ?>
+                                    <div class="hero-buttons">
+                                        <a href="<?php echo esc_url($main_hero['button_url']); ?>" class="btn-hero-primary">
+                                            <?php echo esc_html($main_hero['button_text']); ?>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
-                    <?php endwhile; ?>
+                    </div>
                 </div>
-                
-                <!-- ナビゲーション -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-                
-                <!-- ページネーション -->
-                <div class="swiper-pagination"></div>
-            </div>
+            <?php endif; ?>
+            
+            <!-- サムネイルギャラリー -->
+            <?php if (!empty($thumbnails)) : ?>
+                <div class="hero-thumbnails">
+                    <div class="container">
+                        <!-- デスクトップ用グリッド -->
+                        <div class="thumbnails-grid desktop-only">
+                            <?php foreach ($thumbnails as $thumb) : ?>
+                                <div class="thumbnail-item">
+                                    <div class="thumbnail-image" style="background-image: url('<?php echo esc_url($thumb['thumbnail_url']); ?>')">
+                                        <div class="thumbnail-overlay"></div>
+                                        <div class="thumbnail-content">
+                                            <h3 class="thumbnail-title"><?php echo esc_html($thumb['title']); ?></h3>
+                                            <?php if ($thumb['subtitle']) : ?>
+                                                <p class="thumbnail-subtitle"><?php echo esc_html($thumb['subtitle']); ?></p>
+                                            <?php endif; ?>
+                                            <?php if ($thumb['button_url']) : ?>
+                                                <a href="<?php echo esc_url($thumb['button_url']); ?>" class="thumbnail-link">
+                                                    詳細を見る →
+                                                </a>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        
+                        <!-- モバイル用スライダー -->
+                        <div class="swiper thumbnails-slider mobile-only">
+                            <div class="swiper-wrapper">
+                                <?php foreach ($thumbnails as $thumb) : ?>
+                                    <div class="swiper-slide">
+                                        <div class="thumbnail-item">
+                                            <div class="thumbnail-image" style="background-image: url('<?php echo esc_url($thumb['thumbnail_url']); ?>')">
+                                                <div class="thumbnail-overlay"></div>
+                                                <div class="thumbnail-content">
+                                                    <h3 class="thumbnail-title"><?php echo esc_html($thumb['title']); ?></h3>
+                                                    <?php if ($thumb['subtitle']) : ?>
+                                                        <p class="thumbnail-subtitle"><?php echo esc_html($thumb['subtitle']); ?></p>
+                                                    <?php endif; ?>
+                                                    <?php if ($thumb['button_url']) : ?>
+                                                        <a href="<?php echo esc_url($thumb['button_url']); ?>" class="thumbnail-link">
+                                                            詳細を見る →
+                                                        </a>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            
         <?php else : ?>
-            <!-- デフォルトのヒーローセクション（スライダー画像がない場合） -->
+            <!-- デフォルトのヒーローセクション -->
             <div class="default-hero">
                 <div class="wa-pattern-overlay"></div>
                 <div class="container">

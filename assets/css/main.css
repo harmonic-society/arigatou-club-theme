@@ -35,66 +35,37 @@ p,
 }
 
 /* =======================================
-   ヒーローセクション - モバイルファースト設計
+   ヒーローセクション - メイン画像 + サムネイル
    ======================================= */
 
-/* ベース（モバイル） */
-.wa-style .hero-section {
+/* ヒーローセクション全体 */
+.hero-section {
     position: relative;
     width: 100%;
-    height: calc(100vh - 80px);
-    min-height: 400px;
     margin-top: 80px;
-    overflow: hidden;
-    background: #000;
+    background: #f5f5f0;
 }
 
-/* ヒーロースライダー */
-.hero-slider {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.hero-slider .swiper-wrapper {
-    height: 100%;
-}
-
-.hero-slider .swiper-slide {
+/* メインヒーロー画像 */
+.hero-main {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 60vh;
+    min-height: 400px;
     overflow: hidden;
 }
 
-/* スライド画像 - 16:9対応 */
-.slide-image {
-    position: absolute;
-    top: 0;
-    left: 0;
+.hero-main-image {
+    position: relative;
     width: 100%;
     height: 100%;
-    z-index: 1;
-}
-
-.slide-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    transition: transform 10s ease-out;
-}
-
-/* PCでのズームエフェクト */
-@media (min-width: 1024px) {
-    .swiper-slide-active .slide-image img {
-        transform: scale(1.1);
-    }
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* オーバーレイ */
-.slide-overlay {
+.hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -103,155 +74,218 @@ p,
     background: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0.2) 0%,
-        rgba(0, 0, 0, 0.3) 50%,
-        rgba(0, 0, 0, 0.4) 100%
+        rgba(0, 0, 0, 0.4) 60%,
+        rgba(0, 0, 0, 0.5) 100%
     );
-    z-index: 2;
+    z-index: 1;
 }
 
-/* コンテンツエリア */
-.slide-content {
+/* メインコンテンツ */
+.hero-content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 3;
+    z-index: 2;
     width: 90%;
-    max-width: 600px;
+    max-width: 800px;
     text-align: center;
     padding: 20px;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out forwards;
 }
 
-.slide-content .container {
-    width: 100%;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* アニメーション */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -40%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-}
-
-/* テキストスタイル */
-.slide-title {
-    font-size: 1.8rem;
+.hero-title {
+    font-size: 2rem;
     line-height: 1.3;
     color: #ffffff;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
     letter-spacing: 0.02em;
     font-family: "Klee One", serif;
 }
 
-.slide-subtitle {
-    font-size: 0.9rem;
+.hero-subtitle {
+    font-size: 1rem;
     line-height: 1.5;
     color: #ffffff;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-/* ボタン */
-.slide-buttons {
+.hero-buttons {
     margin-top: 20px;
 }
 
 .btn-hero-primary {
     display: inline-block;
-    padding: 12px 30px;
+    padding: 12px 35px;
     background: linear-gradient(135deg, var(--wa-secondary), var(--wa-accent));
     color: white;
     text-decoration: none;
-    border-radius: 25px;
-    font-size: 0.9rem;
+    border-radius: 30px;
+    font-size: 0.95rem;
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* ナビゲーションボタン */
-.hero-slider .swiper-button-prev,
-.hero-slider .swiper-button-next {
-    width: 35px;
-    height: 35px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    color: #333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.btn-hero-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* サムネイルギャラリー */
+.hero-thumbnails {
+    position: relative;
+    background: #fff;
+    padding: 30px 0;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* デスクトップ用グリッド */
+.thumbnails-grid {
+    display: none;
+}
+
+.desktop-only {
+    display: none;
+}
+
+/* モバイル用スライダー */
+.mobile-only {
+    display: block;
+}
+
+.thumbnails-slider {
+    width: 100%;
+    padding: 0 20px;
+}
+
+.thumbnails-slider .swiper-wrapper {
+    padding: 10px 0;
+}
+
+.thumbnail-item {
+    position: relative;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
-.hero-slider .swiper-button-prev::after,
-.hero-slider .swiper-button-next::after {
-    font-size: 14px;
+.thumbnail-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.thumbnail-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.6) 100%
+    );
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.thumbnail-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    z-index: 2;
+}
+
+.thumbnail-title {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 8px;
     font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-.hero-slider .swiper-button-prev {
-    left: 10px;
+.thumbnail-subtitle {
+    font-size: 0.85rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
 }
 
-.hero-slider .swiper-button-next {
-    right: 10px;
+.thumbnail-link {
+    color: #ffffff;
+    font-size: 0.85rem;
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
 }
 
-/* ページネーション */
-.hero-slider .swiper-pagination {
-    bottom: 20px !important;
+.thumbnail-link:hover {
+    border-bottom-color: #ffffff;
+    padding-left: 5px;
 }
 
-.hero-slider .swiper-pagination-bullet {
+/* モバイルスライダーのページネーション */
+.thumbnails-slider .swiper-pagination {
+    position: relative;
+    bottom: auto;
+    margin-top: 20px;
+}
+
+.thumbnails-slider .swiper-pagination-bullet {
     width: 8px;
     height: 8px;
-    background: rgba(255, 255, 255, 0.5);
+    background: #ccc;
     opacity: 1;
-    margin: 0 4px !important;
+    margin: 0 4px;
 }
 
-.hero-slider .swiper-pagination-bullet-active {
-    background: rgba(255, 255, 255, 1);
+.thumbnails-slider .swiper-pagination-bullet-active {
+    background: var(--wa-secondary);
     width: 24px;
     border-radius: 4px;
 }
 
 /* デフォルトヒーロー */
 .default-hero {
-    height: 100%;
+    height: 60vh;
+    min-height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--wa-bg-cream) 0%, var(--wa-bg-light) 100%);
     padding: 40px 20px;
+    position: relative;
 }
 
 .default-hero .container {
     text-align: center;
+    z-index: 2;
+    position: relative;
 }
 
 .default-hero .hero-title {
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
     color: var(--wa-primary);
+    font-family: "Klee One", serif;
 }
 
 .default-hero .hero-subtitle {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--wa-text);
 }
 
@@ -259,43 +293,37 @@ p,
    タブレット (768px以上)
    ======================================= */
 @media (min-width: 768px) {
-    .wa-style .hero-section {
+    .hero-main {
         height: 70vh;
         min-height: 500px;
     }
     
-    .slide-title {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
+    .hero-title {
+        font-size: 3rem;
+        margin-bottom: 20px;
     }
     
-    .slide-subtitle {
-        font-size: 1.1rem;
+    .hero-subtitle {
+        font-size: 1.2rem;
         margin-bottom: 30px;
     }
     
     .btn-hero-primary {
-        padding: 14px 40px;
+        padding: 14px 45px;
         font-size: 1rem;
     }
     
-    .hero-slider .swiper-button-prev,
-    .hero-slider .swiper-button-next {
-        width: 45px;
-        height: 45px;
+    /* サムネイルを大きく */
+    .thumbnail-image {
+        height: 250px;
     }
     
-    .hero-slider .swiper-button-prev::after,
-    .hero-slider .swiper-button-next::after {
-        font-size: 18px;
+    .thumbnail-title {
+        font-size: 1.3rem;
     }
     
-    .hero-slider .swiper-pagination {
-        bottom: 30px !important;
-    }
-    
-    .slide-content {
-        padding: 30px;
+    .thumbnail-subtitle {
+        font-size: 0.95rem;
     }
 }
 
@@ -303,139 +331,107 @@ p,
    デスクトップ (1024px以上)
    ======================================= */
 @media (min-width: 1024px) {
-    .wa-style .hero-section {
-        height: calc(100vh - 80px);
+    .hero-main {
+        height: 80vh;
         min-height: 600px;
-        max-height: none;
+        max-height: 800px;
     }
     
-    /* スライダーとスライドを全幅に */
-    .hero-slider,
-    .hero-slider .swiper-wrapper,
-    .hero-slider .swiper-slide {
-        width: 100%;
-        height: 100%;
+    .hero-content {
+        max-width: 1000px;
     }
     
-    /* 画像を全幅・全高に */
-    .slide-image {
-        width: 100%;
-        height: 100%;
-    }
-    
-    .slide-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-    }
-    
-    .slide-content {
-        max-width: 1200px;
-        padding: 60px;
-    }
-    
-    .slide-title {
-        font-size: 4.5rem;
+    .hero-title {
+        font-size: 4rem;
         margin-bottom: 25px;
-        letter-spacing: 0.05em;
-        line-height: 1.2;
     }
     
-    .slide-subtitle {
-        font-size: 1.6rem;
+    .hero-subtitle {
+        font-size: 1.5rem;
         margin-bottom: 40px;
-        letter-spacing: 0.03em;
-        line-height: 1.4;
     }
     
     .btn-hero-primary {
-        padding: 18px 60px;
+        padding: 16px 55px;
+        font-size: 1.1rem;
+    }
+    
+    /* デスクトップでグリッド表示 */
+    .desktop-only {
+        display: block;
+    }
+    
+    .mobile-only {
+        display: none;
+    }
+    
+    .thumbnails-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+    
+    .thumbnail-item {
+        cursor: pointer;
+    }
+    
+    .thumbnail-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .thumbnail-item:hover .thumbnail-overlay {
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0.7) 100%
+        );
+    }
+    
+    .thumbnail-image {
+        height: 280px;
+    }
+    
+    .thumbnail-title {
         font-size: 1.2rem;
-        border-radius: 35px;
-        font-weight: 700;
-        letter-spacing: 0.05em;
     }
     
-    .btn-hero-primary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-        background: linear-gradient(135deg, var(--wa-accent), var(--wa-secondary));
+    .thumbnail-subtitle {
+        font-size: 0.9rem;
     }
     
-    .hero-slider .swiper-button-prev,
-    .hero-slider .swiper-button-next {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .hero-slider .swiper-button-prev::after,
-    .hero-slider .swiper-button-next::after {
-        font-size: 20px;
-    }
-    
-    .hero-slider .swiper-button-prev {
-        left: 30px;
-    }
-    
-    .hero-slider .swiper-button-next {
-        right: 30px;
-    }
-    
-    .hero-slider .swiper-pagination-bullet {
-        width: 10px;
-        height: 10px;
-    }
-    
-    .hero-slider .swiper-pagination-bullet-active {
-        width: 30px;
-        border-radius: 5px;
+    .hero-thumbnails {
+        padding: 40px 0;
     }
 }
 
 /* =======================================
-   大画面デスクトップ (1440px以上)
+   大画面 (1440px以上)
    ======================================= */
 @media (min-width: 1440px) {
-    .wa-style .hero-section {
-        height: 90vh;
-        max-height: 1080px;
-    }
-    
-    .slide-content {
-        max-width: 1400px;
-    }
-    
-    .slide-title {
-        font-size: 4.5rem;
-        line-height: 1.2;
-    }
-    
-    .slide-subtitle {
-        font-size: 1.6rem;
-        line-height: 1.5;
-    }
-}
-
-/* =======================================
-   超大画面 (1920px以上)
-   ======================================= */
-@media (min-width: 1920px) {
-    .wa-style .hero-section {
+    .hero-main {
         height: 85vh;
-        max-height: 1200px;
+        max-height: 900px;
     }
     
-    .slide-content {
-        max-width: 1600px;
+    .hero-content {
+        max-width: 1200px;
     }
     
-    .slide-title {
-        font-size: 5rem;
+    .hero-title {
+        font-size: 4.5rem;
     }
     
-    .slide-subtitle {
-        font-size: 1.8rem;
+    .hero-subtitle {
+        font-size: 1.6rem;
+    }
+    
+    .thumbnails-grid {
+        gap: 25px;
+    }
+    
+    .thumbnail-image {
+        height: 320px;
     }
 }
 

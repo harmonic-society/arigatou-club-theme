@@ -3,119 +3,74 @@ document.addEventListener('DOMContentLoaded', function() {
     const isMobile = window.innerWidth <= 768;
     const isTouch = 'ontouchstart' in window;
     
-    const heroSlider = new Swiper('.hero-slider', {
-        loop: true,
-        autoplay: {
-            delay: isMobile ? 4000 : 5000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: !isMobile,
-        },
-        effect: isMobile ? 'slide' : 'fade',
-        fadeEffect: {
-            crossFade: true
-        },
-        speed: isMobile ? 600 : 1000,
-        
-        // タッチ操作の設定
-        touchRatio: 1.2,
-        touchAngle: 45,
-        grabCursor: true,
-        touchEventsTarget: 'container',
-        touchReleaseOnEdges: true,
-        
-        // モバイル用の追加設定
-        slidesPerView: 1,
-        spaceBetween: 0,
-        centeredSlides: true,
-        watchSlidesProgress: true,
-        
-        // レイジーロード設定
-        lazy: {
-            loadPrevNext: true,
-            loadPrevNextAmount: 1,
-        },
-        
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            renderBullet: function (index, className) {
-                return '<span class="' + className + '"><span class="progress-bar"></span></span>';
+    // サムネイルスライダー（モバイル用）
+    const thumbnailSlider = document.querySelector('.thumbnails-slider');
+    if (thumbnailSlider && isMobile) {
+        const thumbnailSwiper = new Swiper('.thumbnails-slider', {
+            loop: true,
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+            },
+            speed: 600,
+            
+            // タッチ操作の設定
+            touchRatio: 1.2,
+            touchAngle: 45,
+            grabCursor: true,
+            touchEventsTarget: 'container',
+            touchReleaseOnEdges: true,
+            
+            // モバイル用の設定
+            slidesPerView: 1,
+            spaceBetween: 15,
+            centeredSlides: true,
+            
+            pagination: {
+                el: '.thumbnails-slider .swiper-pagination',
+                clickable: true,
+                dynamicBullets: true,
+            },
+            
+            on: {
+                init: function() {
+                    animateThumbnailContent(this.slides[this.activeIndex]);
+                },
+                slideChangeTransitionEnd: function() {
+                    animateThumbnailContent(this.slides[this.activeIndex]);
+                }
             }
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-            hideOnClick: isMobile,
-        },
-        
-        // ブレークポイント設定
-        breakpoints: {
-            320: {
-                autoplay: {
-                    delay: 3500,
-                },
-            },
-            480: {
-                autoplay: {
-                    delay: 4000,
-                },
-            },
-            768: {
-                autoplay: {
-                    delay: 4500,
-                },
-            },
-            1024: {
-                autoplay: {
-                    delay: 5000,
-                },
-            }
-        },
-        on: {
-            init: function() {
-                animateSlideContent(this.slides[this.activeIndex]);
-            },
-            slideChangeTransitionStart: function() {
-                const activeSlide = this.slides[this.activeIndex];
-                const allSlides = this.slides;
-                
-                allSlides.forEach(slide => {
-                    const content = slide.querySelector('.slide-content');
-                    if (content) {
-                        content.classList.remove('animate');
-                    }
-                });
-            },
-            slideChangeTransitionEnd: function() {
-                animateSlideContent(this.slides[this.activeIndex]);
-            }
-        }
-    });
+        });
+    }
     
-    function animateSlideContent(slide) {
-        const content = slide.querySelector('.slide-content');
+    function animateThumbnailContent(slide) {
+        const content = slide.querySelector('.thumbnail-content');
         if (content) {
+            // リセット
+            content.style.opacity = '0';
+            content.style.transform = 'translateY(20px)';
+            
+            // アニメーション
             setTimeout(() => {
-                content.classList.add('animate');
+                content.style.transition = 'all 0.5s ease';
+                content.style.opacity = '1';
+                content.style.transform = 'translateY(0)';
             }, 100);
         }
     }
     
-    // パララックス効果（デスクトップのみ）
+    // メインヒーロー画像のパララックス効果（デスクトップのみ）
     if (!isMobile) {
-        const slides = document.querySelectorAll('.swiper-slide');
+        const heroMain = document.querySelector('.hero-main-image');
         let ticking = false;
         
         function updateParallax() {
             const scrolled = window.pageYOffset;
-            const parallaxSpeed = 0.5;
+            const parallaxSpeed = 0.3;
             
-            slides.forEach(slide => {
-                const image = slide.querySelector('.slide-image');
-                if (image) {
-                    image.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
-                }
-            });
+            if (heroMain) {
+                heroMain.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
+            }
             
             ticking = false;
         }
@@ -125,6 +80,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.requestAnimationFrame(updateParallax);
                 ticking = true;
             }
+        });
+    }
+    
+    // サムネイル画像のホバーエフェクト（デスクトップ）
+    if (!isMobile) {
+        const thumbnailItems = document.querySelectorAll('.thumbnails-grid .thumbnail-item');
+        
+        thumbnailItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                const content = this.querySelector('.thumbnail-content');
+                if (content) {
+                    content.style.opacity = '1';
+                    content.style.transform = 'translateY(0)';
+                }
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                const content = this.querySelector('.thumbnail-content');
+                if (content) {
+                    content.style.opacity = '0';
+                    content.style.transform = 'translateY(20px)';
+                }
+            });
         });
     }
     
@@ -138,39 +116,60 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', setViewportHeight);
     window.addEventListener('orientationchange', setViewportHeight);
     
-    // タッチデバイスでのスワイプヒント表示
-    if (isTouch && isMobile) {
-        let hintShown = false;
-        const showSwipeHint = () => {
-            if (!hintShown && heroSlider) {
+    // タッチデバイスでのスワイプヒント表示（サムネイルスライダー用）
+    if (isTouch && isMobile && thumbnailSlider) {
+        let hintShown = localStorage.getItem('thumbnailSwipeHintShown');
+        
+        if (!hintShown) {
+            const showSwipeHint = () => {
                 const hint = document.createElement('div');
                 hint.className = 'swipe-hint';
-                hint.innerHTML = '<span>スワイプで切り替え</span>';
+                hint.innerHTML = '<span>← スワイプで他の画像を見る →</span>';
                 hint.style.cssText = `
                     position: absolute;
-                    bottom: 60px;
+                    bottom: 20px;
                     left: 50%;
                     transform: translateX(-50%);
-                    background: rgba(0,0,0,0.7);
+                    background: rgba(0,0,0,0.8);
                     color: white;
-                    padding: 8px 20px;
-                    border-radius: 20px;
+                    padding: 10px 25px;
+                    border-radius: 25px;
                     font-size: 14px;
                     z-index: 100;
-                    animation: fadeInOut 3s ease-in-out;
+                    animation: fadeInOut 4s ease-in-out;
+                    pointer-events: none;
                 `;
                 
-                const sliderEl = document.querySelector('.hero-slider');
-                if (sliderEl) {
-                    sliderEl.appendChild(hint);
-                    setTimeout(() => hint.remove(), 3000);
-                    hintShown = true;
-                }
-            }
-        };
-        
-        // 3秒後にヒント表示
-        setTimeout(showSwipeHint, 3000);
+                thumbnailSlider.appendChild(hint);
+                setTimeout(() => {
+                    hint.remove();
+                    localStorage.setItem('thumbnailSwipeHintShown', 'true');
+                }, 4000);
+            };
+            
+            // 2秒後にヒント表示
+            setTimeout(showSwipeHint, 2000);
+        }
     }
+    
+    // スワイプヒントのアニメーション
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(10px);
+            }
+            20%, 80% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+    `;
+    document.head.appendChild(style);
     
 });
