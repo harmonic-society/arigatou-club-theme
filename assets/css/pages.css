@@ -41,6 +41,7 @@
 .page-subtitle {
     color: rgba(255, 255, 255, 0.9);
     font-size: 1.2rem;
+    text-align: center;
 }
 
 /* イベント一覧ページ */
