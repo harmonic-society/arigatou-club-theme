@@ -147,10 +147,10 @@ p,
     position: relative;
     background: #fff;
     padding: 30px 0;
-    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
     overflow: visible;
     margin-top: -1px; /* 微小な隙間を埋める */
     z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .hero-thumbnails .container {
@@ -262,6 +262,11 @@ p,
     left: 0;
     right: 0;
     padding: 20px;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0) 100%
+    );
     z-index: 2;
 }
 
@@ -399,6 +404,8 @@ p,
         width: 100%;
         padding: 0 10px;
         min-height: 220px; /* 最小高さを確保 */
+        display: block !important;
+        visibility: visible !important;
     }
     
     .thumbnails-slider .swiper-pagination {
@@ -419,17 +426,31 @@ p,
     .thumbnails-slider .swiper-slide {
         height: auto;
         min-height: 200px;
+        visibility: visible !important;
+        display: block !important;
+    }
+    
+    .thumbnails-slider .swiper-wrapper {
+        display: flex !important;
+        visibility: visible !important;
     }
     
     .hero-thumbnails {
         padding: 20px 0;
         min-height: 250px; /* 最小高さを確保 */
         margin-bottom: 20px; /* ブログセクションとの間隔 */
+        background: #fff;
+        display: block;
     }
     
     /* サムネイルコンテンツの調整 */
     .thumbnail-content {
         padding: 15px;
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.3) 100%
+        );
     }
     
     .thumbnail-title {

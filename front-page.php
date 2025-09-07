@@ -35,14 +35,16 @@ get_header(); ?>
                 );
             endwhile;
             
-            // 画像が4枚以下の場合はすべてサムネイルとして表示
-            if (count($hero_posts) <= 4) {
-                $main_hero = !empty($hero_posts) ? $hero_posts[0] : null;
-                $thumbnails = array_slice($hero_posts, 1); // 残りすべて
-            } else {
-                // 5枚以上ある場合は、1枚目をメイン、次の4枚をサムネイル
-                $main_hero = !empty($hero_posts) ? $hero_posts[0] : null;
+            // メイン画像とサムネイル画像を設定
+            $main_hero = !empty($hero_posts) ? $hero_posts[0] : null;
+            
+            // サムネイルは常に利用可能なすべての画像を使用（最初の画像を除く）
+            // ただし、最大4枚まで
+            if (count($hero_posts) > 1) {
                 $thumbnails = array_slice($hero_posts, 1, 4);
+            } else {
+                // 画像が1枚しかない場合は、その画像をサムネイルとしても使用
+                $thumbnails = $hero_posts;
             }
             ?>
             
@@ -71,6 +73,10 @@ get_header(); ?>
             <?php endif; ?>
             
             <!-- サムネイルギャラリー -->
+            <?php 
+            // デバッグ: サムネイル数を確認
+            // echo '<!-- Thumbnails count: ' . count($thumbnails) . ' -->';
+            ?>
             <?php if (!empty($thumbnails)) : ?>
                 <div class="hero-thumbnails">
                     <div class="container">

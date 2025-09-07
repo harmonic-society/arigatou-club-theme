@@ -5,10 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // サムネイルスライダー（モバイル用）
     const thumbnailSlider = document.querySelector('.thumbnails-slider');
-    if (thumbnailSlider && isMobile) {
+    if (thumbnailSlider) {
         // スライドの数をチェック
         const slideCount = thumbnailSlider.querySelectorAll('.swiper-slide').length;
-        const thumbnailSwiper = new Swiper('.thumbnails-slider', {
+        console.log('Thumbnail slides found:', slideCount);
+        
+        if (slideCount > 0) {
+            const thumbnailSwiper = new Swiper('.thumbnails-slider', {
             loop: slideCount > 1, // スライドが2枚以上の場合のみループ
             autoplay: slideCount > 1 ? {
                 delay: 3500,
@@ -43,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        }
     }
     
     function animateThumbnailContent(slide) {
