@@ -406,6 +406,8 @@ p,
         min-height: 220px; /* 最小高さを確保 */
         display: block !important;
         visibility: visible !important;
+        position: relative;
+        overflow: visible;
     }
     
     .thumbnails-slider .swiper-pagination {
@@ -416,10 +418,18 @@ p,
         z-index: 20;
     }
     
+    .thumbnail-item {
+        display: flex !important;
+        flex-direction: column;
+        height: 200px;
+        visibility: visible !important;
+    }
+    
     .thumbnail-image {
         height: 200px;
         background-size: cover;
         background-position: center;
+        display: block !important;
     }
     
     /* スワイパースライドの高さを確保 */
@@ -428,6 +438,7 @@ p,
         min-height: 200px;
         visibility: visible !important;
         display: block !important;
+        width: 100%;
     }
     
     .thumbnails-slider .swiper-wrapper {
@@ -437,10 +448,16 @@ p,
     
     .hero-thumbnails {
         padding: 20px 0;
-        min-height: 250px; /* 最小高さを確保 */
+        min-height: 280px; /* 最小高さを確保 */
         margin-bottom: 20px; /* ブログセクションとの間隔 */
-        background: #fff;
-        display: block;
+        background: #f5f5f5; /* 背景色を変更して可視化 */
+        display: block !important;
+        visibility: visible !important;
+        position: relative;
+    }
+    
+    .hero-thumbnails .container {
+        padding: 0 15px;
     }
     
     /* サムネイルコンテンツの調整 */
