@@ -132,6 +132,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function setViewportHeight() {
         const vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
+        
+        // モバイルでヒーローセクションの高さを調整
+        if (isMobile) {
+            const heroSection = document.querySelector('.wa-style .hero-section');
+            if (heroSection) {
+                heroSection.style.height = `${window.innerHeight}px`;
+            }
+        }
     }
     
     setViewportHeight();
@@ -148,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 hint.innerHTML = '<span>スワイプで切り替え</span>';
                 hint.style.cssText = `
                     position: absolute;
-                    bottom: 100px;
+                    bottom: calc(50% + 40px);
                     left: 50%;
                     transform: translateX(-50%);
                     background: rgba(0,0,0,0.7);
