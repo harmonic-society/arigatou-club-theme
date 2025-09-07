@@ -38,18 +38,15 @@ get_header(); ?>
             endwhile;
             
             // メイン画像とサムネイル画像を設定
-            echo '<!-- Total hero posts: ' . count($hero_posts) . ' -->';
             $main_hero = !empty($hero_posts) ? $hero_posts[0] : null;
             
             // サムネイルは常に利用可能なすべての画像を使用（最初の画像を除く）
             // ただし、最大4枚まで
             if (count($hero_posts) > 1) {
                 $thumbnails = array_slice($hero_posts, 1, 4);
-                echo '<!-- Using posts 2+ as thumbnails -->';
             } else {
                 // 画像が1枚しかない場合は、その画像をサムネイルとしても使用
                 $thumbnails = $hero_posts;
-                echo '<!-- Using single post as thumbnail -->';
             }
             ?>
             
@@ -78,15 +75,6 @@ get_header(); ?>
             <?php endif; ?>
             
             <!-- サムネイルギャラリー -->
-            <?php 
-            // デバッグ: サムネイル数を確認
-            if (isset($thumbnails)) {
-                echo '<!-- Thumbnails count: ' . count($thumbnails) . ' -->';
-                echo '<!-- Thumbnails empty check: ' . (empty($thumbnails) ? 'true' : 'false') . ' -->';
-            } else {
-                echo '<!-- Thumbnails not set -->';
-            }
-            ?>
             <?php if (!empty($thumbnails)) : ?>
                 <div class="hero-thumbnails">
                     <div class="container">
@@ -140,8 +128,6 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
-            <?php else : ?>
-                <!-- No thumbnails section because thumbnails array is empty -->
             <?php endif; ?>
             
         <?php else : ?>
