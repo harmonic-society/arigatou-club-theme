@@ -8,44 +8,58 @@ document.addEventListener('DOMContentLoaded', function() {
     if (thumbnailSlider) {
         // スライドの数をチェック
         const slideCount = thumbnailSlider.querySelectorAll('.swiper-slide').length;
-        console.log('Thumbnail slides found:', slideCount);
         
         if (slideCount > 0) {
-            const thumbnailSwiper = new Swiper('.thumbnails-slider', {
-            loop: slideCount > 1, // スライドが2枚以上の場合のみループ
-            autoplay: slideCount > 1 ? {
-                delay: 3500,
-                disableOnInteraction: false,
-            } : false,
-            speed: 600,
-            
-            // タッチ操作の設定
-            touchRatio: 1.2,
-            touchAngle: 45,
-            grabCursor: true,
-            touchEventsTarget: 'container',
-            touchReleaseOnEdges: true,
-            
-            // モバイル用の設定
-            slidesPerView: 1,
-            spaceBetween: 15,
-            centeredSlides: true,
-            
-            pagination: {
-                el: '.thumbnails-slider .swiper-pagination',
-                clickable: true,
-                dynamicBullets: true,
-            },
-            
-            on: {
-                init: function() {
-                    animateThumbnailContent(this.slides[this.activeIndex]);
+            // Swiperの設定オブジェクトを構築
+            const swiperConfig = {
+                speed: 600,
+                
+                // タッチ操作の設定
+                touchRatio: 1.2,
+                touchAngle: 45,
+                grabCursor: true,
+                touchEventsTarget: 'container',
+                touchReleaseOnEdges: true,
+                
+                // モバイル用の設定
+                slidesPerView: 1,
+                spaceBetween: 15,
+                centeredSlides: false,
+                
+                pagination: {
+                    el: '.thumbnails-slider .swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true,
                 },
-                slideChangeTransitionEnd: function() {
-                    animateThumbnailContent(this.slides[this.activeIndex]);
+                
+                on: {
+                    init: function() {
+                        animateThumbnailContent(this.slides[this.activeIndex]);
+                    },
+                    slideChangeTransitionEnd: function() {
+                        animateThumbnailContent(this.slides[this.activeIndex]);
+                    }
                 }
+            };
+            
+            // スライド数に応じてループとオートプレイを設定
+            // Swiperは slidesPerView の3倍以上のスライドを推奨
+            if (slideCount > 3) {
+                swiperConfig.loop = true;
+                swiperConfig.loopedSlides = slideCount; // ループ用の複製スライド数を明示
+                swiperConfig.loopAdditionalSlides = 1; // 追加の複製スライド
+            } else {
+                swiperConfig.loop = false; // 3枚以下の場合はループを無効化
             }
-        });
+            
+            if (slideCount > 1) {
+                swiperConfig.autoplay = {
+                    delay: 3500,
+                    disableOnInteraction: false,
+                };
+            }
+            
+            const thumbnailSwiper = new Swiper('.thumbnails-slider', swiperConfig);
         }
     }
     
