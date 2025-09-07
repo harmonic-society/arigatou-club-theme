@@ -339,6 +339,40 @@ p,
    モバイル専用 (最大767px)
    ======================================= */
 @media (max-width: 767px) {
+    /* メインヒーロー画像の高さ調整 */
+    .hero-main {
+        height: calc(100vh - 70px); /* ヘッダーの高さを引く */
+        min-height: 350px;
+        max-height: 600px;
+    }
+    
+    .hero-main-image {
+        background-position: center center;
+        background-size: cover;
+    }
+    
+    /* コンテンツの調整 */
+    .hero-content {
+        padding: 20px;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+        line-height: 1.4;
+    }
+    
+    .btn-hero-primary {
+        padding: 10px 25px;
+        font-size: 0.85rem;
+    }
+    
     /* モバイルでスライダー表示を確実に */
     .desktop-only,
     .thumbnails-grid {
@@ -354,12 +388,37 @@ p,
         padding: 0 10px;
     }
     
+    .thumbnails-slider .swiper-pagination {
+        position: relative;
+        margin-top: 15px;
+        bottom: auto;
+    }
+    
     .thumbnail-image {
-        height: 180px;
+        height: 200px;
+        background-size: cover;
+        background-position: center;
     }
     
     .hero-thumbnails {
         padding: 20px 0;
+    }
+    
+    /* サムネイルコンテンツの調整 */
+    .thumbnail-content {
+        padding: 15px;
+    }
+    
+    .thumbnail-title {
+        font-size: 1rem;
+    }
+    
+    .thumbnail-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .thumbnail-link {
+        font-size: 0.8rem;
     }
 }
 
