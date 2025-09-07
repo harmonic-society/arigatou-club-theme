@@ -46,7 +46,7 @@ p,
     min-height: 400px;
     margin-top: 80px;
     overflow: hidden;
-    background: #f5f5f5;
+    background: #000;
 }
 
 /* ヒーロースライダー */
@@ -82,6 +82,15 @@ p,
     height: 100%;
     object-fit: cover;
     object-position: center;
+    display: block;
+    transition: transform 10s ease-out;
+}
+
+/* PCでのズームエフェクト */
+@media (min-width: 1024px) {
+    .swiper-slide-active .slide-image img {
+        transform: scale(1.1);
+    }
 }
 
 /* オーバーレイ */
@@ -93,9 +102,9 @@ p,
     height: 100%;
     background: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.3) 0%,
-        rgba(0, 0, 0, 0.4) 50%,
-        rgba(0, 0, 0, 0.5) 100%
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0.4) 100%
     );
     z-index: 2;
 }
@@ -111,11 +120,29 @@ p,
     max-width: 600px;
     text-align: center;
     padding: 20px;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
 }
 
 .slide-content .container {
     width: 100%;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* アニメーション */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
 }
 
 /* テキストスタイル */
@@ -127,6 +154,7 @@ p,
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
     letter-spacing: 0.02em;
+    font-family: "Klee One", serif;
 }
 
 .slide-subtitle {
@@ -278,33 +306,61 @@ p,
     .wa-style .hero-section {
         height: calc(100vh - 80px);
         min-height: 600px;
-        max-height: 900px;
+        max-height: none;
+    }
+    
+    /* スライダーとスライドを全幅に */
+    .hero-slider,
+    .hero-slider .swiper-wrapper,
+    .hero-slider .swiper-slide {
+        width: 100%;
+        height: 100%;
+    }
+    
+    /* 画像を全幅・全高に */
+    .slide-image {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .slide-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
     }
     
     .slide-content {
-        max-width: 800px;
-        padding: 40px;
+        max-width: 1200px;
+        padding: 60px;
     }
     
     .slide-title {
-        font-size: 3.5rem;
-        margin-bottom: 20px;
+        font-size: 4.5rem;
+        margin-bottom: 25px;
+        letter-spacing: 0.05em;
+        line-height: 1.2;
     }
     
     .slide-subtitle {
-        font-size: 1.3rem;
+        font-size: 1.6rem;
         margin-bottom: 40px;
+        letter-spacing: 0.03em;
+        line-height: 1.4;
     }
     
     .btn-hero-primary {
-        padding: 16px 50px;
-        font-size: 1.1rem;
-        border-radius: 30px;
+        padding: 18px 60px;
+        font-size: 1.2rem;
+        border-radius: 35px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
     }
     
     .btn-hero-primary:hover {
         transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        background: linear-gradient(135deg, var(--wa-accent), var(--wa-secondary));
     }
     
     .hero-slider .swiper-button-prev,
@@ -342,19 +398,44 @@ p,
    ======================================= */
 @media (min-width: 1440px) {
     .wa-style .hero-section {
-        max-height: 1000px;
+        height: 90vh;
+        max-height: 1080px;
     }
     
     .slide-content {
-        max-width: 1000px;
+        max-width: 1400px;
     }
     
     .slide-title {
-        font-size: 4rem;
+        font-size: 4.5rem;
+        line-height: 1.2;
     }
     
     .slide-subtitle {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
+        line-height: 1.5;
+    }
+}
+
+/* =======================================
+   超大画面 (1920px以上)
+   ======================================= */
+@media (min-width: 1920px) {
+    .wa-style .hero-section {
+        height: 85vh;
+        max-height: 1200px;
+    }
+    
+    .slide-content {
+        max-width: 1600px;
+    }
+    
+    .slide-title {
+        font-size: 5rem;
+    }
+    
+    .slide-subtitle {
+        font-size: 1.8rem;
     }
 }
 
