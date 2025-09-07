@@ -34,32 +34,40 @@ p,
     font-family: "Klee One", "Zen Maru Gothic", "Kosugi Maru", "游明朝", "Yu Mincho", serif;
 }
 
-/* ヒーローセクション和風 */
+/* =======================================
+   ヒーローセクション - モバイルファースト設計
+   ======================================= */
+
+/* ベース（モバイル） */
 .wa-style .hero-section {
     position: relative;
-    background: linear-gradient(135deg, var(--wa-bg-cream) 0%, var(--wa-bg-light) 100%);
-    padding: 0;
+    width: 100%;
+    height: calc(100vh - 80px);
+    min-height: 400px;
+    margin-top: 80px;
     overflow: hidden;
-    height: 80vh;
-    min-height: 600px;
-    margin-top: 80px; /* ヘッダーの高さ分 */
+    background: #f5f5f5;
 }
 
 /* ヒーロースライダー */
 .hero-slider {
     width: 100%;
     height: 100%;
+    position: relative;
+}
+
+.hero-slider .swiper-wrapper {
+    height: 100%;
 }
 
 .hero-slider .swiper-slide {
     position: relative;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-/* スライド画像 */
+/* スライド画像 - 16:9対応 */
 .slide-image {
     position: absolute;
     top: 0;
@@ -73,11 +81,7 @@ p,
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 10s ease-out;
-}
-
-.swiper-slide-active .slide-image img {
-    transform: scale(1.1);
+    object-position: center;
 }
 
 /* オーバーレイ */
@@ -88,189 +92,276 @@ p,
     width: 100%;
     height: 100%;
     background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0.2) 60%,
+        to bottom,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
         rgba(0, 0, 0, 0.5) 100%
     );
     z-index: 2;
 }
 
-/* スライドコンテンツ */
+/* コンテンツエリア */
 .slide-content {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 3;
+    width: 90%;
+    max-width: 600px;
     text-align: center;
-    padding: 40px;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
+    padding: 20px;
 }
 
-.slide-content.animate {
-    opacity: 1;
-    transform: translateY(0);
+.slide-content .container {
+    width: 100%;
+    padding: 0;
 }
 
+/* テキストスタイル */
 .slide-title {
-    font-size: 4.5rem;
-    color: #fff;
-    margin-bottom: 20px;
-    font-family: "Klee One", serif;
-    text-shadow: 
-        3px 3px 6px rgba(0, 0, 0, 0.5),
-        0 0 30px rgba(164, 198, 36, 0.3);
-    letter-spacing: 0.05em;
-    animation: fadeInUp 1s ease-out;
+    font-size: 1.8rem;
+    line-height: 1.3;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    letter-spacing: 0.02em;
 }
 
 .slide-subtitle {
-    font-size: 1.5rem;
-    color: #fff;
-    margin-bottom: 40px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    animation: fadeInUp 1s ease-out 0.3s forwards;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 /* ボタン */
 .slide-buttons {
-    opacity: 0;
-    animation: fadeInUp 1s ease-out 0.6s forwards;
+    margin-top: 20px;
 }
 
 .btn-hero-primary {
     display: inline-block;
-    padding: 15px 40px;
-    background: linear-gradient(135deg, var(--wa-secondary) 0%, var(--wa-accent) 100%);
+    padding: 12px 30px;
+    background: linear-gradient(135deg, var(--wa-secondary), var(--wa-accent));
     color: white;
     text-decoration: none;
-    border-radius: 30px;
-    font-size: 1.1rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(164, 198, 36, 0.3);
-    position: relative;
-    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.btn-hero-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.6s ease;
-}
-
-.btn-hero-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(164, 198, 36, 0.4);
-}
-
-.btn-hero-primary:hover::before {
-    left: 100%;
-}
-
-/* Swiperナビゲーション */
+/* ナビゲーションボタン */
 .hero-slider .swiper-button-prev,
 .hero-slider .swiper-button-next {
-    color: white;
-    background: rgba(45, 80, 22, 0.5);
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 50%;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.3s ease;
-}
-
-.hero-slider .swiper-button-prev:hover,
-.hero-slider .swiper-button-next:hover {
-    background: rgba(164, 198, 36, 0.7);
-    transform: scale(1.1);
 }
 
 .hero-slider .swiper-button-prev::after,
 .hero-slider .swiper-button-next::after {
-    font-size: 20px;
+    font-size: 14px;
+    font-weight: bold;
 }
 
-/* Swiperページネーション */
+.hero-slider .swiper-button-prev {
+    left: 10px;
+}
+
+.hero-slider .swiper-button-next {
+    right: 10px;
+}
+
+/* ページネーション */
 .hero-slider .swiper-pagination {
-    bottom: 30px;
+    bottom: 20px !important;
 }
 
 .hero-slider .swiper-pagination-bullet {
-    width: 40px;
-    height: 4px;
-    border-radius: 2px;
+    width: 8px;
+    height: 8px;
     background: rgba(255, 255, 255, 0.5);
-    margin: 0 5px;
     opacity: 1;
-    position: relative;
-    overflow: hidden;
+    margin: 0 4px !important;
 }
 
 .hero-slider .swiper-pagination-bullet-active {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 1);
+    width: 24px;
+    border-radius: 4px;
 }
 
-.hero-slider .swiper-pagination-bullet .progress-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 0;
-    background: var(--wa-secondary);
-    transition: width 0.1s linear;
-}
-
-.hero-slider .swiper-pagination-bullet-active .progress-bar {
-    animation: progressBar 5s linear;
-}
-
-@keyframes progressBar {
-    0% { width: 0; }
-    100% { width: 100%; }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* デフォルトヒーロー（スライダーがない場合） */
+/* デフォルトヒーロー */
 .default-hero {
-    position: relative;
-    padding: 120px 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: linear-gradient(135deg, var(--wa-bg-cream) 0%, var(--wa-bg-light) 100%);
+    padding: 40px 20px;
 }
 
-/* レスポンシブ対応 - タブレット */
-@media (max-width: 1024px) {
+.default-hero .container {
+    text-align: center;
+}
+
+.default-hero .hero-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--wa-primary);
+}
+
+.default-hero .hero-subtitle {
+    font-size: 1rem;
+    color: var(--wa-text);
+}
+
+/* =======================================
+   タブレット (768px以上)
+   ======================================= */
+@media (min-width: 768px) {
     .wa-style .hero-section {
         height: 70vh;
         min-height: 500px;
     }
     
     .slide-title {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .slide-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+    
+    .btn-hero-primary {
+        padding: 14px 40px;
+        font-size: 1rem;
+    }
+    
+    .hero-slider .swiper-button-prev,
+    .hero-slider .swiper-button-next {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .hero-slider .swiper-button-prev::after,
+    .hero-slider .swiper-button-next::after {
+        font-size: 18px;
+    }
+    
+    .hero-slider .swiper-pagination {
+        bottom: 30px !important;
+    }
+    
+    .slide-content {
+        padding: 30px;
+    }
+}
+
+/* =======================================
+   デスクトップ (1024px以上)
+   ======================================= */
+@media (min-width: 1024px) {
+    .wa-style .hero-section {
+        height: calc(100vh - 80px);
+        min-height: 600px;
+        max-height: 900px;
+    }
+    
+    .slide-content {
+        max-width: 800px;
+        padding: 40px;
+    }
+    
+    .slide-title {
         font-size: 3.5rem;
+        margin-bottom: 20px;
     }
     
     .slide-subtitle {
         font-size: 1.3rem;
+        margin-bottom: 40px;
+    }
+    
+    .btn-hero-primary {
+        padding: 16px 50px;
+        font-size: 1.1rem;
+        border-radius: 30px;
+    }
+    
+    .btn-hero-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+    
+    .hero-slider .swiper-button-prev,
+    .hero-slider .swiper-button-next {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .hero-slider .swiper-button-prev::after,
+    .hero-slider .swiper-button-next::after {
+        font-size: 20px;
+    }
+    
+    .hero-slider .swiper-button-prev {
+        left: 30px;
+    }
+    
+    .hero-slider .swiper-button-next {
+        right: 30px;
+    }
+    
+    .hero-slider .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .hero-slider .swiper-pagination-bullet-active {
+        width: 30px;
+        border-radius: 5px;
     }
 }
 
-/* レスポンシブ対応 - モバイル */
-@media (max-width: 768px) {
+/* =======================================
+   大画面デスクトップ (1440px以上)
+   ======================================= */
+@media (min-width: 1440px) {
+    .wa-style .hero-section {
+        max-height: 1000px;
+    }
+    
+    .slide-content {
+        max-width: 1000px;
+    }
+    
+    .slide-title {
+        font-size: 4rem;
+    }
+    
+    .slide-subtitle {
+        font-size: 1.5rem;
+    }
+}
+
+/* =======================================
+   モバイル専用スタイルの削除
+   ======================================= */
+@media (max-width: 767px) {
     /* 本文テキストを左寄せ */
     p,
     .activity-description,
@@ -579,161 +670,7 @@ p,
     }
 }
 
-/* レスポンシブ対応 - 小型モバイル */
-@media (max-width: 480px) {
-    /* ヒーローセクションの高さ調整 */
-    .wa-style .hero-section {
-        height: calc(100vh - 80px);
-        min-height: 400px;
-        max-height: 550px;
-        margin-top: 80px;
-    }
-    
-    /* コンテンツエリアの調整 */
-    .slide-content {
-        padding: 15px;
-    }
-    
-    /* テキストサイズの最適化 */
-    .slide-title {
-        font-size: 1.6rem;
-        line-height: 1.3;
-        margin-bottom: 10px;
-        letter-spacing: 0.02em;
-        padding: 0 15px;
-    }
-    
-    .slide-subtitle {
-        font-size: 0.85rem;
-        line-height: 1.5;
-        margin-bottom: 20px;
-        padding: 0 25px;
-    }
-    
-    /* ボタンの調整 */
-    .btn-hero-primary {
-        padding: 10px 28px;
-        font-size: 0.9rem;
-    }
-    
-    /* ナビゲーションボタンの調整 */
-    .hero-slider .swiper-button-prev,
-    .hero-slider .swiper-button-next {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .hero-slider .swiper-button-prev::after,
-    .hero-slider .swiper-button-next::after {
-        font-size: 12px;
-    }
-    
-    .hero-slider .swiper-button-prev {
-        left: 5px;
-    }
-    
-    .hero-slider .swiper-button-next {
-        right: 5px;
-    }
-    
-    /* ページネーションの調整 */
-    .hero-slider .swiper-pagination {
-        padding: 6px 12px;
-    }
-    
-    .hero-slider .swiper-pagination-bullet {
-        width: 6px;
-        height: 6px;
-        margin: 0 4px;
-    }
-    
-    .hero-slider .swiper-pagination-bullet-active {
-        width: 20px;
-        border-radius: 3px;
-    }
-}
 
-/* 横向きモバイル対応 */
-@media (max-width: 768px) and (orientation: landscape) {
-    .wa-style .hero-section {
-        height: calc(100vh - 80px);
-        min-height: 300px;
-        max-height: 500px;
-        margin-top: 80px;
-    }
-    
-    .slide-title {
-        font-size: 1.8rem;
-    }
-    
-    .slide-subtitle {
-        font-size: 0.9rem;
-    }
-    
-    /* ナビゲーションボタンの位置調整 */
-    .hero-slider .swiper-button-prev {
-        left: 10px;
-    }
-    
-    .hero-slider .swiper-button-next {
-        right: 10px;
-    }
-    
-    /* ページネーションの位置調整 */
-    .hero-slider .swiper-pagination {
-        bottom: 15px !important;
-    }
-    
-    .hero-slider .swiper-slide {
-        height: 70vh;
-        min-height: 250px;
-        max-height: 400px;
-    }
-    
-    /* 横向きでも画像全体を表示 */
-    .slide-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-    
-    .slide-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        object-position: center;
-    }
-    
-    .slide-title {
-        font-size: 1.8rem;
-        margin-bottom: 10px;
-    }
-    
-    .slide-subtitle {
-        font-size: 0.9rem;
-        margin-bottom: 15px;
-    }
-    
-    .btn-hero-primary {
-        padding: 8px 25px;
-        font-size: 0.85rem;
-    }
-    
-    .hero-slider .swiper-button-prev,
-    .hero-slider .swiper-button-next {
-        /* bottomプロパティを削除して、top: 50%を使用 */
-    }
-    
-    .hero-slider .swiper-pagination {
-        bottom: 10px !important;
-        position: absolute !important;
-        z-index: 100 !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-    }
-}
 
 /* iPhone X以降のノッチ対応 */
 @supports (padding: max(0px)) {
