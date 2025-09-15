@@ -8,6 +8,13 @@ if (!defined('ABSPATH')) {
 }
 
 /**
+ * SEO強化機能の読み込み
+ */
+if (file_exists(get_template_directory() . '/inc/seo-enhancements.php')) {
+    require_once get_template_directory() . '/inc/seo-enhancements.php';
+}
+
+/**
  * テーマのセットアップ
  */
 function arigatou_club_setup() {
@@ -749,3 +756,401 @@ function arigatou_cf7_redirect_script() {
     </script>
     <?php
 }
+
+/**
+ * SEO & メタタグ最適化
+ */
+function arigatou_club_add_seo_meta_tags() {
+    global $post;
+
+    // デフォルト値の設定
+    $site_name = get_bloginfo('name');
+    $site_description = get_bloginfo('description');
+    $site_url = home_url('/');
+    $site_icon = get_site_icon_url(512);
+
+    // ページ別のメタ情報設定
+    $page_title = '';
+    $page_description = '';
+    $page_url = '';
+    $page_image = '';
+    $page_type = 'website';
+
+    if (is_single() || is_page()) {
+        $page_title = get_the_title() . ' | ' . $site_name;
+        $page_description = mb_substr(strip_tags($post->post_content), 0, 160);
+        $page_url = get_permalink();
+
+        if (has_post_thumbnail()) {
+            $page_image = get_the_post_thumbnail_url($post->ID, 'large');
+        }
+
+        if (is_single()) {
+            $page_type = 'article';
+        }
+    } elseif (is_archive()) {
+        if (is_post_type_archive('event')) {
+            $page_title = 'イベント一覧 | ' . $site_name;
+            $page_description = 'ありがとう倶楽部が開催するイベント・活動の一覧です。地域交流や社会貢献活動を通じて、感謝の心を広げています。';
+        } elseif (is_post_type_archive('sponsor')) {
+            $page_title = '協賛企業一覧 | ' . $site_name;
+            $page_description = 'ありがとう倶楽部の活動を支えてくださる協賛企業の皆様をご紹介します。';
+        } else {
+            $page_title = get_the_archive_title() . ' | ' . $site_name;
+            $page_description = get_the_archive_description() ?: $site_description;
+        }
+        $page_url = get_post_type_archive_link(get_post_type()) ?: get_permalink();
+    } elseif (is_home()) {
+        $page_title = 'ブログ | ' . $site_name;
+        $page_description = 'ありがとう倶楽部の最新情報、活動報告、お知らせをお届けします。';
+        $page_url = get_permalink(get_option('page_for_posts'));
+    } else {
+        $page_title = $site_name . ' | ' . $site_description;
+        $page_description = '愛知県を中心に「ありがとう」の心を広げる活動を行っている団体です。イベント開催、地域交流、社会貢献活動を通じて、感謝の文化を育んでいます。';
+        $page_url = $site_url;
+    }
+
+    // デフォルト画像の設定
+    if (empty($page_image)) {
+        $page_image = $site_icon ?: get_template_directory_uri() . '/screenshot.png';
+    }
+
+    // メタタグの出力
+    ?>
+    <!-- 基本的なSEOメタタグ -->
+    <meta name="description" content="<?php echo esc_attr($page_description); ?>">
+    <meta name="keywords" content="ありがとう倶楽部,愛知県,地域交流,社会貢献,イベント,ボランティア,感謝,コミュニティ">
+    <meta name="author" content="ありがとう倶楽部">
+
+    <!-- Open Graph メタタグ (Facebook, LinkedIn等) -->
+    <meta property="og:title" content="<?php echo esc_attr($page_title); ?>">
+    <meta property="og:description" content="<?php echo esc_attr($page_description); ?>">
+    <meta property="og:type" content="<?php echo esc_attr($page_type); ?>">
+    <meta property="og:url" content="<?php echo esc_url($page_url); ?>">
+    <meta property="og:image" content="<?php echo esc_url($page_image); ?>">
+    <meta property="og:site_name" content="<?php echo esc_attr($site_name); ?>">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitter Card メタタグ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo esc_attr($page_title); ?>">
+    <meta name="twitter:description" content="<?php echo esc_attr($page_description); ?>">
+    <meta name="twitter:image" content="<?php echo esc_url($page_image); ?>">
+
+    <!-- 地域ターゲティング (GEO) -->
+    <meta name="geo.region" content="JP-23">
+    <meta name="geo.placename" content="愛知県">
+    <meta name="geo.position" content="35.1802;136.9066">
+    <meta name="ICBM" content="35.1802, 136.9066">
+
+    <!-- その他のメタタグ -->
+    <link rel="canonical" href="<?php echo esc_url($page_url); ?>">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <?php
+}
+add_action('wp_head', 'arigatou_club_add_seo_meta_tags', 5);
+
+/**
+ * 構造化データ (JSON-LD) の追加
+ */
+function arigatou_club_add_structured_data() {
+    $structured_data = array();
+
+    // 組織情報の構造化データ
+    if (is_front_page()) {
+        $structured_data[] = array(
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            'name' => 'ありがとう倶楽部',
+            'url' => home_url('/'),
+            'logo' => get_site_icon_url(512),
+            'description' => '愛知県を中心に「ありがとう」の心を広げる活動を行っている団体',
+            'address' => array(
+                '@type' => 'PostalAddress',
+                'addressRegion' => '愛知県',
+                'addressCountry' => 'JP'
+            ),
+            'areaServed' => array(
+                '@type' => 'GeoCircle',
+                'geoMidpoint' => array(
+                    '@type' => 'GeoCoordinates',
+                    'latitude' => '35.1802',
+                    'longitude' => '136.9066'
+                ),
+                'geoRadius' => '50000'
+            ),
+            'sameAs' => array(
+                'https://arigatou-goods.stores.jp/'
+            )
+        );
+
+        // WebSite構造化データ
+        $structured_data[] = array(
+            '@context' => 'https://schema.org',
+            '@type' => 'WebSite',
+            'name' => 'ありがとう倶楽部',
+            'url' => home_url('/'),
+            'potentialAction' => array(
+                '@type' => 'SearchAction',
+                'target' => array(
+                    '@type' => 'EntryPoint',
+                    'urlTemplate' => home_url('/?s={search_term_string}')
+                ),
+                'query-input' => 'required name=search_term_string'
+            )
+        );
+    }
+
+    // イベント構造化データ
+    if (is_singular('event')) {
+        global $post;
+        $event_date = get_post_meta($post->ID, '_event_date', true);
+        $event_time = get_post_meta($post->ID, '_event_time', true);
+        $event_location = get_post_meta($post->ID, '_event_location', true);
+        $event_fee = get_post_meta($post->ID, '_event_fee', true);
+
+        $structured_data[] = array(
+            '@context' => 'https://schema.org',
+            '@type' => 'Event',
+            'name' => get_the_title(),
+            'description' => mb_substr(strip_tags($post->post_content), 0, 300),
+            'startDate' => $event_date . 'T' . $event_time . '+09:00',
+            'location' => array(
+                '@type' => 'Place',
+                'name' => $event_location,
+                'address' => array(
+                    '@type' => 'PostalAddress',
+                    'addressRegion' => '愛知県',
+                    'addressCountry' => 'JP'
+                )
+            ),
+            'organizer' => array(
+                '@type' => 'Organization',
+                'name' => 'ありがとう倶楽部',
+                'url' => home_url('/')
+            ),
+            'offers' => array(
+                '@type' => 'Offer',
+                'price' => $event_fee ? str_replace(['円', ',', '無料'], ['', '', '0'], $event_fee) : '0',
+                'priceCurrency' => 'JPY',
+                'availability' => 'https://schema.org/InStock'
+            ),
+            'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+            'eventStatus' => 'https://schema.org/EventScheduled'
+        );
+    }
+
+    // 記事構造化データ
+    if (is_single() && !is_singular('event') && !is_singular('sponsor')) {
+        global $post;
+        $structured_data[] = array(
+            '@context' => 'https://schema.org',
+            '@type' => 'BlogPosting',
+            'headline' => get_the_title(),
+            'description' => mb_substr(strip_tags($post->post_content), 0, 160),
+            'datePublished' => get_the_date('c'),
+            'dateModified' => get_the_modified_date('c'),
+            'author' => array(
+                '@type' => 'Organization',
+                'name' => 'ありがとう倶楽部'
+            ),
+            'publisher' => array(
+                '@type' => 'Organization',
+                'name' => 'ありがとう倶楽部',
+                'logo' => array(
+                    '@type' => 'ImageObject',
+                    'url' => get_site_icon_url(512)
+                )
+            ),
+            'image' => has_post_thumbnail() ? get_the_post_thumbnail_url($post->ID, 'large') : get_site_icon_url(512),
+            'mainEntityOfPage' => array(
+                '@type' => 'WebPage',
+                '@id' => get_permalink()
+            )
+        );
+    }
+
+    // パンくずリスト構造化データ
+    if (!is_front_page()) {
+        $breadcrumb_items = array();
+        $breadcrumb_items[] = array(
+            '@type' => 'ListItem',
+            'position' => 1,
+            'name' => 'ホーム',
+            'item' => home_url('/')
+        );
+
+        $position = 2;
+
+        if (is_page()) {
+            $breadcrumb_items[] = array(
+                '@type' => 'ListItem',
+                'position' => $position,
+                'name' => get_the_title(),
+                'item' => get_permalink()
+            );
+        } elseif (is_singular('event')) {
+            $breadcrumb_items[] = array(
+                '@type' => 'ListItem',
+                'position' => $position++,
+                'name' => 'イベント',
+                'item' => get_post_type_archive_link('event')
+            );
+            $breadcrumb_items[] = array(
+                '@type' => 'ListItem',
+                'position' => $position,
+                'name' => get_the_title(),
+                'item' => get_permalink()
+            );
+        } elseif (is_single()) {
+            $breadcrumb_items[] = array(
+                '@type' => 'ListItem',
+                'position' => $position++,
+                'name' => 'ブログ',
+                'item' => get_permalink(get_option('page_for_posts'))
+            );
+            $breadcrumb_items[] = array(
+                '@type' => 'ListItem',
+                'position' => $position,
+                'name' => get_the_title(),
+                'item' => get_permalink()
+            );
+        }
+
+        $structured_data[] = array(
+            '@context' => 'https://schema.org',
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => $breadcrumb_items
+        );
+    }
+
+    // JSON-LDの出力
+    if (!empty($structured_data)) {
+        foreach ($structured_data as $data) {
+            echo '<script type="application/ld+json">' . json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . '</script>' . "\n";
+        }
+    }
+}
+add_action('wp_head', 'arigatou_club_add_structured_data');
+
+/**
+ * XMLサイトマップの自動生成
+ */
+function arigatou_club_generate_sitemap() {
+    if (isset($_GET['sitemap']) && $_GET['sitemap'] == 'xml') {
+        header('Content-Type: text/xml; charset=UTF-8');
+        echo '<?xml version="1.0" encoding="UTF-8"?>';
+        ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- ホームページ -->
+    <url>
+        <loc><?php echo home_url('/'); ?></loc>
+        <lastmod><?php echo date('c'); ?></lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- 固定ページ -->
+    <?php
+    $pages = get_pages();
+    foreach ($pages as $page) : ?>
+    <url>
+        <loc><?php echo get_permalink($page->ID); ?></loc>
+        <lastmod><?php echo get_the_modified_date('c', $page->ID); ?></lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <?php endforeach; ?>
+
+    <!-- ブログ投稿 -->
+    <?php
+    $posts = get_posts(array('numberposts' => -1));
+    foreach ($posts as $post) : ?>
+    <url>
+        <loc><?php echo get_permalink($post->ID); ?></loc>
+        <lastmod><?php echo get_the_modified_date('c', $post->ID); ?></lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <?php endforeach; ?>
+
+    <!-- イベント -->
+    <?php
+    $events = get_posts(array('post_type' => 'event', 'numberposts' => -1));
+    foreach ($events as $event) : ?>
+    <url>
+        <loc><?php echo get_permalink($event->ID); ?></loc>
+        <lastmod><?php echo get_the_modified_date('c', $event->ID); ?></lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <?php endforeach; ?>
+
+    <!-- 協賛企業 -->
+    <?php
+    $sponsors = get_posts(array('post_type' => 'sponsor', 'numberposts' => -1));
+    foreach ($sponsors as $sponsor) : ?>
+    <url>
+        <loc><?php echo get_permalink($sponsor->ID); ?></loc>
+        <lastmod><?php echo get_the_modified_date('c', $sponsor->ID); ?></lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <?php endforeach; ?>
+</urlset>
+        <?php
+        exit;
+    }
+}
+add_action('init', 'arigatou_club_generate_sitemap');
+
+/**
+ * サイトマップへのリダイレクトルールを追加
+ */
+function arigatou_club_sitemap_rewrite_rule() {
+    add_rewrite_rule('^sitemap\.xml$', 'index.php?sitemap=xml', 'top');
+}
+add_action('init', 'arigatou_club_sitemap_rewrite_rule');
+
+/**
+ * クエリ変数の追加
+ */
+function arigatou_club_query_vars($query_vars) {
+    $query_vars[] = 'sitemap';
+    return $query_vars;
+}
+add_filter('query_vars', 'arigatou_club_query_vars');
+
+/**
+ * ページ速度最適化
+ */
+function arigatou_club_performance_optimizations() {
+    // 画像の遅延読み込み属性を追加
+    add_filter('wp_get_attachment_image_attributes', function($attr) {
+        $attr['loading'] = 'lazy';
+        $attr['decoding'] = 'async';
+        return $attr;
+    });
+
+    // DNSプリフェッチ
+    echo '<link rel="dns-prefetch" href="//fonts.googleapis.com">' . "\n";
+    echo '<link rel="dns-prefetch" href="//arigatou-goods.stores.jp">' . "\n";
+
+    // プリコネクト
+    echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+}
+add_action('wp_head', 'arigatou_club_performance_optimizations', 1);
+
+/**
+ * 不要なWordPressのメタタグを削除
+ */
+function arigatou_club_clean_head() {
+    remove_action('wp_head', 'wp_generator');
+    remove_action('wp_head', 'wlwmanifest_link');
+    remove_action('wp_head', 'rsd_link');
+    remove_action('wp_head', 'wp_shortlink_wp_head');
+    remove_action('wp_head', 'adjacent_posts_rel_link_wp_head');
+    remove_action('wp_head', 'feed_links_extra', 3);
+}
+add_action('init', 'arigatou_club_clean_head');
