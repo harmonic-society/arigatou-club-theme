@@ -86,29 +86,7 @@ get_header(); ?>
                             <p>詳細は<a href="<?php echo home_url('/privacy-policy/'); ?>">プライバシーポリシー</a>をご確認ください。</p>
                         </div>
                     </div>
-                    
-                    <!-- お問い合わせ方法 -->
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title">その他のお問い合わせ方法</h3>
-                        <div class="contact-methods">
-                            <div class="contact-method">
-                                <h4><i class="fas fa-phone"></i> お電話</h4>
-                                <p>平日 10:00〜17:00<br>
-                                <a href="tel:0312345678">03-1234-5678</a></p>
-                            </div>
-                            <div class="contact-method">
-                                <h4><i class="fas fa-envelope"></i> メール</h4>
-                                <p><a href="mailto:info@arigatou-club.jp">info@arigatou-club.jp</a></p>
-                            </div>
-                            <div class="contact-method">
-                                <h4><i class="fas fa-map-marker-alt"></i> 所在地</h4>
-                                <p>〒100-0001<br>
-                                東京都千代田区千代田1-1-1</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
+
                 </aside>
                 
             </div>
