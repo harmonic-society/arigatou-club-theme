@@ -34,30 +34,14 @@ add_action('init', 'arigatou_club_optimize_images');
 
 /**
  * Critical CSSのインライン化
+ * 注: ヒーローセクションのスタイルは含めない（既存のスタイルと競合するため）
  */
 function arigatou_club_inline_critical_css() {
-    if (is_front_page()) {
-        ?>
-        <style id="critical-css">
-            /* クリティカルCSS - ファーストビューの高速表示用 */
-            *{margin:0;padding:0;box-sizing:border-box}
-            body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.6;color:#333}
-            .site-header{background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.1);position:sticky;top:0;z-index:1000}
-            .container{max-width:1200px;margin:0 auto;padding:0 20px}
-            .header-inner{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}
-            .site-branding{display:flex;align-items:center;gap:1rem}
-            .main-navigation ul{list-style:none;display:flex;gap:2rem}
-            .main-navigation a{text-decoration:none;color:#333;font-weight:500}
-            .hero-section{min-height:70vh;display:flex;align-items:center;background-size:cover;background-position:center}
-            @media(max-width:768px){
-                .main-navigation{display:none}
-                .menu-toggle{display:block}
-            }
-        </style>
-        <?php
-    }
+    // Critical CSSを一時的に無効化（ヒーローセクションの表示問題を修正）
+    // 必要に応じて、より精密なCritical CSSを後で追加
+    return;
 }
-add_action('wp_head', 'arigatou_club_inline_critical_css', 1);
+// add_action('wp_head', 'arigatou_club_inline_critical_css', 1);
 
 /**
  * リソースヒントの追加
@@ -89,8 +73,8 @@ function arigatou_club_async_defer_scripts($tag, $handle) {
     // 非同期読み込みするスクリプト
     $async_scripts = array('google-analytics', 'facebook-sdk');
 
-    // 遅延読み込みするスクリプト
-    $defer_scripts = array('arigatou-main', 'arigatou-slider');
+    // 遅延読み込みするスクリプト（存在するハンドルのみ）
+    $defer_scripts = array();
 
     if (in_array($handle, $async_scripts)) {
         return str_replace(' src', ' async src', $tag);

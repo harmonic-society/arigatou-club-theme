@@ -1125,12 +1125,17 @@ add_filter('query_vars', 'arigatou_club_query_vars');
  * ページ速度最適化
  */
 function arigatou_club_performance_optimizations() {
-    // 画像の遅延読み込み属性を追加
-    add_filter('wp_get_attachment_image_attributes', function($attr) {
-        $attr['loading'] = 'lazy';
+    // 画像の遅延読み込み属性を追加（ヒーロー画像を除く）
+    add_filter('wp_get_attachment_image_attributes', function($attr, $attachment, $size) {
+        // ヒーロー画像とフロントページの大きな画像は遅延読み込みしない
+        if (is_front_page() && in_array($size, array('full', 'large'))) {
+            $attr['loading'] = 'eager';
+        } else {
+            $attr['loading'] = 'lazy';
+        }
         $attr['decoding'] = 'async';
         return $attr;
-    });
+    }, 10, 3);
 
     // DNSプリフェッチ
     echo '<link rel="dns-prefetch" href="//fonts.googleapis.com">' . "\n";
