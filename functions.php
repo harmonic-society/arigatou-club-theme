@@ -1094,6 +1094,33 @@ function arigatou_club_add_structured_data() {
 add_action('wp_head', 'arigatou_club_add_structured_data');
 
 /**
+ * 日本語テキストの読了時間を計算
+ */
+function arigatou_club_get_reading_time($content = '') {
+    if (empty($content)) {
+        $content = get_the_content();
+    }
+
+    // HTMLタグを除去
+    $text = strip_tags($content);
+
+    // 改行、スペース、タブを除去
+    $text = preg_replace('/\s+/', '', $text);
+
+    // 日本語の文字数をカウント
+    $char_count = mb_strlen($text, 'UTF-8');
+
+    // 日本人の平均読書速度: 400-600文字/分
+    // 一般的なウェブコンテンツの読書速度として500文字/分を採用
+    $reading_speed = 500;
+
+    // 読了時間を計算（最低1分）
+    $reading_time = max(1, ceil($char_count / $reading_speed));
+
+    return $reading_time;
+}
+
+/**
  * XMLサイトマップの自動生成
  */
 function arigatou_club_generate_sitemap() {

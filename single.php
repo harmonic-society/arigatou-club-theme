@@ -35,7 +35,7 @@ get_header(); ?>
                 </div>
                 <div class="blog-meta-item">
                     <i class="far fa-clock"></i>
-                    <span><?php echo round(str_word_count(strip_tags(get_the_content())) / 200); ?> 分で読めます</span>
+                    <span><?php echo arigatou_club_get_reading_time(); ?> 分で読めます</span>
                 </div>
                 <?php if (get_comments_number() > 0) : ?>
                 <div class="blog-meta-item">
