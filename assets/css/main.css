@@ -596,15 +596,21 @@ p,
     }
     
     .hero-title {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         margin-bottom: 10px;
-        line-height: 1.3;
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
-    
+
     .hero-subtitle {
-        font-size: 0.9rem;
+        font-size: 0.75rem;
         margin-bottom: 15px;
-        line-height: 1.4;
+        line-height: 1.3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     
     .btn-hero-primary {
@@ -920,13 +926,15 @@ p,
     }
     
     .default-hero .hero-title {
-        font-size: 2.5rem;
+        font-size: 1.5rem;
         margin-bottom: 10px;
+        white-space: nowrap;
     }
-    
+
     .default-hero .hero-subtitle {
-        font-size: 1rem;
+        font-size: 0.75rem;
         margin-bottom: 0;
+        white-space: nowrap;
     }
     
     /* モバイル用ヒーローセクション全面改修 */
@@ -1825,17 +1833,52 @@ p,
 
 @media (max-width: 480px) {
     .wa-style .hero-title {
-        font-size: 2rem;
-        letter-spacing: 0.1em;
+        font-size: 1.3rem;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
-    
+
     .wa-style .hero-subtitle {
-        font-size: 1.1rem;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
-    
+
     .section-header {
         flex-direction: column;
         gap: 10px;
+    }
+}
+
+/* 極小画面対応（360px以下） */
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 1.0rem !important;
+        letter-spacing: 0 !important;
+    }
+
+    .hero-subtitle {
+        font-size: 0.6rem !important;
+        letter-spacing: 0 !important;
+    }
+
+    .default-hero .hero-title {
+        font-size: 1.1rem !important;
+    }
+
+    .default-hero .hero-subtitle {
+        font-size: 0.6rem !important;
+    }
+
+    .wa-style .hero-title {
+        font-size: 1.0rem !important;
+    }
+
+    .wa-style .hero-subtitle {
+        font-size: 0.6rem !important;
     }
 }
 
