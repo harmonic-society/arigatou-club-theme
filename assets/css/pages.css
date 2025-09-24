@@ -680,6 +680,11 @@
     margin-bottom: 15px;
 }
 
+.membership-cta p {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 /* 企業向けセクション */
 .corporate-benefits {
     list-style: none;
