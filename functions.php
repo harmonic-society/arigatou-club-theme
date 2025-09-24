@@ -609,12 +609,32 @@ function arigatou_club_customize_register($wp_customize) {
         'default' => '',
         'sanitize_callback' => 'esc_url_raw',
     ));
-    
+
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'okonomiyaki_society_image', array(
         'label' => 'お好み焼き社会イメージ画像',
         'description' => '推奨サイズ: 400×400px（正方形）。未設定の場合は絵文字が表示されます。',
         'section' => 'arigatou_club_okonomiyaki',
         'settings' => 'okonomiyaki_society_image',
+    )));
+
+    // 活動内容セクション
+    $wp_customize->add_section('arigatou_club_activities', array(
+        'title' => '活動内容設定',
+        'priority' => 40,
+        'description' => '活動内容セクションの設定',
+    ));
+
+    // 活動内容セクション画像
+    $wp_customize->add_setting('activities_section_image', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'activities_section_image', array(
+        'label' => '活動内容セクション画像',
+        'description' => '活動内容セクションの見出し下に表示される画像です。推奨サイズ: 1200×400px（横長）',
+        'section' => 'arigatou_club_activities',
+        'settings' => 'activities_section_image',
     )));
 }
 add_action('customize_register', 'arigatou_club_customize_register');
