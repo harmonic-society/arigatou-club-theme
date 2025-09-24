@@ -1269,6 +1269,27 @@ p,
     transform: scale(1.02);
 }
 
+/* 企業の皆様へセクション画像 */
+.corporate-header-image {
+    margin: 25px auto;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    max-width: 800px;
+}
+
+.corporate-header-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.corporate-header-image:hover img {
+    transform: scale(1.02);
+}
+
 /* 活動内容グリッド */
 .activities-grid {
     display: grid;

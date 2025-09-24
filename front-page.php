@@ -412,7 +412,17 @@ get_header(); ?>
                 <span class="section-marker">◯</span>
                 <h2 class="section-title">企業の皆様へ</h2>
             </div>
-            
+
+            <?php
+            // カスタマイザーから企業の皆様へセクション画像を取得
+            $corporate_image = get_theme_mod('corporate_section_image');
+            if ($corporate_image) :
+            ?>
+                <div class="corporate-header-image">
+                    <img src="<?php echo esc_url($corporate_image); ?>" alt="企業の皆様へ" loading="lazy">
+                </div>
+            <?php endif; ?>
+
             <div class="corporate-content">
                 <p class="corporate-intro">ありがとう を企業理念として大切にされている企業の皆様にお願いがあります。</p>
                 

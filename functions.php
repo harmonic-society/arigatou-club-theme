@@ -636,6 +636,26 @@ function arigatou_club_customize_register($wp_customize) {
         'section' => 'arigatou_club_activities',
         'settings' => 'activities_section_image',
     )));
+
+    // 企業の皆様へセクション
+    $wp_customize->add_section('arigatou_club_corporate', array(
+        'title' => '企業の皆様へ設定',
+        'priority' => 45,
+        'description' => '企業の皆様へセクションの設定',
+    ));
+
+    // 企業の皆様へセクション画像
+    $wp_customize->add_setting('corporate_section_image', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'corporate_section_image', array(
+        'label' => '企業の皆様へセクション画像',
+        'description' => '企業の皆様へセクションの見出し下に表示される画像です。推奨サイズ: 800×300px（横長）',
+        'section' => 'arigatou_club_corporate',
+        'settings' => 'corporate_section_image',
+    )));
 }
 add_action('customize_register', 'arigatou_club_customize_register');
 
