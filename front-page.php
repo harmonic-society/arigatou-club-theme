@@ -143,7 +143,61 @@ get_header(); ?>
         wp_reset_postdata();
         ?>
     </section>
-    
+
+    <!-- ニュースティッカー -->
+    <?php
+    $news_query = new WP_Query(array(
+        'post_type' => 'news_ticker',
+        'posts_per_page' => -1,
+        'meta_key' => '_news_ticker_order',
+        'orderby' => 'meta_value_num',
+        'order' => 'ASC',
+        'meta_query' => array(
+            array(
+                'key' => '_news_ticker_active',
+                'value' => '1',
+                'compare' => '='
+            )
+        )
+    ));
+
+    if ($news_query->have_posts()) : ?>
+        <section class="news-ticker-section">
+            <div class="news-ticker-container">
+                <div class="news-ticker-label">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>お知らせ</span>
+                </div>
+                <div class="news-ticker-content">
+                    <div class="news-ticker-items">
+                        <?php while ($news_query->have_posts()) : $news_query->the_post();
+                            $news_url = get_post_meta(get_the_ID(), '_news_ticker_url', true);
+                            $news_date = get_post_meta(get_the_ID(), '_news_ticker_date', true);
+                        ?>
+                            <div class="news-ticker-item">
+                                <?php if ($news_url) : ?>
+                                    <a href="<?php echo esc_url($news_url); ?>">
+                                        <?php if ($news_date) : ?>
+                                            <span class="news-date"><?php echo date('Y.m.d', strtotime($news_date)); ?></span>
+                                        <?php endif; ?>
+                                        <span class="news-text"><?php the_title(); ?></span>
+                                    </a>
+                                <?php else : ?>
+                                    <?php if ($news_date) : ?>
+                                        <span class="news-date"><?php echo date('Y.m.d', strtotime($news_date)); ?></span>
+                                    <?php endif; ?>
+                                    <span class="news-text"><?php the_title(); ?></span>
+                                <?php endif; ?>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <?php endif;
+    wp_reset_postdata();
+    ?>
+
     <!-- ブログセクション -->
     <section class="home-blog-section section">
         <div class="container">

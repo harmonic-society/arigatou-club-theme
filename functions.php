@@ -117,6 +117,11 @@ function arigatou_club_scripts() {
     
     // JavaScript
     wp_enqueue_script('arigatou-club-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.0', true);
+
+    // ニュースティッカーJS (フロントページのみ)
+    if (is_front_page()) {
+        wp_enqueue_script('arigatou-club-news-ticker', get_template_directory_uri() . '/assets/js/news-ticker.js', array(), '1.0.0', true);
+    }
     
     // Swiper JS (フロントページのみ)
     if (is_front_page()) {
@@ -228,6 +233,31 @@ function arigatou_club_custom_post_types() {
         'rewrite' => array('slug' => 'events'),
     ));
     
+    // ニュースティッカー投稿タイプ
+    register_post_type('news_ticker', array(
+        'labels' => array(
+            'name' => 'ニュース',
+            'singular_name' => 'ニュース',
+            'add_new' => '新規追加',
+            'add_new_item' => '新しいニュースを追加',
+            'edit_item' => 'ニュースを編集',
+            'new_item' => '新しいニュース',
+            'view_item' => 'ニュースを表示',
+            'search_items' => 'ニュースを検索',
+            'not_found' => 'ニュースが見つかりません',
+            'not_found_in_trash' => 'ゴミ箱にニュースはありません',
+            'all_items' => 'すべてのニュース',
+            'menu_name' => 'ニュースティッカー',
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'menu_icon' => 'dashicons-megaphone',
+        'supports' => array('title'),
+        'exclude_from_search' => true,
+        'publicly_queryable' => false,
+        'show_in_rest' => true,
+    ));
+
     // 協賛企業投稿タイプ
     register_post_type('sponsor', array(
         'labels' => array(
@@ -321,6 +351,16 @@ function arigatou_club_add_meta_boxes() {
         'high'
     );
     
+    // ニュースティッカー用メタボックス
+    add_meta_box(
+        'news_ticker_details',
+        'ニュース詳細設定',
+        'arigatou_club_news_ticker_meta_box',
+        'news_ticker',
+        'normal',
+        'high'
+    );
+
     // 協賛企業用メタボックス
     add_meta_box(
         'sponsor_details',
@@ -404,6 +444,42 @@ function arigatou_club_event_meta_box($post) {
 }
 
 /**
+ * ニュースティッカーメタボックスの表示
+ */
+function arigatou_club_news_ticker_meta_box($post) {
+    wp_nonce_field('arigatou_club_save_news_ticker_meta', 'arigatou_club_news_ticker_nonce');
+
+    $news_url = get_post_meta($post->ID, '_news_ticker_url', true);
+    $news_date = get_post_meta($post->ID, '_news_ticker_date', true);
+    $display_order = get_post_meta($post->ID, '_news_ticker_order', true);
+    $is_active = get_post_meta($post->ID, '_news_ticker_active', true);
+    ?>
+    <table class="form-table">
+        <tr>
+            <th><label for="news_ticker_date">日付</label></th>
+            <td><input type="date" id="news_ticker_date" name="news_ticker_date" value="<?php echo esc_attr($news_date ?: date('Y-m-d')); ?>" /></td>
+        </tr>
+        <tr>
+            <th><label for="news_ticker_url">リンク先URL（任意）</label></th>
+            <td><input type="url" id="news_ticker_url" name="news_ticker_url" value="<?php echo esc_attr($news_url); ?>" class="regular-text" placeholder="https://example.com" /></td>
+        </tr>
+        <tr>
+            <th><label for="news_ticker_order">表示順序</label></th>
+            <td><input type="number" id="news_ticker_order" name="news_ticker_order" value="<?php echo esc_attr($display_order ?: '0'); ?>" class="small-text" min="0" /> <span class="description">小さい数字から順に表示されます</span></td>
+        </tr>
+        <tr>
+            <th><label for="news_ticker_active">表示状態</label></th>
+            <td>
+                <label><input type="checkbox" id="news_ticker_active" name="news_ticker_active" value="1" <?php checked($is_active, '1'); ?> /> 表示する</label>
+                <p class="description">チェックを外すとニュースティッカーに表示されなくなります</p>
+            </td>
+        </tr>
+    </table>
+    <p class="description">※ タイトルにニュース内容を入力してください（例：2024年1月1日 新年のご挨拶を掲載しました）</p>
+    <?php
+}
+
+/**
  * 協賛企業メタボックスの表示
  */
 function arigatou_club_sponsor_meta_box($post) {
@@ -462,6 +538,22 @@ function arigatou_club_save_post_meta($post_id) {
         return;
     }
     
+    // ニュースティッカーメタの保存
+    if (isset($_POST['arigatou_club_news_ticker_nonce']) && wp_verify_nonce($_POST['arigatou_club_news_ticker_nonce'], 'arigatou_club_save_news_ticker_meta')) {
+        if (isset($_POST['news_ticker_date'])) {
+            update_post_meta($post_id, '_news_ticker_date', sanitize_text_field($_POST['news_ticker_date']));
+        }
+        if (isset($_POST['news_ticker_url'])) {
+            update_post_meta($post_id, '_news_ticker_url', esc_url_raw($_POST['news_ticker_url']));
+        }
+        if (isset($_POST['news_ticker_order'])) {
+            update_post_meta($post_id, '_news_ticker_order', intval($_POST['news_ticker_order']));
+        }
+        // チェックボックスの処理
+        $is_active = isset($_POST['news_ticker_active']) ? '1' : '0';
+        update_post_meta($post_id, '_news_ticker_active', $is_active);
+    }
+
     // スライダーメタの保存
     if (isset($_POST['arigatou_club_slider_nonce']) && wp_verify_nonce($_POST['arigatou_club_slider_nonce'], 'arigatou_club_save_slider_meta')) {
         if (isset($_POST['slide_title'])) {
