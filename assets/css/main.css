@@ -1247,7 +1247,20 @@ p,
     border-top: 2px solid var(--wa-gold);
 }
 
-/* 活動内容セクション - 削除（背景画像として使用するため） */
+/* 活動内容セクション背景画像 */
+.activities-section {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.activities-section-overlay {
+    position: relative;
+    background: rgba(249, 250, 245, 0.92); /* --wa-bg-lightの色に92%の不透明度 */
+    padding: inherit;
+}
 
 /* 企業の皆様へセクション画像 */
 .corporate-header-image {
@@ -1308,30 +1321,20 @@ p,
     box-shadow: 0 5px 15px rgba(0,0,0,0.08);
     border: 2px dashed var(--wa-gold);
     position: relative;
-    overflow: hidden;
 }
 
-/* 背景画像のオーバーレイ */
 .activity-item::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: var(--activities-bg-image, none);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.08;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, transparent 30%, var(--wa-accent) 50%, transparent 70%);
+    opacity: 0;
     transition: opacity 0.3s;
-    z-index: 0;
-}
-
-/* コンテンツを前面に配置 */
-.activity-item > * {
-    position: relative;
-    z-index: 1;
+    z-index: -1;
+    border-radius: 25px;
 }
 
 .activity-item:hover {
@@ -1341,7 +1344,7 @@ p,
 }
 
 .activity-item:hover::before {
-    opacity: 0.12;
+    opacity: 0.1;
 }
 
 .activity-icon {

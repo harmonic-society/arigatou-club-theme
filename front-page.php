@@ -316,19 +316,19 @@ get_header(); ?>
     </section>
     
     <!-- 活動内容セクション -->
-    <section class="activities-section section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-marker">◯</span>
-                <h2 class="section-title">活動内容</h2>
-            </div>
+    <?php
+    // カスタマイザーから活動内容セクション画像を取得
+    $activities_image = get_theme_mod('activities_section_image');
+    ?>
+    <section class="activities-section section" <?php if ($activities_image) : ?>style="background-image: url('<?php echo esc_url($activities_image); ?>');"<?php endif; ?>>
+        <div class="activities-section-overlay">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-marker">◯</span>
+                    <h2 class="section-title">活動内容</h2>
+                </div>
 
-            <?php
-            // カスタマイザーから活動内容セクション画像を取得
-            $activities_image = get_theme_mod('activities_section_image');
-            ?>
-
-            <div class="activities-grid" <?php if ($activities_image) : ?>style="--activities-bg-image: url('<?php echo esc_url($activities_image); ?>');"<?php endif; ?>>
+                <div class="activities-grid">
                 <div class="activity-item">
                     <div class="activity-icon"><i class="fas fa-mug-hot"></i></div>
                     <h3>ありがとうカフェ</h3>
@@ -360,6 +360,7 @@ get_header(); ?>
                     <p class="activity-description">会員の皆様が感じる自分自身や身の回りのヒト・モノ・コトに対するありがとうをまとめて記事にしていきます。</p>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     
