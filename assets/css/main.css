@@ -886,7 +886,6 @@ p,
    ======================================= */
 @media (max-width: 767px) {
     /* 本文テキストを左寄せ */
-    p,
     .activity-description,
     .corporate-content p,
     .corporate-intro,
@@ -897,14 +896,14 @@ p,
     .home-blog-excerpt,
     .home-event-excerpt,
     .event-description,
-    .section-subtitle,
     .membership-notice p,
     .no-posts-message,
     .no-events-message {
         text-align: left !important;
     }
 
-    /* ヒーローセクションのサブタイトルは中央寄せを維持 */
+    /* セクションのサブタイトルとヒーローのサブタイトルは中央寄せを維持 */
+    .section-subtitle,
     .default-hero .hero-subtitle {
         text-align: center !important;
     }
