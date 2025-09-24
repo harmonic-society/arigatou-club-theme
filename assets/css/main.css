@@ -778,21 +778,32 @@ p,
         min-height: 600px;
         max-height: 800px;
     }
-    
+
+    /* PCでヒーロー画像を拡大表示 */
+    .hero-main-image {
+        background-size: 120% auto;
+        background-position: center center;
+        transition: background-size 0.5s ease;
+    }
+
+    .hero-main-image:hover {
+        background-size: 125% auto;
+    }
+
     .hero-content {
         max-width: 1000px;
     }
-    
+
     .hero-title {
         font-size: 4rem;
         margin-bottom: 25px;
     }
-    
+
     .hero-subtitle {
         font-size: 1.5rem;
         margin-bottom: 40px;
     }
-    
+
     .btn-hero-primary {
         padding: 16px 55px;
         font-size: 1.1rem;
@@ -859,23 +870,32 @@ p,
         height: 85vh;
         max-height: 900px;
     }
-    
+
+    /* 大画面でさらに拡大 */
+    .hero-main-image {
+        background-size: 130% auto;
+    }
+
+    .hero-main-image:hover {
+        background-size: 135% auto;
+    }
+
     .hero-content {
         max-width: 1200px;
     }
-    
+
     .hero-title {
         font-size: 4.5rem;
     }
-    
+
     .hero-subtitle {
         font-size: 1.6rem;
     }
-    
+
     .thumbnails-grid {
         gap: 25px;
     }
-    
+
     .thumbnail-image {
         height: 320px;
     }
