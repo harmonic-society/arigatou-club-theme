@@ -1931,6 +1931,128 @@ p,
     transform: translateY(0);
 }
 
+/* ミッションステートメントセクション */
+.mission-statement-section {
+    background: white;
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.mission-statement-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, var(--wa-bg-light), transparent);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.mission-statement-section .section-title {
+    font-size: 2rem;
+    line-height: 1.6;
+    color: var(--wa-primary);
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.mission-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.vision-block,
+.mission-block,
+.recommend-block {
+    background: var(--wa-bg-light);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    position: relative;
+    transform: rotate(-0.5deg);
+}
+
+.mission-block {
+    transform: rotate(0.5deg);
+}
+
+.recommend-block {
+    transform: rotate(-0.3deg);
+}
+
+.mission-subtitle {
+    color: var(--wa-secondary);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    position: relative;
+    padding-left: 30px;
+}
+
+.mission-subtitle::before {
+    content: '◯';
+    position: absolute;
+    left: 0;
+    color: var(--wa-gold);
+    font-size: 1.5rem;
+}
+
+.vision-text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--wa-text-dark);
+}
+
+.mission-list,
+.recommend-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.mission-list li,
+.recommend-list li {
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--wa-text-dark);
+}
+
+.mission-list li::before {
+    content: '◯';
+    position: absolute;
+    left: 10px;
+    color: var(--wa-gold);
+    font-size: 1rem;
+}
+
+.recommend-list li::before {
+    content: '◯';
+    position: absolute;
+    left: 10px;
+    color: var(--wa-secondary);
+    font-size: 1rem;
+}
+
+.mission-footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 40px;
+    border-top: 2px dashed var(--wa-gold);
+}
+
+.mission-invitation {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--wa-primary);
+    font-weight: 500;
+}
+
 /* ホームページ ブログセクション */
 .home-blog-section {
     background: var(--wa-bg-light);
@@ -2227,6 +2349,42 @@ p,
 
 /* レスポンシブ追加 */
 @media (max-width: 768px) {
+    .mission-statement-section {
+        padding: 60px 0;
+    }
+
+    .mission-statement-section .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+
+    .vision-block,
+    .mission-block,
+    .recommend-block {
+        padding: 25px;
+        margin-bottom: 20px;
+        transform: none;
+    }
+
+    .mission-subtitle {
+        font-size: 1.15rem;
+    }
+
+    .vision-text,
+    .mission-list li,
+    .recommend-list li {
+        font-size: 1rem;
+    }
+
+    .mission-footer {
+        margin-top: 30px;
+        padding-top: 30px;
+    }
+
+    .mission-invitation {
+        font-size: 1rem;
+    }
+
     .home-blog-grid,
     .home-events-grid {
         grid-template-columns: 1fr;
