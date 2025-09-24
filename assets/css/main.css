@@ -140,30 +140,114 @@ p,
 
 /* モバイル対応 */
 @media (max-width: 768px) {
+    .news-ticker-section {
+        position: relative;
+    }
+
     .news-ticker-container {
-        height: 45px;
+        height: auto;
+        min-height: 50px;
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .news-ticker-label {
-        padding: 0 15px;
-        font-size: 0.9rem;
+        padding: 8px 15px;
+        font-size: 0.85rem;
+        justify-content: center;
+        width: 100%;
+        background: rgba(0,0,0,0.3);
+    }
+
+    .news-ticker-label i {
+        font-size: 1rem;
+        margin-right: 5px;
     }
 
     .news-ticker-label span {
-        display: none;
+        display: inline;
+        font-size: 0.85rem;
+    }
+
+    .news-ticker-content {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 10px 0;
+    }
+
+    .news-ticker-items {
+        animation-duration: 40s;
+        padding-left: 20px;
+        gap: 0;
     }
 
     .news-ticker-item {
-        padding: 0 30px;
+        padding: 0 20px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .news-ticker-item a,
+    .news-ticker-item {
+        font-size: 0.85rem;
+        gap: 8px;
     }
 
     .news-date {
-        font-size: 0.8rem;
-        padding: 2px 10px;
+        font-size: 0.75rem;
+        padding: 2px 8px;
+        margin-right: 5px;
     }
 
     .news-text {
         font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    /* 1件のみの場合のモバイル表示 */
+    .news-ticker-items:only-child {
+        padding: 5px 15px;
+        white-space: normal;
+    }
+
+    .news-ticker-items:only-child .news-ticker-item {
+        padding: 0;
+        text-align: center;
+    }
+}
+
+/* さらに小さい画面用 */
+@media (max-width: 480px) {
+    .news-ticker-container {
+        min-height: 45px;
+    }
+
+    .news-ticker-label {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    .news-ticker-label i {
+        font-size: 0.9rem;
+    }
+
+    .news-ticker-item {
+        padding: 0 15px;
+    }
+
+    .news-date {
+        font-size: 0.7rem;
+        padding: 1px 6px;
+    }
+
+    .news-text {
+        font-size: 0.8rem;
+    }
+
+    /* アニメーション速度を遅くして読みやすく */
+    .news-ticker-items {
+        animation-duration: 50s;
     }
 }
 
