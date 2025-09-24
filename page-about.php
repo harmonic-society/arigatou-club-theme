@@ -235,39 +235,7 @@ get_header(); ?>
             </div>
         </div>
     </section>
-    
-    <!-- バリューセクション -->
-    <section class="values-section section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-marker">◯</span>
-                <h2 class="section-title">私たちの価値観</h2>
-            </div>
-            
-            <div class="values-content">
-                <div class="value-item">
-                    <div class="value-icon"><i class="fas fa-handshake"></i></div>
-                    <h3>お互い様の精神</h3>
-                </div>
-                
-                <div class="value-item">
-                    <div class="value-icon"><i class="fas fa-star"></i></div>
-                    <h3>個性の尊重</h3>
-                </div>
-                
-                <div class="value-item">
-                    <div class="value-icon"><i class="fas fa-praying-hands"></i></div>
-                    <h3>感謝の実践</h3>
-                </div>
-                
-                <div class="value-item">
-                    <div class="value-icon"><i class="fas fa-yin-yang"></i></div>
-                    <h3>和の心</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-    
+
     <!-- 代表挨拶セクション -->
     <section class="greeting-section section">
         <div class="container">
