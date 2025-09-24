@@ -898,11 +898,15 @@ p,
     .home-event-excerpt,
     .event-description,
     .section-subtitle,
-    .default-hero .hero-subtitle,
     .membership-notice p,
     .no-posts-message,
     .no-events-message {
         text-align: left !important;
+    }
+
+    /* ヒーローセクションのサブタイトルは中央寄せを維持 */
+    .default-hero .hero-subtitle {
+        text-align: center !important;
     }
     
     /* セクションのパディングを調整 */
