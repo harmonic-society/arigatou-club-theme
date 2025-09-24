@@ -322,6 +322,7 @@ p,
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
     letter-spacing: 0.02em;
     font-family: "Klee One", serif;
+    text-align: center;
 }
 
 .hero-subtitle {
