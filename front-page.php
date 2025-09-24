@@ -375,7 +375,17 @@ get_header(); ?>
                 <span class="section-marker">◯</span>
                 <h2 class="section-title">参加方法</h2>
             </div>
-            
+
+            <?php
+            // カスタマイザーから参加方法セクション画像を取得
+            $membership_image = get_theme_mod('membership_section_image');
+            if ($membership_image) :
+            ?>
+                <div class="membership-header-image">
+                    <img src="<?php echo esc_url($membership_image); ?>" alt="参加方法" loading="lazy">
+                </div>
+            <?php endif; ?>
+
             <div class="membership-options">
                 <div class="membership-card free">
                     <div class="membership-header">
