@@ -326,14 +326,9 @@ get_header(); ?>
             <?php
             // カスタマイザーから活動内容セクション画像を取得
             $activities_image = get_theme_mod('activities_section_image');
-            if ($activities_image) :
             ?>
-                <div class="activities-header-image">
-                    <img src="<?php echo esc_url($activities_image); ?>" alt="活動内容" loading="lazy">
-                </div>
-            <?php endif; ?>
 
-            <div class="activities-grid">
+            <div class="activities-grid" <?php if ($activities_image) : ?>style="--activities-bg-image: url('<?php echo esc_url($activities_image); ?>');"<?php endif; ?>>
                 <div class="activity-item">
                     <div class="activity-icon"><i class="fas fa-mug-hot"></i></div>
                     <h3>ありがとうカフェ</h3>

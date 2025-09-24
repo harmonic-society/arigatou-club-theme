@@ -631,8 +631,8 @@ function arigatou_club_customize_register($wp_customize) {
     ));
 
     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'activities_section_image', array(
-        'label' => '活動内容セクション画像',
-        'description' => '活動内容セクションの見出し下に表示される画像です。推奨サイズ: 1200×400px（横長）',
+        'label' => '活動内容セクション背景画像',
+        'description' => '活動内容カードの背景に薄く表示される画像です。推奨サイズ: 1200×800px',
         'section' => 'arigatou_club_activities',
         'settings' => 'activities_section_image',
     )));
