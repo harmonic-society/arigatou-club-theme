@@ -21,6 +21,11 @@ if (file_exists(get_template_directory() . '/inc/landing-pages.php')) {
     require_once get_template_directory() . '/inc/landing-pages.php';
 }
 
+// 一時的にパーマリンクをフラッシュ（後で削除可能）
+if (file_exists(get_template_directory() . '/inc/landing-pages-flush.php')) {
+    require_once get_template_directory() . '/inc/landing-pages-flush.php';
+}
+
 /**
  * テーマのセットアップ
  */

@@ -67,6 +67,13 @@ function arigatou_club_register_landing_page_post_type() {
 }
 add_action('init', 'arigatou_club_register_landing_page_post_type');
 
+// パーマリンクをフラッシュ（テーマ有効化時）
+function arigatou_club_flush_rewrite_rules() {
+    arigatou_club_register_landing_page_post_type();
+    flush_rewrite_rules();
+}
+add_action('after_switch_theme', 'arigatou_club_flush_rewrite_rules');
+
 // メタボックスの追加
 function arigatou_club_add_landing_page_meta_boxes() {
     add_meta_box(
