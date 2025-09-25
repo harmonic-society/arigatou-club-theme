@@ -15,6 +15,13 @@ if (file_exists(get_template_directory() . '/inc/seo-enhancements.php')) {
 }
 
 /**
+ * ランディングページ機能を読み込み
+ */
+if (file_exists(get_template_directory() . '/inc/landing-pages.php')) {
+    require_once get_template_directory() . '/inc/landing-pages.php';
+}
+
+/**
  * テーマのセットアップ
  */
 function arigatou_club_setup() {
@@ -106,7 +113,12 @@ function arigatou_club_scripts() {
     if (is_page_template('page-thanks.php') || is_page('thanks')) {
         wp_enqueue_style('arigatou-club-thanks', get_template_directory_uri() . '/assets/css/thanks-page.css', array(), '1.0.0');
     }
-    
+
+    // ランディングページ用CSS
+    if (is_singular('landing_page')) {
+        wp_enqueue_style('arigatou-club-landing', get_template_directory_uri() . '/assets/css/landing-page.css', array(), '1.0.0');
+    }
+
     // Font Awesome
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0');
     
