@@ -206,31 +206,50 @@ get_header(); ?>
                 <h2 class="section-title">広がれ! お好み焼き社会<br>ありがとう倶楽部</h2>
             </div>
 
-            <div class="mission-content">
-                <div class="vision-block">
-                    <h3 class="mission-subtitle">ヴィジョン</h3>
-                    <p class="vision-text">平たく・まあるく・温かい、人の違い・天才活かし合いのお好み焼き社会を目指す</p>
+            <div class="mission-content-wrapper">
+                <!-- 左側: 縦長画像 -->
+                <div class="mission-image-column">
+                    <?php
+                    $mission_image = get_theme_mod('mission_statement_image');
+                    if ($mission_image) :
+                    ?>
+                        <img src="<?php echo esc_url($mission_image); ?>" alt="ミッションステートメント" class="mission-statement-image">
+                    <?php else : ?>
+                        <div class="mission-image-placeholder">
+                            <p>画像をアップロードしてください</p>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
-                <div class="mission-block">
-                    <h3 class="mission-subtitle">ミッション</h3>
-                    <ul class="mission-list">
-                        <li>人が持つオリジナルの天才を発見、発揮し、人同士が尊重しあって、活かし合い、助け合うための場を創っていく</li>
-                        <li>身の回りに溢れる「ありがとう」に氣づいて、それを表現する人を増やす</li>
-                    </ul>
-                </div>
+                <!-- 右側: テキストコンテンツ -->
+                <div class="mission-text-column">
+                    <div class="mission-content">
+                        <div class="vision-block">
+                            <h3 class="mission-subtitle">ヴィジョン</h3>
+                            <p class="vision-text">平たく・まあるく・温かい、人の違い・天才活かし合いのお好み焼き社会を目指す</p>
+                        </div>
 
-                <div class="recommend-block">
-                    <h3 class="mission-subtitle">こんな人におすすめ</h3>
-                    <ul class="recommend-list">
-                        <li>向上心があり 自分のことをもっと詳しく知り、自分の天才を生かしたい人</li>
-                        <li>悩みがあり 自分のことを 誠実に助けてくれる人と知り合いたい人</li>
-                        <li>安心安全の売買をするための相手を見つけたい人</li>
-                    </ul>
-                </div>
+                        <div class="mission-block">
+                            <h3 class="mission-subtitle">ミッション</h3>
+                            <ul class="mission-list">
+                                <li>人が持つオリジナルの天才を発見、発揮し、人同士が尊重しあって、活かし合い、助け合うための場を創っていく</li>
+                                <li>身の回りに溢れる「ありがとう」に氣づいて、それを表現する人を増やす</li>
+                            </ul>
+                        </div>
 
-                <div class="mission-footer">
-                    <p class="mission-invitation">ありがとう倶楽部には、新たな出会い・氣づきの場があります。<br>ご一緒に楽しい場を作ってください。</p>
+                        <div class="recommend-block">
+                            <h3 class="mission-subtitle">こんな人におすすめ</h3>
+                            <ul class="recommend-list">
+                                <li>向上心があり 自分のことをもっと詳しく知り、自分の天才を生かしたい人</li>
+                                <li>悩みがあり 自分のことを 誠実に助けてくれる人と知り合いたい人</li>
+                                <li>安心安全の売買をするための相手を見つけたい人</li>
+                            </ul>
+                        </div>
+
+                        <div class="mission-footer">
+                            <p class="mission-invitation">ありがとう倶楽部には、新たな出会い・氣づきの場があります。<br>ご一緒に楽しい場を作ってください。</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

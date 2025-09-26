@@ -766,6 +766,26 @@ function arigatou_club_customize_register($wp_customize) {
         'settings' => 'corporate_section_image',
     )));
 
+    // ミッションステートメントセクション
+    $wp_customize->add_section('arigatou_club_mission', array(
+        'title' => 'ミッションステートメント設定',
+        'priority' => 42,
+        'description' => 'ミッションステートメントセクションの設定',
+    ));
+
+    // ミッションステートメント縦長画像
+    $wp_customize->add_setting('mission_statement_image', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'mission_statement_image', array(
+        'label' => 'ミッションステートメント画像',
+        'description' => 'ミッションステートメントセクションの左側に表示される縦長画像です。推奨サイズ: 600×800px（縦長）',
+        'section' => 'arigatou_club_mission',
+        'settings' => 'mission_statement_image',
+    )));
+
     // 参加方法セクション
     $wp_customize->add_section('arigatou_club_membership', array(
         'title' => '参加方法設定',

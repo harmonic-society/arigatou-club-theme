@@ -1982,9 +1982,51 @@ p,
     margin-bottom: 50px;
 }
 
-.mission-content {
-    max-width: 900px;
+.mission-content-wrapper {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 60px;
+    max-width: 1200px;
     margin: 0 auto;
+    align-items: start;
+}
+
+.mission-image-column {
+    position: sticky;
+    top: 100px;
+}
+
+.mission-statement-image {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transform: rotate(-1deg);
+}
+
+.mission-image-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--wa-bg-light);
+    border: 2px dashed var(--wa-gold);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-1deg);
+}
+
+.mission-image-placeholder p {
+    color: var(--wa-text-light);
+    font-size: 1rem;
+}
+
+.mission-text-column {
+    flex: 1;
+}
+
+.mission-content {
+    max-width: 100%;
 }
 
 .vision-block,
@@ -2371,6 +2413,19 @@ p,
 }
 
 /* レスポンシブ追加 */
+@media (max-width: 1024px) {
+    .mission-content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .mission-image-column {
+        position: static;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
 @media (max-width: 768px) {
     .mission-statement-section {
         padding: 60px 0;
@@ -2379,6 +2434,14 @@ p,
     .mission-statement-section .section-title {
         font-size: 1.5rem;
         margin-bottom: 30px;
+    }
+
+    .mission-content-wrapper {
+        gap: 30px;
+    }
+
+    .mission-image-column {
+        max-width: 100%;
     }
 
     .vision-block,
