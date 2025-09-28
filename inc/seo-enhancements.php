@@ -98,21 +98,21 @@ function arigatou_club_local_business_schema() {
             '@type' => 'LocalBusiness',
             'name' => 'ありがとう倶楽部',
             'image' => get_site_icon_url(512),
-            'description' => '愛知県を中心に「ありがとう」の心を広げる活動を行っている地域団体',
+            'description' => '千葉県千葉市を中心に「ありがとう」の心を広げる活動を行っている地域団体',
             '@id' => home_url('/#organization'),
             'url' => home_url('/'),
             'telephone' => '+81-XXX-XXX-XXXX',
             'address' => array(
                 '@type' => 'PostalAddress',
-                'addressLocality' => '名古屋市',
-                'addressRegion' => '愛知県',
+                'addressLocality' => '千葉市',
+                'addressRegion' => '千葉県',
                 'postalCode' => 'XXX-XXXX',
                 'addressCountry' => 'JP'
             ),
             'geo' => array(
                 '@type' => 'GeoCoordinates',
-                'latitude' => 35.1802,
-                'longitude' => 136.9066
+                'latitude' => 35.6074,
+                'longitude' => 140.1065
             ),
             'openingHoursSpecification' => array(
                 '@type' => 'OpeningHoursSpecification',
@@ -218,6 +218,106 @@ function arigatou_club_optimize_excerpt($excerpt) {
     return $excerpt;
 }
 add_filter('get_the_excerpt', 'arigatou_club_optimize_excerpt');
+
+/**
+ * メタディスクリプションとメタキーワードの追加
+ */
+function arigatou_club_meta_tags() {
+    // デフォルトのメタディスクリプション
+    $default_description = 'ありがとう倶楽部は千葉県千葉市を中心に「ありがとう」の心を広げる活動を行う地域団体です。地域交流イベント、ボランティア活動、講演会、ワークショップなどを通じて、感謝の気持ちを大切にする社会づくりに貢献しています。';
+
+    // デフォルトのメタキーワード
+    $default_keywords = 'ありがとう倶楽部,千葉県,千葉市,地域交流,ボランティア,感謝,ありがとう,社会貢献,イベント,講演会,ワークショップ,地域活動,コミュニティ';
+
+    // ページタイプごとのメタ情報
+    $description = '';
+    $keywords = $default_keywords;
+
+    if (is_front_page()) {
+        $description = 'ありがとう倶楽部は「ありがとう」の心を広げる千葉県千葉市の地域団体。地域交流イベント、ボランティア活動、講演会を通じて感謝の気持ちを大切にする社会づくりを推進。入会無料、どなたでも参加できます。';
+        $keywords = 'ありがとう倶楽部,千葉県,千葉市,地域交流,ボランティア活動,感謝の心,社会貢献活動,無料イベント,地域コミュニティ,講演会,ワークショップ';
+
+    } elseif (is_page('about')) {
+        $description = 'ありがとう倶楽部について。私たちは「ありがとう」の心を大切に、千葉県千葉市を中心に地域交流とボランティア活動を展開。設立理念、活動内容、メンバー紹介、参加方法をご案内します。';
+        $keywords .= ',倶楽部について,設立理念,活動内容,メンバー紹介,参加方法,ミッション,ビジョン';
+
+    } elseif (is_page('contact')) {
+        $description = 'ありがとう倶楽部へのお問い合わせ・入会申込みページ。イベント参加、ボランティア活動、講演依頼、協賛のご相談など、お気軽にご連絡ください。千葉県千葉市を中心に活動中。';
+        $keywords .= ',お問い合わせ,入会申込み,連絡先,講演依頼,協賛募集';
+
+    } elseif (is_post_type_archive('event')) {
+        $description = 'ありがとう倶楽部のイベント情報。千葉県内で開催する地域交流イベント、ボランティア活動、講演会、ワークショップの最新情報をお届け。参加無料のイベント多数開催中。';
+        $keywords .= ',イベント情報,イベントスケジュール,参加無料,地域イベント,交流会';
+
+    } elseif (is_singular('event')) {
+        $post = get_post();
+        $excerpt = wp_trim_words(strip_tags($post->post_content), 30);
+        $description = $post->post_title . ' - ありがとう倶楽部主催。' . $excerpt;
+        $keywords .= ',' . $post->post_title . ',イベント詳細';
+
+    } elseif (is_post_type_archive('sponsor')) {
+        $description = 'ありがとう倶楽部の協賛企業・スポンサー一覧。私たちの「ありがとう」の心を広げる活動を支援してくださる千葉県内外の企業様をご紹介。協賛のご相談も受付中。';
+        $keywords .= ',協賛企業,スポンサー,支援企業,パートナー企業,協賛募集';
+
+    } elseif (is_singular('sponsor')) {
+        $post = get_post();
+        $description = $post->post_title . ' - ありがとう倶楽部協賛企業。' . wp_trim_words(strip_tags($post->post_content), 25);
+        $keywords .= ',' . $post->post_title . ',協賛企業';
+
+    } elseif (is_home() || is_archive()) {
+        $description = 'ありがとう倶楽部ブログ。活動報告、イベントレポート、感謝のエピソード、地域交流の様子など、日々の活動を発信。千葉県の地域活性化と「ありがとう」の心を広げる取り組みをご紹介。';
+        $keywords .= ',ブログ,活動報告,イベントレポート,活動記録,コラム';
+
+    } elseif (is_single()) {
+        $post = get_post();
+        $excerpt = get_the_excerpt();
+        if (empty($excerpt)) {
+            $excerpt = wp_trim_words(strip_tags($post->post_content), 30);
+        }
+        $description = mb_substr($excerpt, 0, 155);
+
+        // カテゴリーとタグからキーワードを生成
+        $categories = get_the_category();
+        $tags = get_the_tags();
+        if ($categories) {
+            foreach ($categories as $category) {
+                $keywords .= ',' . $category->name;
+            }
+        }
+        if ($tags) {
+            foreach ($tags as $tag) {
+                $keywords .= ',' . $tag->name;
+            }
+        }
+
+    } elseif (is_404()) {
+        $description = 'ページが見つかりません - ありがとう倶楽部。お探しのページは移動または削除された可能性があります。トップページから目的のページをお探しください。';
+        $keywords .= ',404エラー,ページが見つかりません';
+
+    } else {
+        // その他のページはデフォルトを使用
+        $description = $default_description;
+    }
+
+    // メタディスクリプションが空の場合はデフォルトを使用
+    if (empty($description)) {
+        $description = $default_description;
+    }
+
+    // メタタグを出力
+    echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
+    echo '<meta name="keywords" content="' . esc_attr($keywords) . '">' . "\n";
+
+    // OGPメタタグ
+    echo '<meta property="og:description" content="' . esc_attr($description) . '">' . "\n";
+    echo '<meta property="og:site_name" content="ありがとう倶楽部">' . "\n";
+    echo '<meta property="og:locale" content="ja_JP">' . "\n";
+
+    // Twitterカード
+    echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+    echo '<meta name="twitter:description" content="' . esc_attr($description) . '">' . "\n";
+}
+add_action('wp_head', 'arigatou_club_meta_tags', 5);
 
 /**
  * 検索エンジン向けのサイト情報
