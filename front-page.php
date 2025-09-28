@@ -335,19 +335,35 @@ get_header(); ?>
             
             <div class="home-events-grid">
                 <?php
+                // イベントを取得（日付が設定されていないものも含む）
                 $upcoming_events = new WP_Query(array(
                     'post_type' => 'event',
                     'posts_per_page' => 3,
-                    'meta_key' => '_event_date',
-                    'orderby' => 'meta_value',
-                    'order' => 'ASC',
+                    'post_status' => 'publish',
                     'meta_query' => array(
+                        'relation' => 'OR',
                         array(
+                            // 日付が設定されていて、今日以降のイベント
                             'key' => '_event_date',
                             'value' => date('Y-m-d'),
                             'compare' => '>=',
                             'type' => 'DATE'
+                        ),
+                        array(
+                            // 日付が設定されていないイベント
+                            'key' => '_event_date',
+                            'compare' => 'NOT EXISTS'
+                        ),
+                        array(
+                            // 日付が空のイベント
+                            'key' => '_event_date',
+                            'value' => '',
+                            'compare' => '='
                         )
+                    ),
+                    'orderby' => array(
+                        'meta_value' => 'ASC',
+                        'date' => 'DESC'
                     )
                 ));
                 
