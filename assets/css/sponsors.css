@@ -87,6 +87,8 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
     transform: rotate(-0.5deg);
+    display: flex;
+    flex-direction: column;
 }
 
 .sponsor-card:nth-child(even) {
@@ -105,6 +107,7 @@
     justify-content: center;
     background: var(--wa-bg-cream);
     padding: 20px;
+    flex-shrink: 0;
 }
 
 .sponsor-logo img {
@@ -115,6 +118,9 @@
 
 .sponsor-content {
     padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .sponsor-name {
@@ -152,6 +158,7 @@
     color: var(--wa-text-dark);
     line-height: 1.7;
     margin: 20px 0;
+    flex: 1;
 }
 
 .sponsor-actions {
