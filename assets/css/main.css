@@ -610,7 +610,7 @@ p,
     }
     
     .hero-title {
-        font-size: 2rem;
+        font-size: 2.5rem;
         margin-bottom: 20px;
         line-height: 1.4;
         padding: 0;
@@ -619,7 +619,7 @@ p,
     }
 
     .hero-subtitle {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         margin-bottom: 25px;
         line-height: 1.5;
         padding: 0;
