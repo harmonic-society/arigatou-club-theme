@@ -203,7 +203,7 @@ get_header(); ?>
         <div class="container">
             <div class="section-header">
                 <span class="section-marker">◯</span>
-                <h2 class="section-title">広がれ! お好み焼き社会<br>ありがとう倶楽部</h2>
+                <h2 class="section-title">いかせ 天才<br>広がれ! お好み焼き社会<br>ありがとう倶楽部</h2>
             </div>
 
             <div class="mission-content-wrapper">
