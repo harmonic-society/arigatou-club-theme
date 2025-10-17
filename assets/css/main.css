@@ -132,7 +132,7 @@ p,
 }
 
 /* ニュースが1件の場合は中央表示 */
-.news-ticker-items:only-child {
+.news-ticker-items.static {
     animation: none;
     justify-content: center;
     padding-left: 0;
@@ -206,12 +206,12 @@ p,
     }
 
     /* 1件のみの場合のモバイル表示 */
-    .news-ticker-items:only-child {
+    .news-ticker-items.static {
         padding: 5px 15px;
         white-space: normal;
     }
 
-    .news-ticker-items:only-child .news-ticker-item {
+    .news-ticker-items.static .news-ticker-item {
         padding: 0;
         text-align: center;
     }
