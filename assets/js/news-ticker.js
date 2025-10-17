@@ -12,10 +12,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const isMobile = window.innerWidth <= 768;
     const isSmallMobile = window.innerWidth <= 480;
 
-    if (items.length > 1) {
+    if (items.length >= 1) {
         // アイテムを複製して無限ループを実現
         const clonedItems = tickerItems.innerHTML;
-        tickerItems.innerHTML += clonedItems + clonedItems; // モバイルでは3回複製してスムーズに
+        tickerItems.innerHTML += clonedItems + clonedItems; // 3回複製してスムーズに
+
+        // アニメーションを確実に開始
+        tickerItems.style.animation = 'none';
+        setTimeout(() => {
+            tickerItems.style.animation = '';
+        }, 10);
 
         // PC: ホバー時の一時停止
         if (!isMobile) {
