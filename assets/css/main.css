@@ -84,7 +84,7 @@ p,
     display: flex;
     align-items: center;
     height: 100%;
-    animation: scroll-left 60s linear infinite;
+    animation: scroll-left 30s linear infinite;
     white-space: nowrap;
     padding-left: 100%;
 }
@@ -177,7 +177,7 @@ p,
     }
 
     .news-ticker-items {
-        animation-duration: 70s;
+        animation-duration: 35s;
         padding-left: 20px;
         gap: 0;
     }
@@ -247,7 +247,7 @@ p,
 
     /* アニメーション速度を遅くして読みやすく */
     .news-ticker-items {
-        animation-duration: 80s;
+        animation-duration: 40s;
     }
 }
 
