@@ -50,14 +50,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }, { passive: true });
         }
 
-        // アニメーション速度の動的調整
+        // アニメーション速度の動的調整（ゆっくりスクロール）
         const totalWidth = tickerItems.scrollWidth;
         const viewportWidth = tickerItems.parentElement.offsetWidth;
 
         if (totalWidth > viewportWidth) {
-            // デバイスに応じて速度を調整
-            let baseDuration = isMobile ? (isSmallMobile ? 50 : 40) : 30;
-            const duration = Math.max(baseDuration, (totalWidth / 100) * 2);
+            // デバイスに応じて速度を調整（より遅く）
+            let baseDuration = isMobile ? (isSmallMobile ? 80 : 70) : 60;
+            const duration = Math.max(baseDuration, (totalWidth / 100) * 3);
             tickerItems.style.animationDuration = duration + 's';
         }
 
