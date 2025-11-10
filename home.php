@@ -101,11 +101,16 @@ get_header(); ?>
                         <!-- ページネーション -->
                         <div class="blog-pagination">
                             <?php
-                            echo paginate_links(array(
+                            $pagination_links = paginate_links(array(
                                 'prev_text' => '←',
                                 'next_text' => '→',
                                 'type' => 'array'
                             ));
+                            if ($pagination_links) {
+                                foreach ($pagination_links as $link) {
+                                    echo $link;
+                                }
+                            }
                             ?>
                         </div>
                         
