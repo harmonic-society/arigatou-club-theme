@@ -77,4 +77,5 @@ arigatou-club-theme/
 GPL v2 or later
 
 ## バージョン履歴
+- v1.1.0 - UIの改善とバグ修正
 - v1.0.0 - 初回リリース
