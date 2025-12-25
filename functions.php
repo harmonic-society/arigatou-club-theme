@@ -1418,3 +1418,42 @@ function arigatou_club_clean_head() {
     remove_action('wp_head', 'feed_links_extra', 3);
 }
 add_action('init', 'arigatou_club_clean_head');
+
+/**
+ * ログインページのロゴをサイトアイコンに変更
+ */
+function arigatou_club_login_logo() {
+    $site_icon_url = get_site_icon_url(200);
+    if (!$site_icon_url) {
+        return;
+    }
+    ?>
+    <style type="text/css">
+        #login h1 a {
+            background-image: url(<?php echo esc_url($site_icon_url); ?>);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 120px;
+            height: 120px;
+        }
+    </style>
+    <?php
+}
+add_action('login_enqueue_scripts', 'arigatou_club_login_logo');
+
+/**
+ * ログインページのロゴリンクをサイトURLに変更
+ */
+function arigatou_club_login_logo_url() {
+    return home_url('/');
+}
+add_filter('login_headerurl', 'arigatou_club_login_logo_url');
+
+/**
+ * ログインページのロゴタイトルをサイト名に変更
+ */
+function arigatou_club_login_logo_title() {
+    return get_bloginfo('name');
+}
+add_filter('login_headertext', 'arigatou_club_login_logo_title');
