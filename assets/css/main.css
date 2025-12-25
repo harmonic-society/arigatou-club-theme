@@ -1702,6 +1702,16 @@ p,
     color: var(--wa-text-dark);
 }
 
+.membership-cta {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.membership-cta .btn {
+    padding: 18px 50px;
+    font-size: 1.1rem;
+}
+
 .membership-notice {
     background: rgba(255, 245, 238, 0.8);
     padding: 25px;

@@ -375,9 +375,7 @@ get_header(); ?>
             </div>
             
             <div class="membership-cta">
-                <h3>会員登録をご希望の方へ</h3>
-                <p>下記のお問い合わせフォームより、会員登録希望の旨をお知らせください。</p>
-                <a href="<?php echo home_url('/contact/'); ?>" class="btn btn-primary">お問い合わせはこちら</a>
+                <a href="<?php echo esc_url(home_url('/membership/')); ?>" class="btn btn-primary btn-lg">会員登録はこちら</a>
             </div>
         </div>
     </section>

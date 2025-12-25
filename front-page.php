@@ -518,7 +518,7 @@ get_header(); ?>
                         <p>Facebook グループに登録してありがとう倶楽部の活動を知ることができます。またスポットで料金を払うことでありがとうカフェや セミナーに参加することもできます。</p>
                     </div>
                 </div>
-                
+
                 <div class="membership-card premium">
                     <div class="membership-header">
                         <h3>有料会員</h3>
@@ -530,7 +530,11 @@ get_header(); ?>
                     </div>
                 </div>
             </div>
-            
+
+            <div class="membership-cta">
+                <a href="<?php echo esc_url(home_url('/membership/')); ?>" class="btn btn-primary btn-lg">会員登録はこちら</a>
+            </div>
+
             <div class="membership-notice">
                 <span class="note-marker">※</span>
                 <p>会員の皆さんに対して、ご自身のご商売やご活動を積極的にご案内いただきます。しかしながら、会員の皆様に対して不誠実な対応や、嘘偽りの内容があってトラブルに発展したような場合、情報を共有させていただき、場合によってはご退会いただくこともございます。お互い様の精神で、氣持ちの良い関係性を保てる倶楽部にしてまいりましょう。</p>
