@@ -6,6 +6,12 @@
 
     $(document).ready(function() {
 
+        // メールアドレス検証
+        function validateEmail(email) {
+            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
         // Checkoutボタンクリック
         $('.checkout-btn').on('click', function(e) {
             e.preventDefault();
@@ -13,18 +19,36 @@
             var $btn = $(this);
             var planType = $btn.data('plan');
             var originalText = $btn.text();
+            var $card = $btn.closest('.pricing-card');
+            var $emailInput = $card.find('.guest-email-input');
+            var email = $emailInput.length ? $emailInput.val().trim() : '';
+
+            // 非ログイン時はメールアドレス必須
+            if ($emailInput.length && (!email || !validateEmail(email))) {
+                alert('有効なメールアドレスを入力してください');
+                $emailInput.focus();
+                return;
+            }
 
             // ボタンを無効化
             $btn.prop('disabled', true).text('処理中...');
 
+            // リクエストデータ
+            var requestData = {
+                action: 'arigatou_create_checkout',
+                plan_type: planType,
+                nonce: arigatou_ajax.nonce
+            };
+
+            // ゲスト決済の場合はメールアドレスを追加
+            if (email) {
+                requestData.email = email;
+            }
+
             $.ajax({
                 url: arigatou_ajax.ajax_url,
                 type: 'POST',
-                data: {
-                    action: 'arigatou_create_checkout',
-                    plan_type: planType,
-                    nonce: arigatou_ajax.nonce
-                },
+                data: requestData,
                 success: function(response) {
                     if (response.success && response.data.checkout_url) {
                         // Stripe Checkoutへリダイレクト

@@ -43,20 +43,49 @@ function arigatou_create_checkout_session($plan_type, $user_id) {
 }
 
 /**
+ * ゲスト用Checkout Session作成（非ログインユーザー）
+ *
+ * @param string $plan_type 'monthly' or 'annual'
+ * @param string $email メールアドレス
+ * @return array|WP_Error
+ */
+function arigatou_create_guest_checkout_session($plan_type, $email) {
+    $price_ids = Arigatou_Stripe_Config::get_price_ids();
+
+    if (empty($price_ids[$plan_type])) {
+        return new WP_Error('invalid_plan', '無効なプランです');
+    }
+
+    // 既存ユーザーチェック（メールアドレスで検索）
+    $existing_user = get_user_by('email', $email);
+    if ($existing_user) {
+        // 既に有料会員かチェック
+        if (arigatou_is_premium_member($existing_user->ID)) {
+            return new WP_Error('already_premium', '既に有料会員です。ログインしてマイページをご確認ください。');
+        }
+    }
+
+    $session = Arigatou_Stripe_API::create_checkout_session(array(
+        'customer_email' => $email,
+        'price_id'       => $price_ids[$plan_type],
+        'success_url'    => home_url('/membership-success/') . '?session_id={CHECKOUT_SESSION_ID}',
+        'cancel_url'     => home_url('/membership-cancel/'),
+        'metadata'       => array(
+            'guest_email' => $email,
+            'plan_type'   => $plan_type,
+        ),
+    ));
+
+    return $session;
+}
+
+/**
  * AJAX: Checkout Session作成
  */
 function arigatou_ajax_create_checkout() {
     // Nonce検証
     if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'arigatou_nonce')) {
         wp_send_json_error(array('message' => 'セキュリティチェックに失敗しました'));
-    }
-
-    // ログインチェック
-    if (!is_user_logged_in()) {
-        wp_send_json_error(array(
-            'message'  => 'ログインが必要です',
-            'redirect' => wp_login_url(home_url('/membership/')),
-        ));
     }
 
     // プランタイプ検証
@@ -66,16 +95,29 @@ function arigatou_ajax_create_checkout() {
         wp_send_json_error(array('message' => '無効なプランです'));
     }
 
-    // 既に有料会員かチェック
-    if (arigatou_is_premium_member()) {
-        wp_send_json_error(array(
-            'message'  => '既に有料会員です',
-            'redirect' => home_url('/my-account/'),
-        ));
-    }
+    // ログインユーザーの場合
+    if (is_user_logged_in()) {
+        // 既に有料会員かチェック
+        if (arigatou_is_premium_member()) {
+            wp_send_json_error(array(
+                'message'  => '既に有料会員です',
+                'redirect' => home_url('/my-account/'),
+            ));
+        }
 
-    // Checkout Session作成
-    $session = arigatou_create_checkout_session($plan_type, get_current_user_id());
+        // Checkout Session作成（既存処理）
+        $session = arigatou_create_checkout_session($plan_type, get_current_user_id());
+    } else {
+        // 非ログインユーザーの場合（ゲスト決済）
+        $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+
+        if (empty($email) || !is_email($email)) {
+            wp_send_json_error(array('message' => 'メールアドレスを入力してください'));
+        }
+
+        // ゲスト用Checkout Session作成
+        $session = arigatou_create_guest_checkout_session($plan_type, $email);
+    }
 
     if (is_wp_error($session)) {
         wp_send_json_error(array('message' => $session->get_error_message()));
@@ -88,6 +130,7 @@ function arigatou_ajax_create_checkout() {
     wp_send_json_success(array('checkout_url' => $session['url']));
 }
 add_action('wp_ajax_arigatou_create_checkout', 'arigatou_ajax_create_checkout');
+add_action('wp_ajax_nopriv_arigatou_create_checkout', 'arigatou_ajax_create_checkout');
 
 /**
  * AJAX: Customer Portal Session作成

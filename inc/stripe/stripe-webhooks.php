@@ -93,10 +93,34 @@ function arigatou_handle_checkout_completed($session) {
     // メタデータからユーザーID取得
     $user_id = isset($session['metadata']['wp_user_id']) ? intval($session['metadata']['wp_user_id']) : 0;
     $plan_type = isset($session['metadata']['plan_type']) ? $session['metadata']['plan_type'] : '';
+    $is_new_user = false;
 
     // メタデータにない場合はCustomer IDから検索
     if (!$user_id && !empty($session['customer'])) {
         $user_id = arigatou_get_user_by_customer_id($session['customer']);
+    }
+
+    // まだユーザーが見つからない場合、ゲスト決済としてメールアドレスからユーザー作成
+    if (!$user_id) {
+        $email = '';
+
+        // customer_details.email から取得
+        if (!empty($session['customer_details']['email'])) {
+            $email = $session['customer_details']['email'];
+        }
+        // metadata.guest_email から取得（フォールバック）
+        elseif (!empty($session['metadata']['guest_email'])) {
+            $email = $session['metadata']['guest_email'];
+        }
+
+        if (!empty($email)) {
+            $user_id = arigatou_get_or_create_user_by_email($email, $is_new_user);
+
+            // Stripe Customer IDを紐付け
+            if ($user_id && !empty($session['customer'])) {
+                update_user_meta($user_id, '_stripe_customer_id', $session['customer']);
+            }
+        }
     }
 
     if (!$user_id) {
@@ -113,8 +137,10 @@ function arigatou_handle_checkout_completed($session) {
         }
     }
 
-    // ウェルカムメール送信
-    arigatou_send_welcome_email($user_id, $plan_type);
+    // ウェルカムメール送信（新規ユーザーはパスワード付きメールが別途送信されるのでスキップ）
+    if (!$is_new_user) {
+        arigatou_send_welcome_email($user_id, $plan_type);
+    }
 }
 
 /**

@@ -259,3 +259,112 @@ function arigatou_get_user_by_customer_id($customer_id) {
 
     return !empty($users) ? $users[0]->ID : false;
 }
+
+/**
+ * メールアドレスからユーザーを検索または作成
+ *
+ * @param string $email
+ * @param bool   $is_new_user 新規作成されたかどうかを返す参照変数
+ * @return int|false ユーザーID
+ */
+function arigatou_get_or_create_user_by_email($email, &$is_new_user = false) {
+    $is_new_user = false;
+
+    // 既存ユーザー検索
+    $user = get_user_by('email', $email);
+    if ($user) {
+        return $user->ID;
+    }
+
+    // 新規ユーザー作成
+    $password = wp_generate_password(12, true, false);
+    $username = sanitize_user(strstr($email, '@', true), true);
+
+    // 空のユーザー名の場合はメール全体を使用
+    if (empty($username)) {
+        $username = sanitize_user($email, true);
+    }
+
+    // ユーザー名重複チェック
+    $base_username = $username;
+    $counter = 1;
+    while (username_exists($username)) {
+        $username = $base_username . $counter;
+        $counter++;
+    }
+
+    $user_id = wp_insert_user(array(
+        'user_login'   => $username,
+        'user_email'   => $email,
+        'user_pass'    => $password,
+        'display_name' => $username,
+        'role'         => 'subscriber',
+    ));
+
+    if (is_wp_error($user_id)) {
+        error_log('WPユーザー作成エラー: ' . $user_id->get_error_message());
+        return false;
+    }
+
+    $is_new_user = true;
+
+    // パスワード付きウェルカムメール送信
+    arigatou_send_new_user_welcome_email($user_id, $password);
+
+    return $user_id;
+}
+
+/**
+ * 新規ユーザー向けウェルカムメール（パスワード付き）
+ *
+ * @param int    $user_id
+ * @param string $password
+ */
+function arigatou_send_new_user_welcome_email($user_id, $password) {
+    $user = get_user_by('id', $user_id);
+
+    if (!$user) {
+        return;
+    }
+
+    $subject = '[ありがとう倶楽部] アカウントが作成されました';
+
+    $body = sprintf(
+        '<html>
+<body style="font-family: sans-serif; line-height: 1.8;">
+<p>%s 様</p>
+
+<p>ありがとう倶楽部の有料会員にご登録いただき、誠にありがとうございます。</p>
+<p>アカウントを自動作成しました。以下の情報でログインできます。</p>
+
+<div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+<h3 style="margin-top: 0; color: #D32F2F;">ログイン情報</h3>
+<p><strong>ユーザー名:</strong> %s</p>
+<p><strong>メールアドレス:</strong> %s</p>
+<p><strong>パスワード:</strong> %s</p>
+<p style="margin-bottom: 0;"><strong>ログインURL:</strong> <a href="%s">%s</a></p>
+</div>
+
+<p style="color: #666; font-size: 0.9em;">セキュリティのため、初回ログイン後にパスワードを変更されることをお勧めします。</p>
+
+<p>マイページから会員情報の確認・変更が可能です。</p>
+<p><a href="%s">マイページはこちら</a></p>
+
+<p>今後ともよろしくお願いいたします。</p>
+
+<p>ありがとう倶楽部</p>
+</body>
+</html>',
+        esc_html($user->display_name),
+        esc_html($user->user_login),
+        esc_html($user->user_email),
+        esc_html($password),
+        esc_url(wp_login_url()),
+        esc_url(wp_login_url()),
+        esc_url(home_url('/my-account/'))
+    );
+
+    $headers = array('Content-Type: text/html; charset=UTF-8');
+
+    wp_mail($user->user_email, $subject, $body, $headers);
+}

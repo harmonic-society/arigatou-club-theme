@@ -118,17 +118,18 @@ get_header(); ?>
                                 <li><i class="fas fa-check"></i> グッズ会員価格</li>
                                 <li><i class="fas fa-check"></i> 全ての無料会員特典</li>
                             </ul>
+                            <?php if (!is_user_logged_in()) : ?>
+                            <div class="guest-checkout-form">
+                                <label for="guest-email-monthly">メールアドレス <span class="required">*</span></label>
+                                <input type="email" id="guest-email-monthly" class="guest-email-input" placeholder="example@email.com" required>
+                                <p class="input-note">決済完了後、アカウントを自動作成します</p>
+                            </div>
+                            <?php endif; ?>
                         </div>
                         <div class="pricing-footer">
-                            <?php if (is_user_logged_in()) : ?>
-                                <button type="button" class="btn btn-primary checkout-btn" data-plan="monthly">
-                                    月額プランに申し込む
-                                </button>
-                            <?php else : ?>
-                                <a href="<?php echo esc_url(wp_login_url(get_permalink())); ?>" class="btn btn-primary">
-                                    ログインして申し込む
-                                </a>
-                            <?php endif; ?>
+                            <button type="button" class="btn btn-primary checkout-btn" data-plan="monthly">
+                                月額プランに申し込む
+                            </button>
                         </div>
                     </div>
 
@@ -152,30 +153,29 @@ get_header(); ?>
                                 <i class="fas fa-info-circle"></i>
                                 年金生活者・学生は無料
                             </p>
+                            <?php if (!is_user_logged_in()) : ?>
+                            <div class="guest-checkout-form">
+                                <label for="guest-email-annual">メールアドレス <span class="required">*</span></label>
+                                <input type="email" id="guest-email-annual" class="guest-email-input" placeholder="example@email.com" required>
+                                <p class="input-note">決済完了後、アカウントを自動作成します</p>
+                            </div>
+                            <?php endif; ?>
                         </div>
                         <div class="pricing-footer">
-                            <?php if (is_user_logged_in()) : ?>
-                                <button type="button" class="btn btn-primary checkout-btn" data-plan="annual">
-                                    年額プランに申し込む
-                                </button>
-                            <?php else : ?>
-                                <a href="<?php echo esc_url(wp_login_url(get_permalink())); ?>" class="btn btn-primary">
-                                    ログインして申し込む
-                                </a>
-                            <?php endif; ?>
+                            <button type="button" class="btn btn-primary checkout-btn" data-plan="annual">
+                                年額プランに申し込む
+                            </button>
                         </div>
                     </div>
 
                 </div>
 
                 <?php if (!is_user_logged_in()) : ?>
-                <div class="login-notice">
+                <div class="guest-checkout-notice">
                     <p>
-                        有料会員に申し込むには、まず
-                        <a href="<?php echo esc_url(wp_login_url(get_permalink())); ?>">ログイン</a>
-                        または
-                        <a href="<?php echo esc_url(wp_registration_url()); ?>">会員登録</a>
-                        が必要です。
+                        <i class="fas fa-info-circle"></i>
+                        決済完了後にアカウントが自動作成され、ログイン情報がメールで届きます。
+                        既にアカウントをお持ちの方は<a href="<?php echo esc_url(wp_login_url(get_permalink())); ?>">ログイン</a>してください。
                     </p>
                 </div>
                 <?php endif; ?>

@@ -189,6 +189,77 @@
     text-decoration: underline;
 }
 
+/* ゲスト決済フォーム */
+.guest-checkout-form {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--wa-bg-cream);
+    border-radius: 8px;
+}
+
+.guest-checkout-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--wa-text-dark);
+    font-size: 0.9rem;
+}
+
+.guest-checkout-form .required {
+    color: #D32F2F;
+}
+
+.guest-checkout-form input[type="email"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.guest-checkout-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--wa-accent);
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+}
+
+.guest-checkout-form .input-note {
+    margin: 8px 0 0;
+    font-size: 0.85rem;
+    color: var(--wa-text-muted);
+}
+
+/* ゲスト決済案内 */
+.guest-checkout-notice {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.guest-checkout-notice p {
+    margin: 0;
+    color: var(--wa-text-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.guest-checkout-notice i {
+    color: var(--wa-accent);
+}
+
+.guest-checkout-notice a {
+    color: var(--wa-accent);
+    text-decoration: underline;
+}
+
 /* FAQ */
 .membership-faq {
     max-width: 800px;
