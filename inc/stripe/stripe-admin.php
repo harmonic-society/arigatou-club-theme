@@ -295,6 +295,7 @@ function arigatou_stripe_settings_page() {
             'webhook_secret'  => $_POST['webhook_secret'] ?? '',
             'price_monthly'   => $_POST['price_monthly'] ?? '',
             'price_annual'    => $_POST['price_annual'] ?? '',
+            'price_cafe'      => $_POST['price_cafe'] ?? '',
         );
 
         Arigatou_Stripe_Config::save_settings($settings);
@@ -382,6 +383,20 @@ function arigatou_stripe_settings_page() {
                                        value="<?php echo esc_attr($settings['price_annual']); ?>"
                                        class="regular-text" placeholder="price_xxxxx">
                                 <p class="description">年額¥10,000のPrice ID（price_ で始まる）</p>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h2>スポット決済設定</h2>
+
+                    <table class="form-table">
+                        <tr>
+                            <th><label for="price_cafe">ありがとうカフェ Price ID</label></th>
+                            <td>
+                                <input type="text" id="price_cafe" name="price_cafe"
+                                       value="<?php echo esc_attr($settings['price_cafe']); ?>"
+                                       class="regular-text" placeholder="price_xxxxx">
+                                <p class="description">カフェ参加費¥1,000のPrice ID（price_ で始まる・One time）</p>
                             </td>
                         </tr>
                     </table>

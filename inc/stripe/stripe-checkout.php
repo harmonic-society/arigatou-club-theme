@@ -160,3 +160,80 @@ function arigatou_ajax_reactivate_subscription() {
     wp_send_json_success(array('message' => '解約予約をキャンセルしました。'));
 }
 add_action('wp_ajax_arigatou_reactivate_subscription', 'arigatou_ajax_reactivate_subscription');
+
+/**
+ * スポット決済Checkout Session作成
+ *
+ * @param string $product_type 'cafe' など
+ * @param string $email 購入者メールアドレス（非ログイン時）
+ * @return array|WP_Error
+ */
+function arigatou_create_spot_checkout_session($product_type, $email = '') {
+    $spot_prices = Arigatou_Stripe_Config::get_spot_price_ids();
+
+    if (empty($spot_prices[$product_type])) {
+        return new WP_Error('invalid_product', '無効な商品です');
+    }
+
+    // 商品名マッピング
+    $product_names = array(
+        'cafe' => 'ありがとうカフェ 参加費',
+    );
+
+    $session = Arigatou_Stripe_API::create_spot_checkout_session(array(
+        'price_id'       => $spot_prices[$product_type],
+        'customer_email' => $email,
+        'success_url'    => home_url('/spot-payment-success/') . '?session_id={CHECKOUT_SESSION_ID}',
+        'cancel_url'     => home_url('/spot-payment/'),
+        'metadata'       => array(
+            'product_type' => $product_type,
+            'product_name' => $product_names[$product_type] ?? $product_type,
+        ),
+    ));
+
+    return $session;
+}
+
+/**
+ * AJAX: スポット決済Checkout Session作成
+ */
+function arigatou_ajax_create_spot_checkout() {
+    // Nonce検証
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'arigatou_spot_nonce')) {
+        wp_send_json_error(array('message' => 'セキュリティチェックに失敗しました'));
+    }
+
+    // 商品タイプ検証
+    $product_type = isset($_POST['product_type']) ? sanitize_text_field($_POST['product_type']) : '';
+    $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+
+    if (empty($product_type)) {
+        wp_send_json_error(array('message' => '商品が指定されていません'));
+    }
+
+    // ログインユーザーの場合はメールアドレスを自動取得
+    if (is_user_logged_in() && empty($email)) {
+        $current_user = wp_get_current_user();
+        $email = $current_user->user_email;
+    }
+
+    // メールアドレス必須
+    if (empty($email) || !is_email($email)) {
+        wp_send_json_error(array('message' => '有効なメールアドレスを入力してください'));
+    }
+
+    // Checkout Session作成
+    $session = arigatou_create_spot_checkout_session($product_type, $email);
+
+    if (is_wp_error($session)) {
+        wp_send_json_error(array('message' => $session->get_error_message()));
+    }
+
+    if (!isset($session['url'])) {
+        wp_send_json_error(array('message' => 'Checkout URLの取得に失敗しました'));
+    }
+
+    wp_send_json_success(array('checkout_url' => $session['url']));
+}
+add_action('wp_ajax_arigatou_create_spot_checkout', 'arigatou_ajax_create_spot_checkout');
+add_action('wp_ajax_nopriv_arigatou_create_spot_checkout', 'arigatou_ajax_create_spot_checkout');

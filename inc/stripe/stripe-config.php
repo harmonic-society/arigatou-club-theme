@@ -31,6 +31,7 @@ class Arigatou_Stripe_Config {
             'webhook_secret'  => 'STRIPE_WEBHOOK_SECRET',
             'price_monthly'   => 'STRIPE_PRICE_MONTHLY',
             'price_annual'    => 'STRIPE_PRICE_ANNUAL',
+            'price_cafe'      => 'STRIPE_PRICE_CAFE',
         );
 
         if (isset($constant_map[$key]) && defined($constant_map[$key])) {
@@ -52,6 +53,7 @@ class Arigatou_Stripe_Config {
             'webhook_secret'  => sanitize_text_field($settings['webhook_secret'] ?? ''),
             'price_monthly'   => sanitize_text_field($settings['price_monthly'] ?? ''),
             'price_annual'    => sanitize_text_field($settings['price_annual'] ?? ''),
+            'price_cafe'      => sanitize_text_field($settings['price_cafe'] ?? ''),
         );
 
         return update_option(self::OPTION_NAME, $sanitized);
@@ -69,6 +71,7 @@ class Arigatou_Stripe_Config {
             'webhook_secret'  => $options['webhook_secret'] ?? '',
             'price_monthly'   => $options['price_monthly'] ?? '',
             'price_annual'    => $options['price_annual'] ?? '',
+            'price_cafe'      => $options['price_cafe'] ?? '',
         );
     }
 
@@ -94,12 +97,21 @@ class Arigatou_Stripe_Config {
     }
 
     /**
-     * Price ID取得
+     * Price ID取得（サブスクリプション用）
      */
     public static function get_price_ids() {
         return array(
             'monthly' => self::get_setting('price_monthly'),
             'annual'  => self::get_setting('price_annual'),
+        );
+    }
+
+    /**
+     * スポット決済Price ID取得
+     */
+    public static function get_spot_price_ids() {
+        return array(
+            'cafe' => self::get_setting('price_cafe'),
         );
     }
 
@@ -198,7 +210,7 @@ class Arigatou_Stripe_API {
     }
 
     /**
-     * Checkout Session作成
+     * Checkout Session作成（サブスクリプション用）
      */
     public static function create_checkout_session($params) {
         $data = array(
@@ -211,6 +223,35 @@ class Arigatou_Stripe_API {
         if (!empty($params['customer'])) {
             $data['customer'] = $params['customer'];
         }
+
+        if (!empty($params['customer_email'])) {
+            $data['customer_email'] = $params['customer_email'];
+        }
+
+        // Line items
+        $data['line_items[0][price]'] = $params['price_id'];
+        $data['line_items[0][quantity]'] = 1;
+
+        // Metadata
+        if (!empty($params['metadata'])) {
+            foreach ($params['metadata'] as $key => $value) {
+                $data['metadata[' . $key . ']'] = $value;
+            }
+        }
+
+        return self::request('/checkout/sessions', 'POST', $data);
+    }
+
+    /**
+     * Checkout Session作成（スポット決済用）
+     */
+    public static function create_spot_checkout_session($params) {
+        $data = array(
+            'mode' => 'payment',
+            'success_url' => $params['success_url'],
+            'cancel_url'  => $params['cancel_url'],
+            'locale'      => 'ja',
+        );
 
         if (!empty($params['customer_email'])) {
             $data['customer_email'] = $params['customer_email'];

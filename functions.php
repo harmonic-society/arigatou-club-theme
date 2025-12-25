@@ -136,7 +136,7 @@ function arigatou_club_scripts() {
     }
 
     // 会員ページ用CSS/JS
-    if (is_page_template('page-membership.php') || is_page_template('page-membership-success.php') || is_page_template('page-membership-cancel.php') || is_page_template('page-my-account.php') || is_page('membership') || is_page('membership-success') || is_page('membership-cancel') || is_page('my-account')) {
+    if (is_page_template('page-membership.php') || is_page_template('page-membership-success.php') || is_page_template('page-membership-cancel.php') || is_page_template('page-my-account.php') || is_page_template('page-spot-payment.php') || is_page_template('page-spot-payment-success.php') || is_page('membership') || is_page('membership-success') || is_page('membership-cancel') || is_page('my-account') || is_page('spot-payment') || is_page('spot-payment-success')) {
         wp_enqueue_style('arigatou-club-membership', get_template_directory_uri() . '/assets/css/membership.css', array(), '1.0.0');
         wp_enqueue_script('arigatou-club-membership', get_template_directory_uri() . '/assets/js/membership.js', array('jquery'), '1.0.0', true);
     }

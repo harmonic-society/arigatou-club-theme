@@ -81,6 +81,15 @@ function arigatou_handle_stripe_webhook(WP_REST_Request $request) {
  * @param array $session
  */
 function arigatou_handle_checkout_completed($session) {
+    $mode = isset($session['mode']) ? $session['mode'] : 'subscription';
+
+    // スポット決済（単発購入）の場合
+    if ($mode === 'payment') {
+        arigatou_handle_spot_payment_completed($session);
+        return;
+    }
+
+    // サブスクリプションの場合
     // メタデータからユーザーID取得
     $user_id = isset($session['metadata']['wp_user_id']) ? intval($session['metadata']['wp_user_id']) : 0;
     $plan_type = isset($session['metadata']['plan_type']) ? $session['metadata']['plan_type'] : '';
@@ -106,6 +115,30 @@ function arigatou_handle_checkout_completed($session) {
 
     // ウェルカムメール送信
     arigatou_send_welcome_email($user_id, $plan_type);
+}
+
+/**
+ * スポット決済完了時の処理
+ *
+ * @param array $session
+ */
+function arigatou_handle_spot_payment_completed($session) {
+    $customer_email = isset($session['customer_details']['email']) ? $session['customer_details']['email'] : '';
+    $customer_name = isset($session['customer_details']['name']) ? $session['customer_details']['name'] : '';
+    $product_type = isset($session['metadata']['product_type']) ? $session['metadata']['product_type'] : '';
+    $product_name = isset($session['metadata']['product_name']) ? $session['metadata']['product_name'] : '';
+    $amount_total = isset($session['amount_total']) ? $session['amount_total'] : 0;
+
+    if (empty($customer_email)) {
+        error_log('Stripe Webhook: スポット決済でメールアドレスがありません - ' . print_r($session, true));
+        return;
+    }
+
+    // 購入者にメール送信
+    arigatou_send_spot_purchase_email($customer_email, $customer_name, $product_name, $amount_total);
+
+    // 管理者にメール送信
+    arigatou_send_spot_purchase_admin_email($customer_email, $customer_name, $product_name, $amount_total);
 }
 
 /**
@@ -364,4 +397,114 @@ function arigatou_send_payment_failed_email($user_id) {
     $headers = array('Content-Type: text/html; charset=UTF-8');
 
     wp_mail($user->user_email, $subject, $body, $headers);
+}
+
+/**
+ * スポット決済購入完了メール送信（購入者向け）
+ *
+ * @param string $email
+ * @param string $name
+ * @param string $product_name
+ * @param int    $amount
+ */
+function arigatou_send_spot_purchase_email($email, $name, $product_name, $amount) {
+    $display_name = !empty($name) ? $name : 'お客';
+    $display_amount = number_format($amount / 100);
+
+    $subject = '[ありがとう倶楽部] ご購入ありがとうございます';
+
+    $body = sprintf(
+        '<html>
+<body style="font-family: sans-serif; line-height: 1.8;">
+<p>%s 様</p>
+
+<p>この度は、ありがとう倶楽部をご利用いただき、誠にありがとうございます。</p>
+
+<h3 style="color: #D32F2F;">ご購入内容</h3>
+<table style="border-collapse: collapse; width: 100%%; max-width: 400px;">
+<tr>
+<td style="padding: 10px; border-bottom: 1px solid #ddd;">商品名</td>
+<td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>%s</strong></td>
+</tr>
+<tr>
+<td style="padding: 10px; border-bottom: 1px solid #ddd;">金額</td>
+<td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>¥%s</strong></td>
+</tr>
+</table>
+
+<p style="margin-top: 20px;">当日のご参加をお待ちしております。</p>
+
+<p>ご不明な点がございましたら、お気軽にお問い合わせください。</p>
+
+<p>ありがとう倶楽部</p>
+</body>
+</html>',
+        esc_html($display_name),
+        esc_html($product_name),
+        esc_html($display_amount)
+    );
+
+    $headers = array('Content-Type: text/html; charset=UTF-8');
+
+    wp_mail($email, $subject, $body, $headers);
+}
+
+/**
+ * スポット決済購入通知メール送信（管理者向け）
+ *
+ * @param string $email
+ * @param string $name
+ * @param string $product_name
+ * @param int    $amount
+ */
+function arigatou_send_spot_purchase_admin_email($email, $name, $product_name, $amount) {
+    $admin_email = get_option('admin_email');
+    $display_name = !empty($name) ? $name : '（名前なし）';
+    $display_amount = number_format($amount / 100);
+
+    $subject = '[ありがとう倶楽部] 新しい購入がありました';
+
+    $body = sprintf(
+        '<html>
+<body style="font-family: sans-serif; line-height: 1.8;">
+<h2 style="color: #D32F2F;">新しい購入通知</h2>
+
+<table style="border-collapse: collapse; width: 100%%; max-width: 500px;">
+<tr>
+<td style="padding: 10px; border: 1px solid #ddd; background: #f5f5f5;">購入者名</td>
+<td style="padding: 10px; border: 1px solid #ddd;">%s</td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #ddd; background: #f5f5f5;">メールアドレス</td>
+<td style="padding: 10px; border: 1px solid #ddd;">%s</td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #ddd; background: #f5f5f5;">商品名</td>
+<td style="padding: 10px; border: 1px solid #ddd;"><strong>%s</strong></td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #ddd; background: #f5f5f5;">金額</td>
+<td style="padding: 10px; border: 1px solid #ddd;"><strong>¥%s</strong></td>
+</tr>
+<tr>
+<td style="padding: 10px; border: 1px solid #ddd; background: #f5f5f5;">日時</td>
+<td style="padding: 10px; border: 1px solid #ddd;">%s</td>
+</tr>
+</table>
+
+<p style="margin-top: 20px;">
+<a href="https://dashboard.stripe.com/payments" target="_blank">Stripe Dashboardで確認</a>
+</p>
+</body>
+</html>',
+        esc_html($display_name),
+        esc_html($email),
+        esc_html($product_name),
+        esc_html($display_amount),
+        esc_html(date('Y年n月j日 H:i'))
+    );
+
+    $headers = array('Content-Type: text/html; charset=UTF-8');
+
+    wp_mail($admin_email, $subject, $body, $headers);
 }
