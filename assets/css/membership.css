@@ -1,0 +1,735 @@
+/* 会員登録・マイページ専用スタイル */
+
+/* ==================================
+   会員登録ページ
+================================== */
+
+.membership-section {
+    padding: 80px 0;
+    background: var(--wa-bg-light);
+}
+
+/* イントロダクション */
+.membership-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px;
+}
+
+.membership-intro p {
+    line-height: 1.8;
+    color: var(--wa-text-dark);
+    margin: 10px 0;
+}
+
+/* ==================================
+   料金カード
+================================== */
+
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.pricing-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.pricing-card.featured {
+    border: 3px solid var(--wa-accent);
+    transform: scale(1.05);
+}
+
+.pricing-card.featured:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.pricing-badge {
+    position: absolute;
+    top: 15px;
+    right: -35px;
+    background: var(--wa-accent);
+    color: white;
+    padding: 5px 40px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transform: rotate(45deg);
+}
+
+.pricing-badge.save {
+    background: var(--wa-primary);
+}
+
+.pricing-header {
+    padding: 30px 25px;
+    text-align: center;
+    background: var(--wa-bg-cream);
+}
+
+.pricing-header h3 {
+    font-size: 1.3rem;
+    color: var(--wa-primary);
+    margin-bottom: 15px;
+    font-family: "Klee One", serif;
+}
+
+.price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 3px;
+}
+
+.price .amount {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: var(--wa-secondary);
+}
+
+.price .currency {
+    font-size: 1.2rem;
+    color: var(--wa-text-dark);
+}
+
+.price .period {
+    font-size: 1rem;
+    color: var(--wa-text-muted);
+}
+
+.pricing-body {
+    padding: 25px;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feature-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--wa-bg-cream);
+    color: var(--wa-text-dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.feature-list li:last-child {
+    border-bottom: none;
+}
+
+.feature-list li i {
+    color: var(--wa-accent);
+    width: 20px;
+    text-align: center;
+}
+
+.feature-list li i.fa-star {
+    color: #FFD700;
+}
+
+.special-note {
+    margin-top: 15px;
+    padding: 10px;
+    background: #FFF3E0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #E65100;
+}
+
+.special-note i {
+    margin-right: 5px;
+}
+
+.pricing-footer {
+    padding: 25px;
+    text-align: center;
+    border-top: 1px solid var(--wa-bg-cream);
+}
+
+.pricing-footer .btn {
+    width: 100%;
+}
+
+.current-plan-badge {
+    display: inline-block;
+    padding: 12px 25px;
+    background: var(--wa-bg-cream);
+    color: var(--wa-text-muted);
+    border-radius: 50px;
+    font-weight: 500;
+}
+
+/* ログイン案内 */
+.login-notice {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.login-notice a {
+    color: var(--wa-accent);
+    text-decoration: underline;
+}
+
+/* FAQ */
+.membership-faq {
+    max-width: 800px;
+    margin: 60px auto 0;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.membership-faq h2 {
+    text-align: center;
+    color: var(--wa-primary);
+    margin-bottom: 30px;
+    font-family: "Klee One", serif;
+}
+
+.membership-faq .faq-item {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--wa-bg-cream);
+}
+
+.membership-faq .faq-item:last-child {
+    border-bottom: none;
+}
+
+.membership-faq .faq-item h3 {
+    font-size: 1.1rem;
+    color: var(--wa-secondary);
+    margin-bottom: 10px;
+}
+
+.membership-faq .faq-item p {
+    color: var(--wa-text-dark);
+    line-height: 1.8;
+}
+
+/* ==================================
+   現在の会員ステータス（有料会員向け）
+================================== */
+
+.membership-current {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.current-status-card {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.status-badge.premium {
+    background: var(--wa-accent);
+    color: white;
+}
+
+.current-status-card h2 {
+    color: var(--wa-primary);
+    margin-bottom: 25px;
+    font-family: "Klee One", serif;
+}
+
+.subscription-details {
+    background: var(--wa-bg-cream);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.subscription-details .detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.subscription-details .detail-item:last-child {
+    border-bottom: none;
+}
+
+.subscription-details .label {
+    color: var(--wa-text-muted);
+}
+
+.subscription-details .value {
+    font-weight: 500;
+    color: var(--wa-text-dark);
+}
+
+.subscription-details .value.status-active {
+    color: #4CAF50;
+}
+
+.subscription-details .value.status-canceling {
+    color: #FF9800;
+}
+
+.membership-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.my-account-link {
+    margin-top: 20px;
+}
+
+.my-account-link a {
+    color: var(--wa-accent);
+    text-decoration: underline;
+}
+
+/* ==================================
+   成功・キャンセルページ
+================================== */
+
+.success-message,
+.cancel-message {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    background: white;
+    padding: 50px 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.success-icon,
+.cancel-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.success-icon {
+    color: #4CAF50;
+}
+
+.cancel-icon {
+    color: #9E9E9E;
+}
+
+.success-message h2,
+.cancel-message h2 {
+    color: var(--wa-primary);
+    margin-bottom: 20px;
+    font-family: "Klee One", serif;
+}
+
+.success-message p,
+.cancel-message p {
+    color: var(--wa-text-dark);
+    line-height: 1.8;
+    margin: 10px 0;
+}
+
+.subscription-summary {
+    background: var(--wa-bg-cream);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 30px 0;
+    text-align: left;
+}
+
+.subscription-summary h3 {
+    color: var(--wa-primary);
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.subscription-summary .summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+.success-actions,
+.cancel-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+/* ==================================
+   マイページ
+================================== */
+
+.my-account-section {
+    padding: 80px 0;
+    background: var(--wa-bg-light);
+}
+
+.my-account-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.account-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.account-card.status-card {
+    grid-column: 1 / -1;
+}
+
+.card-header {
+    padding: 20px 25px;
+    background: var(--wa-bg-cream);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card-header h2 {
+    font-size: 1.1rem;
+    color: var(--wa-primary);
+    margin: 0;
+    font-family: "Klee One", serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-header h2 i {
+    color: var(--wa-accent);
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* 会員ステータス */
+.member-status {
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.member-status.premium {
+    background: linear-gradient(135deg, #FFE082, #FFCA28);
+}
+
+.member-status.free {
+    background: var(--wa-bg-cream);
+}
+
+.member-status .status-badge {
+    font-size: 1.2rem;
+    padding: 10px 30px;
+}
+
+.member-status.premium .status-badge {
+    background: var(--wa-accent);
+    color: white;
+}
+
+.member-status.free .status-badge {
+    background: white;
+    color: var(--wa-text-muted);
+}
+
+.subscription-info {
+    background: var(--wa-bg-cream);
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-row .label {
+    color: var(--wa-text-muted);
+}
+
+.info-row .value {
+    font-weight: 500;
+    color: var(--wa-text-dark);
+}
+
+.info-row .value.status-active {
+    color: #4CAF50;
+}
+
+.info-row .value.status-canceling {
+    color: #FF9800;
+}
+
+.info-row .value.status-past_due {
+    color: #F44336;
+}
+
+.subscription-actions,
+.account-actions {
+    margin-top: 15px;
+}
+
+.upgrade-prompt {
+    text-align: center;
+    color: var(--wa-text-dark);
+    margin-bottom: 15px;
+}
+
+/* 会員特典リスト */
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.benefits-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--wa-bg-cream);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.benefits-list li:last-child {
+    border-bottom: none;
+}
+
+.benefits-list li.available i {
+    color: #4CAF50;
+}
+
+.benefits-list li.unavailable {
+    color: var(--wa-text-muted);
+}
+
+.benefits-list li.unavailable i {
+    color: #9E9E9E;
+}
+
+/* クイックリンク */
+.quick-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quick-links li {
+    border-bottom: 1px solid var(--wa-bg-cream);
+}
+
+.quick-links li:last-child {
+    border-bottom: none;
+}
+
+.quick-links a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 10px;
+    color: var(--wa-text-dark);
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.quick-links a:hover {
+    background: var(--wa-bg-cream);
+}
+
+.quick-links a i {
+    color: var(--wa-accent);
+    width: 20px;
+    text-align: center;
+}
+
+/* 解約セクション */
+.cancel-section {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-text {
+    background: none;
+    border: none;
+    color: var(--wa-text-muted);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-text:hover {
+    color: var(--wa-text-dark);
+}
+
+/* ==================================
+   モーダル
+================================== */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+    color: var(--wa-primary);
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: var(--wa-text-dark);
+    margin-bottom: 10px;
+}
+
+.modal-note {
+    font-size: 0.9rem;
+    color: var(--wa-text-muted);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+/* ボタン追加スタイル */
+.btn-danger {
+    background: #F44336;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #D32F2F;
+}
+
+.btn-sm {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+/* ==================================
+   レスポンシブ
+================================== */
+
+@media (max-width: 992px) {
+    .pricing-cards {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+    }
+
+    .pricing-card.featured {
+        transform: none;
+        order: -1;
+    }
+
+    .pricing-card.featured:hover {
+        transform: translateY(-5px);
+    }
+
+    .my-account-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .account-card.status-card {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .membership-section,
+    .my-account-section {
+        padding: 60px 0;
+    }
+
+    .membership-faq {
+        padding: 30px 20px;
+        margin-top: 40px;
+    }
+
+    .current-status-card {
+        padding: 30px 20px;
+    }
+
+    .success-message,
+    .cancel-message {
+        padding: 40px 25px;
+    }
+
+    .modal-content {
+        padding: 30px 20px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+}

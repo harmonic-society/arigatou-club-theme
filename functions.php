@@ -27,6 +27,17 @@ if (file_exists(get_template_directory() . '/inc/landing-pages-flush.php')) {
 }
 
 /**
+ * Stripe サブスクリプション機能を読み込み
+ */
+if (file_exists(get_template_directory() . '/inc/stripe/stripe-config.php')) {
+    require_once get_template_directory() . '/inc/stripe/stripe-config.php';
+    require_once get_template_directory() . '/inc/stripe/stripe-subscription.php';
+    require_once get_template_directory() . '/inc/stripe/stripe-checkout.php';
+    require_once get_template_directory() . '/inc/stripe/stripe-webhooks.php';
+    require_once get_template_directory() . '/inc/stripe/stripe-admin.php';
+}
+
+/**
  * テーマのセットアップ
  */
 function arigatou_club_setup() {
@@ -122,6 +133,12 @@ function arigatou_club_scripts() {
     // ランディングページ用CSS
     if (is_singular('landing_page')) {
         wp_enqueue_style('arigatou-club-landing', get_template_directory_uri() . '/assets/css/landing-page.css', array(), '1.0.0');
+    }
+
+    // 会員ページ用CSS/JS
+    if (is_page_template('page-membership.php') || is_page_template('page-membership-success.php') || is_page_template('page-membership-cancel.php') || is_page_template('page-my-account.php') || is_page('membership') || is_page('membership-success') || is_page('membership-cancel') || is_page('my-account')) {
+        wp_enqueue_style('arigatou-club-membership', get_template_directory_uri() . '/assets/css/membership.css', array(), '1.0.0');
+        wp_enqueue_script('arigatou-club-membership', get_template_directory_uri() . '/assets/js/membership.js', array('jquery'), '1.0.0', true);
     }
 
     // Font Awesome
