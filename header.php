@@ -72,6 +72,12 @@
                         echo '<li><a href="' . get_post_type_archive_link('sponsor') . '">協賛企業</a></li>';
                         echo '<li><a href="https://arigatohclub.base.shop/" target="_blank" rel="noopener">グッズ販売<span class="external-link-icon">🛒</span></a></li>';
                         echo '<li><a href="' . home_url('/contact/') . '">お問い合わせ</a></li>';
+                        // 会員メニュー（ログイン状態で切替）
+                        if (is_user_logged_in()) {
+                            echo '<li class="menu-item menu-item-member logged-in"><a href="' . home_url('/my-account/') . '">マイページ</a></li>';
+                        } else {
+                            echo '<li class="menu-item menu-item-member"><a href="' . home_url('/membership/') . '">会員登録</a></li>';
+                        }
                         echo '</ul>';
                     }
                 ));

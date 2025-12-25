@@ -79,6 +79,32 @@ function arigatou_club_setup() {
 add_action('after_setup_theme', 'arigatou_club_setup');
 
 /**
+ * ナビゲーションに会員メニューを動的追加
+ */
+function arigatou_add_member_menu_item($items, $args) {
+    if ($args->theme_location !== 'primary') {
+        return $items;
+    }
+
+    if (is_user_logged_in()) {
+        $link = home_url('/my-account/');
+        $label = 'マイページ';
+        $class = 'menu-item-member logged-in';
+    } else {
+        $link = home_url('/membership/');
+        $label = '会員登録';
+        $class = 'menu-item-member';
+    }
+
+    $items .= '<li class="menu-item ' . $class . '">';
+    $items .= '<a href="' . esc_url($link) . '">' . esc_html($label) . '</a>';
+    $items .= '</li>';
+
+    return $items;
+}
+add_filter('wp_nav_menu_items', 'arigatou_add_member_menu_item', 10, 2);
+
+/**
  * スタイルシートとスクリプトの読み込み
  */
 function arigatou_club_scripts() {
