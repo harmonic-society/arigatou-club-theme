@@ -32,6 +32,15 @@ function arigatou_stripe_admin_menu() {
 
     add_submenu_page(
         'arigatou-membership',
+        'スポット決済一覧',
+        'スポット決済',
+        'manage_options',
+        'arigatou-spot-payments',
+        'arigatou_spot_payments_list_page'
+    );
+
+    add_submenu_page(
+        'arigatou-membership',
         'Stripe設定',
         'Stripe設定',
         'manage_options',

@@ -160,6 +160,16 @@ function arigatou_handle_spot_payment_completed($session) {
         return;
     }
 
+    // DB保存
+    arigatou_save_spot_payment(array(
+        'customer_email'   => $customer_email,
+        'customer_name'    => $customer_name,
+        'product_type'     => $product_type,
+        'product_name'     => $product_name,
+        'amount'           => $amount_total,
+        'stripe_session_id' => $session['id'],
+    ));
+
     // 購入者にメール送信
     arigatou_send_spot_purchase_email($customer_email, $customer_name, $product_name, $amount_total);
 

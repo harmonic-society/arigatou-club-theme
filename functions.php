@@ -35,6 +35,7 @@ if (file_exists(get_template_directory() . '/inc/stripe/stripe-config.php')) {
     require_once get_template_directory() . '/inc/stripe/stripe-checkout.php';
     require_once get_template_directory() . '/inc/stripe/stripe-webhooks.php';
     require_once get_template_directory() . '/inc/stripe/stripe-admin.php';
+    require_once get_template_directory() . '/inc/stripe/stripe-spot-payments.php';
 }
 
 /**
