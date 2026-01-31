@@ -114,7 +114,7 @@ function arigatou_spot_payments_list_page() {
                             <td><?php echo esc_html($payment->customer_name ?: '（名前なし）'); ?></td>
                             <td><?php echo esc_html($payment->customer_email); ?></td>
                             <td><?php echo esc_html($payment->product_name ?: $payment->product_type); ?></td>
-                            <td>&yen;<?php echo esc_html(number_format($payment->amount / 100)); ?></td>
+                            <td>&yen;<?php echo esc_html(number_format($payment->amount)); ?></td>
                             <td><?php echo esc_html($payment->paid_at); ?></td>
                         </tr>
                     <?php endforeach; ?>

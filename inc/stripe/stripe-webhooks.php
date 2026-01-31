@@ -445,7 +445,7 @@ function arigatou_send_payment_failed_email($user_id) {
  */
 function arigatou_send_spot_purchase_email($email, $name, $product_name, $amount) {
     $display_name = !empty($name) ? $name : 'お客';
-    $display_amount = number_format($amount / 100);
+    $display_amount = number_format($amount);
 
     $subject = '[ありがとう倶楽部] ご購入ありがとうございます';
 
@@ -496,7 +496,7 @@ function arigatou_send_spot_purchase_email($email, $name, $product_name, $amount
 function arigatou_send_spot_purchase_admin_email($email, $name, $product_name, $amount) {
     $admin_email = get_option('admin_email');
     $display_name = !empty($name) ? $name : '（名前なし）';
-    $display_amount = number_format($amount / 100);
+    $display_amount = number_format($amount);
 
     $subject = '[ありがとう倶楽部] 新しい購入がありました';
 
