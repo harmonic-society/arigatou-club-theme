@@ -180,6 +180,51 @@
             });
         });
 
+        // スポット決済ボタンクリック
+        $('.spot-checkout-btn').on('click', function(e) {
+            e.preventDefault();
+
+            var $btn = $(this);
+            var productType = $btn.data('product');
+            var $card = $btn.closest('.spot-card');
+            var $emailInput = $card.find('input[type="email"]');
+            var email = $emailInput.length ? $emailInput.val().trim() : '';
+            var originalText = $btn.html();
+
+            // 非ログイン時はメールアドレス必須
+            if ($emailInput.length && (!email || !validateEmail(email))) {
+                alert('有効なメールアドレスを入力してください');
+                $emailInput.focus();
+                return;
+            }
+
+            // ボタンを無効化
+            $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> 処理中...');
+
+            $.ajax({
+                url: arigatou_ajax.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'arigatou_create_spot_checkout',
+                    product_type: productType,
+                    email: email,
+                    nonce: arigatou_ajax.spot_nonce
+                },
+                success: function(response) {
+                    if (response.success && response.data.checkout_url) {
+                        window.location.href = response.data.checkout_url;
+                    } else {
+                        alert(response.data && response.data.message ? response.data.message : 'エラーが発生しました');
+                        $btn.prop('disabled', false).html(originalText);
+                    }
+                },
+                error: function() {
+                    alert('通信エラーが発生しました。もう一度お試しください。');
+                    $btn.prop('disabled', false).html(originalText);
+                }
+            });
+        });
+
         // ESCキーでモーダルを閉じる
         $(document).on('keydown', function(e) {
             if (e.key === 'Escape' && $('#cancel-modal').is(':visible')) {

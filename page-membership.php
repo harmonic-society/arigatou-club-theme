@@ -170,6 +170,48 @@ get_header(); ?>
 
                 </div>
 
+                <!-- スポット参加決済 -->
+                <div class="spot-payment-section">
+                    <h2 class="spot-section-title">カフェにスポット参加する</h2>
+
+                    <div class="pricing-card spot-card">
+                        <div class="pricing-header">
+                            <h3>ありがとうカフェ</h3>
+                            <p class="spot-description">参加費</p>
+                            <div class="price">
+                                <span class="currency">¥</span>
+                                <span class="amount">1,000</span>
+                                <span class="period">/ 1回</span>
+                            </div>
+                        </div>
+                        <div class="pricing-body">
+                            <ul class="feature-list">
+                                <li><i class="fas fa-coffee"></i> ありがとうカフェへ1回参加</li>
+                                <li><i class="fas fa-users"></i> 会員同士の交流</li>
+                                <li><i class="fas fa-heart"></i> ありがとうの輪を広げよう</li>
+                            </ul>
+
+                            <?php if (!is_user_logged_in()) : ?>
+                            <div class="spot-email-input">
+                                <label for="spot-email-cafe">メールアドレス <span class="required">*</span></label>
+                                <input type="email" id="spot-email-cafe" placeholder="example@email.com" required>
+                                <p class="input-note">確認メールをお送りします</p>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="pricing-footer">
+                            <button type="button" class="btn btn-primary spot-checkout-btn" data-product="cafe">
+                                <i class="fas fa-credit-card"></i> 決済へ進む
+                            </button>
+                        </div>
+                    </div>
+
+                    <p class="spot-premium-note">
+                        <i class="fas fa-info-circle"></i>
+                        有料会員になるとカフェ参加費が無料になります
+                    </p>
+                </div>
+
                 <?php if (!is_user_logged_in()) : ?>
                 <div class="guest-checkout-notice">
                     <p>

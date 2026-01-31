@@ -192,7 +192,8 @@ function arigatou_club_scripts() {
     // AJAXのURL設定
     wp_localize_script('arigatou-club-main', 'arigatou_ajax', array(
         'ajax_url' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('arigatou_nonce')
+        'nonce' => wp_create_nonce('arigatou_nonce'),
+        'spot_nonce' => wp_create_nonce('arigatou_spot_nonce')
     ));
 }
 add_action('wp_enqueue_scripts', 'arigatou_club_scripts');

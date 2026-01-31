@@ -260,6 +260,92 @@
     text-decoration: underline;
 }
 
+/* ==================================
+   スポット決済セクション
+================================== */
+
+.spot-payment-section {
+    max-width: 500px;
+    margin: 60px auto 0;
+    text-align: center;
+}
+
+.spot-section-title {
+    color: var(--wa-primary);
+    font-family: "Klee One", serif;
+    margin-bottom: 30px;
+}
+
+.spot-payment-section .spot-card {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.spot-description {
+    color: var(--wa-text-muted);
+    margin: 0 0 10px;
+    font-size: 0.9rem;
+}
+
+.spot-email-input {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--wa-bg-cream);
+    border-radius: 8px;
+}
+
+.spot-email-input label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--wa-text-dark);
+}
+
+.spot-email-input .required {
+    color: #D32F2F;
+}
+
+.spot-email-input input[type="email"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.spot-email-input input[type="email"]:focus {
+    outline: none;
+    border-color: var(--wa-accent);
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+}
+
+.spot-email-input .input-note {
+    margin: 8px 0 0;
+    font-size: 0.85rem;
+    color: var(--wa-text-muted);
+}
+
+.spot-checkout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.spot-premium-note {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: var(--wa-text-muted);
+}
+
+.spot-premium-note i {
+    color: var(--wa-accent);
+    margin-right: 5px;
+}
+
 /* FAQ */
 .membership-faq {
     max-width: 800px;
