@@ -38,29 +38,30 @@
                     <?php endif; ?>
                 </div>
 
-                <div class="footer-widget-area">
-                    <h3><?php esc_html_e( 'メディアサイト', 'corporate-seo-pro' ); ?></h3>
-                    <ul class="footer-media-links">
-                        <li>
-                            <a href="https://harmonic-society.com" target="_blank" rel="noopener noreferrer">
-                                <span class="media-link-name">Harmonic Society Records</span>
-                                <span class="media-link-desc">アナログレコードの知識ベース。アルバムレビュー、アーティスト紹介、ジャンル解説など。</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://harmonic-society.net" target="_blank" rel="noopener noreferrer">
-                                <span class="media-link-name">Harmonic Society Philosophy</span>
-                                <span class="media-link-desc">古代ギリシャから現代に至る哲学の思想・哲学者・学派を網羅したオンライン哲学事典。</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://post-web3.com" target="_blank" rel="noopener noreferrer">
-                                <span class="media-link-name">Post Web3</span>
-                                <span class="media-link-desc">DeFi、NFT、ブロックチェーンインフラに関する専門的な分析・市場動向メディア。</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+            </div>
+
+            <div class="footer-media-section">
+                <h3><?php esc_html_e( 'メディアサイト', 'corporate-seo-pro' ); ?></h3>
+                <ul class="footer-media-links">
+                    <li>
+                        <a href="https://harmonic-society.com" target="_blank" rel="noopener noreferrer">
+                            <span class="media-link-name">Harmonic Society Records</span>
+                            <span class="media-link-desc">アナログレコードの知識ベース。アルバムレビュー、アーティスト紹介、ジャンル解説など。</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://harmonic-society.net" target="_blank" rel="noopener noreferrer">
+                            <span class="media-link-name">Harmonic Society Philosophy</span>
+                            <span class="media-link-desc">古代ギリシャから現代に至る哲学の思想・哲学者・学派を網羅したオンライン哲学事典。</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://post-web3.com" target="_blank" rel="noopener noreferrer">
+                            <span class="media-link-name">Post Web3</span>
+                            <span class="media-link-desc">DeFi、NFT、ブロックチェーンインフラに関する専門的な分析・市場動向メディア。</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
 
             <div class="footer-bottom">

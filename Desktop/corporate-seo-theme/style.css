@@ -290,14 +290,27 @@ a:hover {
     color: white;
 }
 
+.footer-media-section {
+    padding: 2rem 0;
+    border-top: 1px solid #374151;
+    margin-bottom: 2rem;
+}
+
+.footer-media-section h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
 .footer-media-links {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    gap: 2rem;
 }
 
 .footer-media-links li {
-    margin-bottom: 1rem;
+    flex: 1;
 }
 
 .footer-media-links a {
@@ -368,6 +381,10 @@ a:hover {
     
     .grid-2, .grid-3, .grid-4 {
         grid-template-columns: 1fr;
+    }
+
+    .footer-media-links {
+        flex-direction: column;
     }
 }
 
