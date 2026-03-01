@@ -255,6 +255,28 @@ get_header(); ?>
         </div>
     </section>
 
+    <!-- 動画セクション -->
+    <section class="home-video-section section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-marker">◯</span>
+                <h2 class="section-title">ありがとう倶楽部の紹介</h2>
+            </div>
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube.com/embed/3ijGKxhqv3s"
+                        title="ありがとう倶楽部 紹介動画"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ブログセクション -->
     <section class="home-blog-section section">
         <div class="container">
