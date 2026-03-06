@@ -220,7 +220,9 @@ function arigatou_create_spot_checkout_session($product_type, $email = '') {
 
     // 商品名マッピング
     $product_names = array(
-        'cafe' => 'ありがとうカフェ 参加費',
+        'cafe'            => 'ありがとうカフェ 参加費',
+        'seminar_member'  => 'セミナー＆ワークショップ 参加費（会員価格）',
+        'seminar_general' => 'セミナー＆ワークショップ 参加費（一般価格）',
     );
 
     $session = Arigatou_Stripe_API::create_spot_checkout_session(array(
@@ -252,6 +254,13 @@ function arigatou_ajax_create_spot_checkout() {
 
     if (empty($product_type)) {
         wp_send_json_error(array('message' => '商品が指定されていません'));
+    }
+
+    // 会員価格は有料会員のみ
+    if ($product_type === 'seminar_member') {
+        if (!is_user_logged_in() || !arigatou_is_premium_member()) {
+            wp_send_json_error(array('message' => '会員価格はログイン済みの有料会員のみご利用いただけます'));
+        }
     }
 
     // ログインユーザーの場合はメールアドレスを自動取得

@@ -212,6 +212,103 @@ get_header(); ?>
                     </p>
                 </div>
 
+                <!-- セミナー＆ワークショップ スポット参加決済 -->
+                <div class="spot-payment-section spot-payment-section--seminar">
+                    <h2 class="spot-section-title">セミナー＆ワークショップにスポット参加する</h2>
+
+                    <?php if (is_user_logged_in() && arigatou_is_premium_member()) : ?>
+                        <!-- 有料会員: 2カード表示 -->
+                        <div class="spot-cards-grid">
+                            <div class="pricing-card spot-card featured">
+                                <div class="pricing-badge">会員特典</div>
+                                <div class="pricing-header">
+                                    <h3>会員価格</h3>
+                                    <p class="spot-description">セミナー＆ワークショップ</p>
+                                    <div class="price">
+                                        <span class="currency">¥</span>
+                                        <span class="amount">1,500</span>
+                                        <span class="period">/ 1回</span>
+                                    </div>
+                                </div>
+                                <div class="pricing-body">
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-chalkboard-teacher"></i> セミナー＆ワークショップ へ1回参加</li>
+                                        <li><i class="fas fa-users"></i> ありがとう倶楽部の講師陣と交流</li>
+                                        <li><i class="fas fa-lightbulb"></i> 自分の天才を発見 発揮しよう!</li>
+                                    </ul>
+                                </div>
+                                <div class="pricing-footer">
+                                    <button type="button" class="btn btn-primary spot-checkout-btn" data-product="seminar_member">
+                                        <i class="fas fa-credit-card"></i> 会員価格で決済
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="pricing-card spot-card">
+                                <div class="pricing-header">
+                                    <h3>一般価格</h3>
+                                    <p class="spot-description">セミナー＆ワークショップ</p>
+                                    <div class="price">
+                                        <span class="currency">¥</span>
+                                        <span class="amount">2,000</span>
+                                        <span class="period">/ 1回</span>
+                                    </div>
+                                </div>
+                                <div class="pricing-body">
+                                    <ul class="feature-list">
+                                        <li><i class="fas fa-chalkboard-teacher"></i> セミナー＆ワークショップ へ1回参加</li>
+                                        <li><i class="fas fa-users"></i> ありがとう倶楽部の講師陣と交流</li>
+                                        <li><i class="fas fa-lightbulb"></i> 自分の天才を発見 発揮しよう!</li>
+                                    </ul>
+                                </div>
+                                <div class="pricing-footer">
+                                    <button type="button" class="btn btn-primary spot-checkout-btn" data-product="seminar_general">
+                                        <i class="fas fa-credit-card"></i> 一般価格で決済
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    <?php else : ?>
+                        <!-- 非会員 / 未ログイン: 一般価格のみ -->
+                        <div class="pricing-card spot-card">
+                            <div class="pricing-header">
+                                <h3>一般価格</h3>
+                                <p class="spot-description">セミナー＆ワークショップ</p>
+                                <div class="price">
+                                    <span class="currency">¥</span>
+                                    <span class="amount">2,000</span>
+                                    <span class="period">/ 1回</span>
+                                </div>
+                            </div>
+                            <div class="pricing-body">
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-chalkboard-teacher"></i> セミナー＆ワークショップ へ1回参加</li>
+                                    <li><i class="fas fa-users"></i> ありがとう倶楽部の講師陣と交流</li>
+                                    <li><i class="fas fa-lightbulb"></i> 自分の天才を発見 発揮しよう!</li>
+                                </ul>
+
+                                <?php if (!is_user_logged_in()) : ?>
+                                <div class="spot-email-input">
+                                    <label for="spot-email-seminar">メールアドレス <span class="required">*</span></label>
+                                    <input type="email" id="spot-email-seminar" placeholder="example@email.com" required>
+                                    <p class="input-note">確認メールをお送りします</p>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="pricing-footer">
+                                <button type="button" class="btn btn-primary spot-checkout-btn" data-product="seminar_general">
+                                    <i class="fas fa-credit-card"></i> 決済へ進む
+                                </button>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <p class="spot-premium-note">
+                        <i class="fas fa-info-circle"></i>
+                        有料会員の方は会員価格（¥1,500）でご参加いただけます
+                    </p>
+                </div>
+
                 <?php if (!is_user_logged_in()) : ?>
                 <div class="guest-checkout-notice">
                     <p>

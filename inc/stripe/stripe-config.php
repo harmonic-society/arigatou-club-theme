@@ -31,7 +31,9 @@ class Arigatou_Stripe_Config {
             'webhook_secret'  => 'STRIPE_WEBHOOK_SECRET',
             'price_monthly'   => 'STRIPE_PRICE_MONTHLY',
             'price_annual'    => 'STRIPE_PRICE_ANNUAL',
-            'price_cafe'      => 'STRIPE_PRICE_CAFE',
+            'price_cafe'             => 'STRIPE_PRICE_CAFE',
+            'price_seminar_member'   => 'STRIPE_PRICE_SEMINAR_MEMBER',
+            'price_seminar_general'  => 'STRIPE_PRICE_SEMINAR_GENERAL',
         );
 
         if (isset($constant_map[$key]) && defined($constant_map[$key])) {
@@ -53,7 +55,9 @@ class Arigatou_Stripe_Config {
             'webhook_secret'  => sanitize_text_field($settings['webhook_secret'] ?? ''),
             'price_monthly'   => sanitize_text_field($settings['price_monthly'] ?? ''),
             'price_annual'    => sanitize_text_field($settings['price_annual'] ?? ''),
-            'price_cafe'      => sanitize_text_field($settings['price_cafe'] ?? ''),
+            'price_cafe'             => sanitize_text_field($settings['price_cafe'] ?? ''),
+            'price_seminar_member'   => sanitize_text_field($settings['price_seminar_member'] ?? ''),
+            'price_seminar_general'  => sanitize_text_field($settings['price_seminar_general'] ?? ''),
         );
 
         return update_option(self::OPTION_NAME, $sanitized);
@@ -71,7 +75,9 @@ class Arigatou_Stripe_Config {
             'webhook_secret'  => $options['webhook_secret'] ?? '',
             'price_monthly'   => $options['price_monthly'] ?? '',
             'price_annual'    => $options['price_annual'] ?? '',
-            'price_cafe'      => $options['price_cafe'] ?? '',
+            'price_cafe'             => $options['price_cafe'] ?? '',
+            'price_seminar_member'   => $options['price_seminar_member'] ?? '',
+            'price_seminar_general'  => $options['price_seminar_general'] ?? '',
         );
     }
 
@@ -111,7 +117,9 @@ class Arigatou_Stripe_Config {
      */
     public static function get_spot_price_ids() {
         return array(
-            'cafe' => self::get_setting('price_cafe'),
+            'cafe'            => self::get_setting('price_cafe'),
+            'seminar_member'  => self::get_setting('price_seminar_member'),
+            'seminar_general' => self::get_setting('price_seminar_general'),
         );
     }
 

@@ -346,6 +346,23 @@
     margin-right: 5px;
 }
 
+/* セミナー＆ワークショップ 2カードレイアウト */
+.spot-payment-section--seminar {
+    max-width: 850px;
+}
+
+.spot-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.spot-cards-grid .spot-card {
+    max-width: none;
+    margin: 0;
+    text-align: left;
+}
+
 /* FAQ */
 .membership-faq {
     max-width: 800px;
@@ -863,6 +880,12 @@
 }
 
 @media (max-width: 768px) {
+    .spot-cards-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
     .membership-section,
     .my-account-section {
         padding: 60px 0;

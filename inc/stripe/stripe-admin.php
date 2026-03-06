@@ -304,7 +304,9 @@ function arigatou_stripe_settings_page() {
             'webhook_secret'  => $_POST['webhook_secret'] ?? '',
             'price_monthly'   => $_POST['price_monthly'] ?? '',
             'price_annual'    => $_POST['price_annual'] ?? '',
-            'price_cafe'      => $_POST['price_cafe'] ?? '',
+            'price_cafe'             => $_POST['price_cafe'] ?? '',
+            'price_seminar_member'   => $_POST['price_seminar_member'] ?? '',
+            'price_seminar_general'  => $_POST['price_seminar_general'] ?? '',
         );
 
         Arigatou_Stripe_Config::save_settings($settings);
@@ -406,6 +408,24 @@ function arigatou_stripe_settings_page() {
                                        value="<?php echo esc_attr($settings['price_cafe']); ?>"
                                        class="regular-text" placeholder="price_xxxxx">
                                 <p class="description">カフェ参加費¥1,000のPrice ID（price_ で始まる・One time）</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label for="price_seminar_member">セミナー（会員価格）Price ID</label></th>
+                            <td>
+                                <input type="text" id="price_seminar_member" name="price_seminar_member"
+                                       value="<?php echo esc_attr($settings['price_seminar_member']); ?>"
+                                       class="regular-text" placeholder="price_xxxxx">
+                                <p class="description">セミナー＆ワークショップ 会員価格¥1,500のPrice ID（price_ で始まる・One time）</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label for="price_seminar_general">セミナー（一般価格）Price ID</label></th>
+                            <td>
+                                <input type="text" id="price_seminar_general" name="price_seminar_general"
+                                       value="<?php echo esc_attr($settings['price_seminar_general']); ?>"
+                                       class="regular-text" placeholder="price_xxxxx">
+                                <p class="description">セミナー＆ワークショップ 一般価格¥2,000のPrice ID（price_ で始まる・One time）</p>
                             </td>
                         </tr>
                     </table>
