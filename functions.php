@@ -93,7 +93,7 @@ function arigatou_add_member_menu_item($items, $args) {
         $class = 'menu-item-member logged-in';
     } else {
         $link = home_url('/membership/');
-        $label = '会員登録';
+        $label = 'お申し込み';
         $class = 'menu-item-member';
     }
 

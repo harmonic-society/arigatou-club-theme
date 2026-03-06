@@ -110,8 +110,8 @@ get_header(); ?>
                     <?php if (!$is_past) : ?>
                         <div class="event-cta">
                             <h3>このイベントに参加をご希望の方へ</h3>
-                            <p>下記のお問い合わせフォームより、イベント参加希望の旨をお知らせください。</p>
-                            <a href="<?php echo home_url('/contact/'); ?>?event=<?php echo urlencode(get_the_title()); ?>" class="btn btn-primary">参加申し込み</a>
+                            <p>会員登録をして、イベントにご参加ください。</p>
+                            <a href="<?php echo esc_url(home_url('/membership/')); ?>" class="btn btn-primary">参加申し込み</a>
                         </div>
                     <?php endif; ?>
                     

@@ -76,7 +76,7 @@
                         if (is_user_logged_in()) {
                             echo '<li class="menu-item menu-item-member logged-in"><a href="' . home_url('/my-account/') . '">マイページ</a></li>';
                         } else {
-                            echo '<li class="menu-item menu-item-member"><a href="' . home_url('/membership/') . '">会員登録</a></li>';
+                            echo '<li class="menu-item menu-item-member"><a href="' . home_url('/membership/') . '">お申し込み</a></li>';
                         }
                         echo '</ul>';
                     }

@@ -230,16 +230,6 @@
             $(this).removeClass('card-hover');
         });
         
-        // イベント日付のフォーマット
-        $('.event-date').each(function() {
-            var dateStr = $(this).text();
-            if (dateStr) {
-                var date = new Date(dateStr);
-                var options = { year: 'numeric', month: 'long', day: 'numeric' };
-                var formattedDate = date.toLocaleDateString('ja-JP', options);
-                $(this).text(formattedDate);
-            }
-        });
         
         // 画像の遅延読み込み
         if ('IntersectionObserver' in window) {
