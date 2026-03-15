@@ -5,6 +5,27 @@
  * Stripe Checkout（スポット決済）成功後のリダイレクトページ
  */
 
+// Stripe Checkout Sessionから商品情報を取得
+$product_name = 'ありがとうカフェ 参加費';
+$product_amount = '¥1,000';
+
+$session_id = isset($_GET['session_id']) ? sanitize_text_field($_GET['session_id']) : '';
+if (!empty($session_id)) {
+    // Checkout Sessionを取得
+    $session = Arigatou_Stripe_API::request('/checkout/sessions/' . $session_id);
+
+    if (!is_wp_error($session)) {
+        // メタデータから商品名を取得
+        if (!empty($session['metadata']['product_name'])) {
+            $product_name = esc_html($session['metadata']['product_name']);
+        }
+        // 金額を取得
+        if (!empty($session['amount_total'])) {
+            $product_amount = '¥' . number_format($session['amount_total'] / 100);
+        }
+    }
+}
+
 get_header(); ?>
 
 <main id="main" class="site-main wa-style">
@@ -35,11 +56,11 @@ get_header(); ?>
                     <h3>ご購入内容</h3>
                     <div class="summary-item">
                         <span class="label">商品</span>
-                        <span class="value">ありがとうカフェ 参加費</span>
+                        <span class="value"><?php echo $product_name; ?></span>
                     </div>
                     <div class="summary-item">
                         <span class="label">金額</span>
-                        <span class="value">¥1,000</span>
+                        <span class="value"><?php echo $product_amount; ?></span>
                     </div>
                 </div>
 
