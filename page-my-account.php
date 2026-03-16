@@ -145,6 +145,31 @@ get_header(); ?>
                     </div>
                 </div>
 
+                <!-- セミナー申込（有料会員向け） -->
+                <?php if ($is_premium) : ?>
+                <div class="account-card seminar-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-chalkboard-teacher"></i> セミナー＆ワークショップ</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="seminar-card-description">有料会員特典の会員価格でお申し込みいただけます。</p>
+                        <div class="seminar-price-display">
+                            <div class="seminar-price-row">
+                                <span class="seminar-price-label">会員価格</span>
+                                <span class="seminar-price-value">¥1,500<span class="seminar-price-period"> / 1回</span></span>
+                            </div>
+                            <div class="seminar-price-row general">
+                                <span class="seminar-price-label">一般価格</span>
+                                <span class="seminar-price-value"><s>¥2,000</s></span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary spot-checkout-btn seminar-apply-btn" data-product="seminar_member">
+                            <i class="fas fa-credit-card"></i> 会員価格で申し込む
+                        </button>
+                    </div>
+                </div>
+                <?php endif; ?>
+
                 <!-- クイックリンク -->
                 <div class="account-card">
                     <div class="card-header">
