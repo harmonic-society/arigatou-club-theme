@@ -189,7 +189,12 @@ function arigatou_club_scripts() {
         wp_enqueue_script('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '11.0.0', true);
         wp_enqueue_script('arigatou-club-slider', get_template_directory_uri() . '/assets/js/slider.js', array('swiper'), '1.0.0', true);
     }
-    
+
+    // ポッドキャストプレーヤーJS (フロントページのみ)
+    if (is_front_page()) {
+        wp_enqueue_script('arigatou-club-podcast', get_template_directory_uri() . '/assets/js/podcast-player.js', array(), '1.0.0', true);
+    }
+
     // AJAXのURL設定
     wp_localize_script('arigatou-club-main', 'arigatou_ajax', array(
         'ajax_url' => admin_url('admin-ajax.php'),

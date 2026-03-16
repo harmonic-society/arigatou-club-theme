@@ -277,6 +277,116 @@ get_header(); ?>
         </div>
     </section>
 
+    <!-- ポッドキャストセクション -->
+    <?php
+    $podcast_rss_url = 'https://stand.fm/rss/69aed94b75c28fe699072ad7';
+    $podcast_channel_link = 'https://stand.fm/channels/69aed94b75c28fe699072ad7';
+    $podcast_rss = fetch_feed($podcast_rss_url);
+
+    if (!is_wp_error($podcast_rss)) :
+        $podcast_max_items = $podcast_rss->get_item_quantity(3);
+        $podcast_items = $podcast_rss->get_items(0, $podcast_max_items);
+        $podcast_channel_image = $podcast_rss->get_image_url();
+    ?>
+    <section class="home-podcast-section section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-marker"><i class="fas fa-microphone-alt"></i></span>
+                <h2 class="section-title">ポッドキャスト</h2>
+            </div>
+            <p class="section-subtitle">ありがとう倶楽部 秋山 興チャンネル</p>
+
+            <div class="home-podcast-grid">
+                <?php foreach ($podcast_items as $podcast_item) :
+                    $podcast_title = esc_html($podcast_item->get_title());
+                    $podcast_link = esc_url($podcast_item->get_link());
+                    $podcast_date = $podcast_item->get_date('Y.m.d');
+                    $podcast_desc = wp_trim_words(wp_strip_all_tags($podcast_item->get_description()), 40, '...');
+
+                    // iTunes duration
+                    $podcast_duration = '';
+                    $itunes_duration = $podcast_item->get_item_tags('http://www.itunes.com/dtds/podcast-1.0.dtd', 'duration');
+                    if ($itunes_duration) {
+                        $podcast_duration = $itunes_duration[0]['data'];
+                    }
+
+                    // Episode image (iTunes)
+                    $podcast_ep_image = '';
+                    $itunes_image = $podcast_item->get_item_tags('http://www.itunes.com/dtds/podcast-1.0.dtd', 'image');
+                    if ($itunes_image && isset($itunes_image[0]['attribs']['']['href'])) {
+                        $podcast_ep_image = $itunes_image[0]['attribs']['']['href'];
+                    }
+
+                    // Audio enclosure
+                    $podcast_enclosure = $podcast_item->get_enclosure();
+                    $podcast_audio_url = $podcast_enclosure ? $podcast_enclosure->get_link() : '';
+                ?>
+                <article class="home-podcast-card">
+                    <div class="podcast-card-image">
+                        <?php if ($podcast_ep_image) : ?>
+                            <img src="<?php echo esc_url($podcast_ep_image); ?>" alt="<?php echo $podcast_title; ?>" loading="lazy">
+                        <?php elseif ($podcast_channel_image) : ?>
+                            <img src="<?php echo esc_url($podcast_channel_image); ?>" alt="ポッドキャスト" loading="lazy">
+                        <?php else : ?>
+                            <div class="podcast-image-placeholder">
+                                <i class="fas fa-podcast"></i>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($podcast_duration) : ?>
+                            <span class="podcast-duration-badge">
+                                <i class="fas fa-clock"></i> <?php echo esc_html($podcast_duration); ?>
+                            </span>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="podcast-card-content">
+                        <div class="podcast-meta">
+                            <span class="podcast-date"><?php echo esc_html($podcast_date); ?></span>
+                            <span class="podcast-source">stand.fm</span>
+                        </div>
+
+                        <h3 class="podcast-card-title">
+                            <a href="<?php echo $podcast_link; ?>" target="_blank" rel="noopener noreferrer">
+                                <?php echo $podcast_title; ?>
+                            </a>
+                        </h3>
+
+                        <div class="podcast-card-description">
+                            <?php echo esc_html($podcast_desc); ?>
+                        </div>
+
+                        <?php if ($podcast_audio_url) : ?>
+                        <div class="podcast-audio-player">
+                            <audio preload="none">
+                                <source src="<?php echo esc_url($podcast_audio_url); ?>" type="audio/x-m4a">
+                            </audio>
+                            <button class="podcast-play-btn" aria-label="再生">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="podcast-progress-bar">
+                                <div class="podcast-progress-fill"></div>
+                            </div>
+                            <span class="podcast-time">0:00</span>
+                        </div>
+                        <?php endif; ?>
+
+                        <a href="<?php echo $podcast_link; ?>" class="podcast-listen-link" target="_blank" rel="noopener noreferrer">
+                            stand.fmで聴く →
+                        </a>
+                    </div>
+                </article>
+                <?php endforeach; ?>
+            </div>
+
+            <div class="section-footer">
+                <a href="<?php echo esc_url($podcast_channel_link); ?>" class="btn-more" target="_blank" rel="noopener noreferrer">
+                    もっと聴く
+                </a>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
     <!-- ブログセクション -->
     <section class="home-blog-section section">
         <div class="container">
