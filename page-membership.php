@@ -171,6 +171,8 @@ get_header(); ?>
                 </div>
 
                 <!-- スポット参加決済 -->
+                <div class="spot-payment-wrapper">
+
                 <div class="spot-payment-section spot-payment-section--cafe">
                     <h2 class="spot-section-title"><i class="fas fa-coffee"></i> カフェにスポット参加する</h2>
 
@@ -308,6 +310,8 @@ get_header(); ?>
                         有料会員の方は会員価格（¥1,500）でご参加いただけます
                     </p>
                 </div>
+
+                </div><!-- /.spot-payment-wrapper -->
 
                 <?php if (!is_user_logged_in()) : ?>
                 <div class="guest-checkout-notice">
