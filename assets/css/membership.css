@@ -346,6 +346,99 @@
     margin-right: 5px;
 }
 
+/* カフェ：オレンジテーマ */
+.spot-payment-section--cafe .spot-section-title {
+    color: #e67e22;
+}
+
+.spot-payment-section--cafe .spot-section-title i {
+    color: #e67e22;
+}
+
+.spot-payment-section--cafe .spot-card {
+    border-top: 4px solid #e67e22;
+}
+
+.spot-payment-section--cafe .pricing-header {
+    background: linear-gradient(135deg, #fef5ec, #fdebd0);
+}
+
+.spot-payment-section--cafe .pricing-header h3 {
+    color: #d35400;
+}
+
+.spot-payment-section--cafe .price .amount {
+    color: #e67e22;
+}
+
+.spot-payment-section--cafe .feature-list li i {
+    color: #e67e22;
+}
+
+.spot-payment-section--cafe .spot-checkout-btn {
+    background: linear-gradient(135deg, #e67e22, #f39c12) !important;
+    border-color: #e67e22 !important;
+}
+
+.spot-payment-section--cafe .spot-checkout-btn:hover {
+    background: linear-gradient(135deg, #d35400, #e67e22) !important;
+}
+
+.spot-payment-section--cafe .spot-premium-note i {
+    color: #e67e22;
+}
+
+/* セミナー：ブルーテーマ */
+.spot-payment-section--seminar .spot-section-title {
+    color: #2980b9;
+}
+
+.spot-payment-section--seminar .spot-section-title i {
+    color: #2980b9;
+}
+
+.spot-payment-section--seminar .spot-card {
+    border-top: 4px solid #2980b9;
+}
+
+.spot-payment-section--seminar .pricing-header {
+    background: linear-gradient(135deg, #ebf5fb, #d4e6f1);
+}
+
+.spot-payment-section--seminar .pricing-header h3 {
+    color: #1a5276;
+}
+
+.spot-payment-section--seminar .price .amount {
+    color: #2980b9;
+}
+
+.spot-payment-section--seminar .feature-list li i {
+    color: #2980b9;
+}
+
+.spot-payment-section--seminar .spot-checkout-btn {
+    background: linear-gradient(135deg, #2980b9, #3498db) !important;
+    border-color: #2980b9 !important;
+}
+
+.spot-payment-section--seminar .spot-checkout-btn:hover {
+    background: linear-gradient(135deg, #1a5276, #2980b9) !important;
+}
+
+.spot-payment-section--seminar .spot-premium-note i {
+    color: #2980b9;
+}
+
+.spot-payment-section--seminar .pricing-card.featured {
+    border: 3px solid #2980b9;
+    border-top: 4px solid #2980b9;
+}
+
+.spot-payment-section--seminar .pricing-badge {
+    background: #2980b9;
+}
+
 /* セミナー＆ワークショップ 2カードレイアウト */
 .spot-payment-section--seminar {
     max-width: 850px;
@@ -759,7 +852,28 @@
     text-align: center;
 }
 
-/* セミナー申込カード（マイページ） */
+/* セミナー申込カード（マイページ） - ブルーテーマ */
+.seminar-card .card-header {
+    background: linear-gradient(135deg, #ebf5fb, #d4e6f1);
+}
+
+.seminar-card .card-header h2 {
+    color: #1a5276;
+}
+
+.seminar-card .card-header h2 i {
+    color: #2980b9;
+}
+
+.seminar-card .seminar-apply-btn {
+    background: linear-gradient(135deg, #2980b9, #3498db) !important;
+    border-color: #2980b9 !important;
+}
+
+.seminar-card .seminar-apply-btn:hover {
+    background: linear-gradient(135deg, #1a5276, #2980b9) !important;
+}
+
 .seminar-card-description {
     color: var(--wa-text-dark);
     margin-bottom: 15px;

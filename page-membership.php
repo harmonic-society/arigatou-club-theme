@@ -171,8 +171,8 @@ get_header(); ?>
                 </div>
 
                 <!-- スポット参加決済 -->
-                <div class="spot-payment-section">
-                    <h2 class="spot-section-title">カフェにスポット参加する</h2>
+                <div class="spot-payment-section spot-payment-section--cafe">
+                    <h2 class="spot-section-title"><i class="fas fa-coffee"></i> カフェにスポット参加する</h2>
 
                     <div class="pricing-card spot-card">
                         <div class="pricing-header">
@@ -214,7 +214,7 @@ get_header(); ?>
 
                 <!-- セミナー＆ワークショップ スポット参加決済 -->
                 <div class="spot-payment-section spot-payment-section--seminar">
-                    <h2 class="spot-section-title">セミナー＆ワークショップにスポット参加する</h2>
+                    <h2 class="spot-section-title"><i class="fas fa-chalkboard-teacher"></i> セミナー＆ワークショップにスポット参加する</h2>
 
                     <?php if (is_user_logged_in() && arigatou_is_premium_member()) : ?>
                         <!-- 有料会員: 2カード表示 -->
